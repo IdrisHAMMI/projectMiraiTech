@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "projectmiraitech": {
+      "hosting": {
+        "projectMiraiTech": [
+          "projectmiraitech"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "projectmiraitech"
+  }
+}

@@ -1,0 +1,53 @@
+<mat-toolbar class="max-w-7x1 mx-auto border-x justify-between" style="height: 99px;">
+  <img src="../../../assets/img/index_logo.png" alt="logo" routerLink="home" style="width:110px; margin-left: 20px;">
+  <form>
+    <!-- SEARCH BAR START -->
+    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+    <div class="relative">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </div>
+        <input type="search" id="default-search" class="block w-80 p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Products..." required>
+        <button type="submit" style="bottom: 7px;" class="text-white absolute right-2.5 bottom-2.5  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-[padding-top: 0.5rem;] "><mat-icon>search</mat-icon></button>
+    </div>
+</form>
+    <!--SEARCH BAR END-->
+
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+  <mat-icon
+    matBadge="1"
+    matBadgeColor="warn"
+  >shopping_cart</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <div class="p-3 divide-y divide-solid">
+      <div class="pb-3 flex justify-between">
+        <span class="mr-16">1 Item</span>
+        <a routerLink="cart">View Cart</a>
+      </div>
+      <div class="flex justify-between font-light mb-2">
+        Keyboard x 1
+        <span class="font-bold">{{ '100' | currency}}</span>
+      </div>
+      <div class="flex justify-between py-3 font-light">
+        Total :
+        <span class="font-bold">{{ '100' | currency }}</span>
+      </div>
+      <div class="pt-3 flex justify-between">
+        <button class="bg-rose-600 text-white rounded-full w-9 h-9">
+          <mat-icon>remove_shopping_cart</mat-icon>
+        </button>
+        <button
+        routerLink="cart"
+        class="bg-green-600 text-white rounded-full w-9 h-9">
+          <mat-icon>remove_shopping_cart</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-menu>
+</mat-toolbar>
+<mat-toolbar class="bg-[#4598F8]" >
+<div class="pl-3">Computers</div>
+<div class="pl-7">PC Components</div>
+<div class="pl-7">Periphirals</div>
+</mat-toolbar>
