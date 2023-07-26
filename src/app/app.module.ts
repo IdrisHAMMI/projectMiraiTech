@@ -8,8 +8,11 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 //HTTP CLIENT IMPORT
 import { HttpClientModule } from '@angular/common/http';
-//HEADER IMPORT
-import { HeaderComponent } from './header/header.component';
+//HEADER & FOOTER IMPORT
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+//INDEX IMPORT
+import { IndexComponent } from './components/index/index.component';
 
 //FIRESTORM IMPORTS
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
@@ -30,8 +33,8 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IndexComponent } from './index/index.component';
-import { CarouselModule } from '@coreui/angular';
+
+
 
 
 
@@ -39,8 +42,9 @@ import { CarouselModule } from '@coreui/angular';
   declarations: [
     AppComponent,
     HeaderComponent,
-    IndexComponent
-  ],
+    IndexComponent,
+    FooterComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
