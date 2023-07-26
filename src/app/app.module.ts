@@ -33,6 +33,9 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { AuthSignupComponent } from './components/auth-signup/auth-signup.component';
+import { AuthLoginComponent } from './components/auth-login/auth-login.component';
 
 
 
@@ -43,7 +46,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppComponent,
     HeaderComponent,
     IndexComponent,
-    FooterComponent
+    FooterComponent,
+    UserProfileComponent,
+    AuthSignupComponent,
+    AuthLoginComponent
     ],
   imports: [
     BrowserModule,
