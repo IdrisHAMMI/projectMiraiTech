@@ -36,6 +36,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AuthSignupComponent } from './components/auth-signup/auth-signup.component';
 import { AuthLoginComponent } from './components/auth-login/auth-login.component';
+import { provideAuth,getAuth } from '@angular/fire/auth';
 
 
 
@@ -72,7 +73,8 @@ import { AuthLoginComponent } from './components/auth-login/auth-login.component
     //MODULAR SDK FOR FIREBASE
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    provideAuth(() => getAuth())
   ],
   providers: [],
   bootstrap: [AppComponent]

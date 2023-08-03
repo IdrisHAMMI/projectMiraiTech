@@ -1,14 +1,29 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
-//DB CONNECTION STRING ID
-var CONNECTION_STRING="mongodb+srv://hammiidris:?8#A;~8RrQe-^JW@cluster0.gudaofb.mongodb.net/?retryWrites=true&w=majority"
-
+const passport = require('passport');
 const mongoose = require('mongoose');
-const mongoDBURL = 'mongodb://localhost:27017/your-database-name';
 
-mongoose.connect(mongoDBURL, {
+const users = require('./routes/users');
+
+// DB CONNECTION STRING
+const CONNECTION_STRING = "mongodb+srv://hammiidris:j2c1ivpAj5JIu7Dd@cluster0.gudaofb.mongodb.net/?retryWrites=true&w=majority";
+
+const app = express(); // Define app here
+
+//CONTROLERS
+var usersController = require('./controllers/userController.js');
+
+//////////////////////
+//TESTING SPACE
+
+app.use('/users' , usersController);
+
+//TESTING SPACE
+///////////////////////
+
+mongoose.connect(CONNECTION_STRING, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -20,17 +35,20 @@ db.once('open', () => {
   console.log('Connected to MongoDB');
 });
 
-const app = express();
 const port = 3000;
 
-//CORS ("CROSS ORIGIN RESOURCE SHARING") ENABLER
-app.use(cors());
-//END
+//NULL ENDPOINT ERROR
+app.get('/', (req, res) => {
+  res.send('Invalid Endpoint');
+});
 
-//BODY PARSER MIDDLEWARE TO PARSE JSON REQUESTS
+// CORS ("CROSS ORIGIN RESOURCE SHARING") ENABLER
+app.use(cors());
+
+// BODY PARSER MIDDLEWARE TO PARSE JSON REQUESTS
 app.use(bodyParser.json());
 
-//SERVER START
+// SERVER START
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on port ${port}. URL: http://localhost:${port}`);
 });
