@@ -10,7 +10,10 @@ const users = require('./routes/users');
 // DB CONNECTION STRING
 const CONNECTION_STRING = "mongodb+srv://hammiidris:j2c1ivpAj5JIu7Dd@cluster0.gudaofb.mongodb.net/?retryWrites=true&w=majority";
 
-const app = express(); // Define app here
+const app = express();
+
+// BODY PARSER MIDDLEWARE TO PARSE JSON REQUESTS
+app.use(express.json());
 
 //CONTROLERS
 var usersController = require('./controllers/userController.js');
@@ -44,9 +47,6 @@ app.get('/', (req, res) => {
 
 // CORS ("CROSS ORIGIN RESOURCE SHARING") ENABLER
 app.use(cors());
-
-// BODY PARSER MIDDLEWARE TO PARSE JSON REQUESTS
-app.use(bodyParser.json());
 
 // SERVER START
 app.listen(port, () => {
