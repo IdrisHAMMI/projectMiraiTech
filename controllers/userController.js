@@ -1,11 +1,8 @@
 const express = require('express');
 const router = express.Router();
-
 const { Users } = require('../models/users');
 
-
-//CALLBACK QUERY & ROUTE HANDLER
-//URL => localhost:3000/users
+// GET REQUEST TO FETCH USERS FROM DB
 router.get('/', async (req, res) => {
   try {
     const docs = await Users.find().exec();
@@ -16,17 +13,22 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', (req, res) => {
 
-  var usrObject = new Users({
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password
-  });
-  usrObject.save((err, doc) => {
-    if(!err) {res.send(doc); }
-    else { console.log('Error in Users Save:' + JSON.stringify(err,undefined,2 )) ;}
-  });
+
+// POST REQUEST TO ADD NEW USER TO DB
+router.post('/', async (req, res) => {
+  try {
+    const usrObject = new Users({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password
+    });
+    const newUser = await usrObject.save();
+    res.send(newUser);
+  } catch (err) {
+    console.log('Error in Users Save:' + JSON.stringify(err, undefined, 2));
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 module.exports = router;
