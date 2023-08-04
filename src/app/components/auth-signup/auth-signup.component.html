@@ -13,7 +13,12 @@
           <h1 class="text-3xl font-bold pt-2">Créer un Nouveau Compte</h1>
         </div>
         <div class="mt-4">
-          <form action="#" class="w-96 mx-auto" method="post">
+          <form #usersFForm="ngForm" class="w-96 mx-auto" method="post">
+            <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="usersService.selectedUsers._id">
+            <div class="mb-4">
+              <label for="username" class="block font-bold">Username</label>
+              <input type="text" class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" name="username" placeholder="username" />
+            </div>
             <div class="mb-4">
               <label for="email" class="block font-bold">Email</label>
               <input type="text" class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" name="email" placeholder="Email" />

@@ -51,4 +51,46 @@ router.post('/', async (req, res) => {
   }
 });
 
+
+//FINDS THE ID UPDATES IT
+router.put('/:id', async (req, res) => {
+  if (!ObjectId.isValid(req.params.id))
+    return res.status(400).send(`No record with given id: ${req.params.id}`);
+
+  const usrObject = {
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password
+  };
+
+  try {
+    const updatedUser = await Users.findByIdAndUpdate(
+      req.params.id,
+      { $set: usrObject },
+      { new: true }
+    ).exec();
+
+    if (updatedUser) {
+      res.send(updatedUser);
+    } else {
+      res.status(404).send(`No record found with id: ${req.params.id}`);
+    }
+  } catch (err) {
+    console.log('Error in Users Update: ' + JSON.stringify(err, undefined, 2));
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+router.delete('/:id', async (req, res) => {
+  try {
+    if (!ObjectId.isValid(req.params.id))
+      return res.status(400).send(`No record with given id: ${req.params.id}`);
+    const doc = await Users.findByIdAndDelete(req.params.id);
+    res.send(doc)
+  } catch(err) {
+    console.log('Error in the Users Delete:' +JSON.stringify(err, undefined, 2));
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+})
+
 module.exports = router;
