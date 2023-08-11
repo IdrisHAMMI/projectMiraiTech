@@ -5,26 +5,22 @@ const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
 
-const users = require('./routes/users');
-
-// DB CONNECTION STRING
-const CONNECTION_STRING = "mongodb+srv://hammiidris:j2c1ivpAj5JIu7Dd@cluster0.gudaofb.mongodb.net/?retryWrites=true&w=majority";
-
-const app = express();
+const app = express(); //EXPRESS INSTANCE
 
 // BODY PARSER MIDDLEWARE TO PARSE JSON REQUESTS
 app.use(express.json());
 
+// CORS ("CROSS ORIGIN RESOURCE SHARING") ENABLER
+app.use(cors());
+
 //CONTROLERS
 var usersController = require('./controllers/userController.js');
 
-//////////////////////
-//TESTING SPACE
+// TESTING SPACE
+app.use('/users', usersController);
 
-app.use('/users' , usersController);
-
-//TESTING SPACE
-///////////////////////
+// DB CONNECTION STRING
+const CONNECTION_STRING = "mongodb+srv://hammiidris:j2c1ivpAj5JIu7Dd@cluster0.gudaofb.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.connect(CONNECTION_STRING, {
   useNewUrlParser: true,
@@ -40,13 +36,10 @@ db.once('open', () => {
 
 const port = 3000;
 
-//NULL ENDPOINT ERROR
+// NULL ENDPOINT ERROR
 app.get('/', (req, res) => {
   res.send('Invalid Endpoint');
 });
-
-// CORS ("CROSS ORIGIN RESOURCE SHARING") ENABLER
-app.use(cors());
 
 // SERVER START
 app.listen(port, () => {

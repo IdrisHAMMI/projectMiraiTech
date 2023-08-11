@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 
 import { UsersService } from '../../shared/users.service';
 
+declare var M: any;
+
 @Component({
   selector: 'app-auth-signup',
   templateUrl: './auth-signup.component.html',
@@ -25,8 +27,14 @@ export class AuthSignupComponent {
       username: "",
       email: "",
       password: "",
-    }
-  }
+    };
 
+  }
+  onSubmit(form: NgForm) {
+    this.usersService.postUsers(form.value).subscribe((res) => {
+      this.resetForm(form);
+      M.toast({ html: 'Registration Successful'});
+    });
+  }
 }
 

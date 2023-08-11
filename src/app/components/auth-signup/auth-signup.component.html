@@ -13,30 +13,26 @@
           <h1 class="text-3xl font-bold pt-2">Créer un Nouveau Compte</h1>
         </div>
         <div class="mt-4">
-          <form #usersFForm="ngForm" class="w-96 mx-auto" method="post">
+          <form #usersForm="ngForm" (ngSubmit)="onSubmit(usersForm)" class="w-96 mx-auto">
             <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="usersService.selectedUsers._id">
             <div class="mb-4">
               <label for="username" class="block font-bold">Username</label>
-              <input type="text" class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" name="username" placeholder="username" />
+              <input type="text" #username="ngModel" [(ngModel)]="usersService.selectedUsers.username" class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" name="username" placeholder="Username" />
             </div>
             <div class="mb-4">
               <label for="email" class="block font-bold">Email</label>
-              <input type="text" class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" name="email" placeholder="Email" />
+              <input type="text" #email="ngModel" [(ngModel)]="usersService.selectedUsers.email" class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" name="email" placeholder="Email" />
             </div>
             <div class="mb-4">
-              <label for="password" class="block font-bold">Mot de Passe</label>
-              <input type="password" class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" name="password" placeholder="Mot de Passe" />
+              <label for="password" class="block font-bold">Password</label>
+              <input type="password" #password="ngModel" [(ngModel)]="usersService.selectedUsers.password" class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" name="password" placeholder="Password" />
             </div>
-            <div class="mb-4">
-              <label for="password" class="block font-bold">Répéter Mot de Passe</label>
-              <input type="password" class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" name="password" placeholder="Mot de Passe" />
-            </div>
+
             <div class="mt-4">
-              <button type="submit" name="submit" class="btn w-full py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Connection</button>
+              <button type="submit" name="submit" class="btn w-full py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Register</button>
             </div>
             <p class="pt-5">Pas de compte? <br><a href="#" class="text-blue-500">Inscrivez vous Maintenant !</a></p>
           </form>
-
         </div>
       </div>
     </div>
