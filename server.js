@@ -20,7 +20,7 @@ var usersController = require('./controllers/userController.js');
 app.use('/users', usersController);
 
 // DB CONNECTION STRING
-const CONNECTION_STRING = "mongodb+srv://hammiidris:j2c1ivpAj5JIu7Dd@cluster0.gudaofb.mongodb.net/?retryWrites=true&w=majority";
+const CONNECTION_STRING = "mongodb+srv://hammiidris:j2c1ivpAj5JIu7Dd@cluster0.gudaofb.mongodb.net/MiraiTech_db?retryWrites=true&w=majority";
 
 mongoose.connect(CONNECTION_STRING, {
   useNewUrlParser: true,
