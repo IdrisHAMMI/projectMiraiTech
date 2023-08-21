@@ -3,7 +3,10 @@ const router = express.Router();
 var ObjectId = require('mongoose').Types.ObjectId;
 const jwt = require('jsonwebtoken');
 
+
 const { Users } = require('../models/users');
+
+////////////////////SIGN UP ROUTE////////////////////
 
 // GET REQUEST TO FETCH USERS FROM DB
 router.get('/', async (req, res) => {
@@ -97,3 +100,32 @@ router.delete('/:id', async (req, res) => {
 })
 
 module.exports = router;
+
+////////////////////LOGIN ROUTE////////////////////
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    // Find the user by username or email
+    const user = await User.findOne({ $or: [{ username }, { email: username }] });
+
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    // Check if the password is correct
+    const isPasswordValid = await user.comparePassword(password);
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    // Generate a JWT
+    const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
+
+    res.json({ token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
