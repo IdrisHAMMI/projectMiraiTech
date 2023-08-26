@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 var ObjectId = require('mongoose').Types.ObjectId;
 const jwt = require('jsonwebtoken');
-
+const app = require('../server.js');
 
 const { Users } = require('../models/users');
 
@@ -99,17 +99,17 @@ router.delete('/:id', async (req, res) => {
   }
 })
 
-module.exports = router;
-
-////////////////////LOGIN ROUTE////////////////////
-app.post('/login', async (req, res) => {
+//LOGIN
+router.post('/login', async (req, res) => {
   const { username, password } = req.body;
+  console.log('Received credentials:', username, password);
 
   try {
     // Find the user by username or email
-    const user = await User.findOne({ $or: [{ username }, { email: username }] });
+    const user = await Users.findOne({ $or: [{ username }, { email: username }] });
 
     if (!user) {
+      console.log('User not found');
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
@@ -117,6 +117,7 @@ app.post('/login', async (req, res) => {
     const isPasswordValid = await user.comparePassword(password);
 
     if (!isPasswordValid) {
+      console.log('Invalid password');
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
@@ -129,3 +130,6 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+
+module.exports = router;

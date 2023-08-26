@@ -5,6 +5,8 @@ const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
 
+
+
 const app = express(); //EXPRESS INSTANCE
 
 // BODY PARSER MIDDLEWARE TO PARSE JSON REQUESTS
@@ -16,11 +18,12 @@ app.use(cors());
 //CONTROLERS
 var usersController = require('./controllers/userController.js');
 
-// TESTING SPACE
 app.use('/users', usersController);
 
 // DB CONNECTION STRING
 const CONNECTION_STRING = "mongodb+srv://hammiidris:j2c1ivpAj5JIu7Dd@cluster0.gudaofb.mongodb.net/MiraiTech_db?retryWrites=true&w=majority";
+
+const jwtSecret = require('./src/app/auth/jwtSecret.js');
 
 mongoose.connect(CONNECTION_STRING, {
   useNewUrlParser: true,
@@ -45,3 +48,7 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}. URL: http://localhost:${port}`);
 });
+
+
+
+module.exports = app;
