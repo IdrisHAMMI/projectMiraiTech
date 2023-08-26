@@ -3,7 +3,7 @@ const router = express.Router();
 var ObjectId = require('mongoose').Types.ObjectId;
 const jwt = require('jsonwebtoken');
 const app = require('../server.js');
-
+const bcrypt = require('bcrypt');
 const { Users } = require('../models/users');
 
 ////////////////////SIGN UP ROUTE////////////////////
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
     const docs = await Users.find().exec();
     res.send(docs);
   } catch (err) {
-    console.log('Error in retrieving Users: ' + JSON.stringify(err, undefined, 2));
+    console.log('Error in retrieving Users:', err); // Log the error for debugging
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
@@ -99,6 +99,29 @@ router.delete('/:id', async (req, res) => {
   }
 })
 
+
+router.post('/', async (req, res) => {
+  try {
+    const { username, email, password } = req.body;
+
+    // Hash the password before saving
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const usrObject = new Users({
+      username: username,
+      email: email,
+      password: hashedPassword // Store the hashed password
+    });
+
+    const newUser = await usrObject.save();
+
+    res.send(newUser);
+  } catch (err) {
+    console.log('Error in Users Save:' + JSON.stringify(err, undefined, 2));
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 //LOGIN
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
@@ -113,7 +136,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    // Check if the password is correct
+    // Check if the entered password matches the stored hashed password
     const isPasswordValid = await user.comparePassword(password);
 
     if (!isPasswordValid) {
@@ -130,6 +153,5 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
 
 module.exports = router;
