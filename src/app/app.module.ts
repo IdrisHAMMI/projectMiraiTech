@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+
 
 //APP ENVIRONMENT FOR FIREBASE IMPORT
 import { environment } from '../environments/environment';
@@ -57,6 +59,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     MatSidenavModule,
     MatGridListModule,
     MatMenuModule,

@@ -15,7 +15,6 @@ router.post('/register', async (req, res) => {
 
     //PASSWORD ENCRYPTION
     const salt = await bcrypt.genSalt(10)
-
     const hashedPassword = await bcrypt.hash(password, salt)
 
     const record = await Users.findOne({email:email})
@@ -35,9 +34,18 @@ router.post('/register', async (req, res) => {
       email: email,
       password: hashedPassword
     });
-
   }
-    const result = await user.save(); // Change newUser to user
+    const result = await user.save();
+
+    //JWT TOKEN
+
+    const {_id} = await result.toJSON()
+    const token = jwt.sign({_id:_id}, "SECRETPLACEHOLDER")
+    res.cookie("jwt", token, {
+      httpOnly:true,
+      //COOKIE EXPIRATION = 1DAY
+      maxAge: 24*60*60*100
+    })
 
     res.json({
       user: result
@@ -46,8 +54,9 @@ router.post('/register', async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-
 });
+////////////////////SIGN UP ROUTE////////////////////
+
 
 router.post("/login", (req, res) => {
   res.send("login user");
