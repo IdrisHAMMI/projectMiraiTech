@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { NgForm } from '@angular/forms';
 
+
 @Component({
   selector: 'app-auth-login',
   templateUrl: './auth-login.component.html',
@@ -10,10 +11,20 @@ import { NgForm } from '@angular/forms';
 export class AuthLoginComponent {
   constructor(private authService: AuthService) {}
 
-  onSubmit(loginForm: NgForm) {
+  async onSubmit(loginForm: NgForm) {
     if (loginForm.valid) {
       const credentials = loginForm.value;
-      this.authService.login(credentials).subscribe(
+
+      // Hash the password using bcrypt
+
+
+      // Send the hashed password in the request
+      const loginData = {
+        username: credentials.username,
+        password: credentials.password // Send the hashed password
+      };
+
+      this.authService.login(loginData).subscribe(
         (response) => {
           // Handle successful login
           const token = response.token;

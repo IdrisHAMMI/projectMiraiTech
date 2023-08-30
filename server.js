@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
-const jwtSecret = require('./src/app/auth/jwtSecret.js');
+const cookieParser = require('cookie-parser')
 
 
 const app = express(); //EXPRESS INSTANCE
@@ -15,14 +15,13 @@ app.use(express.json());
 // CORS ("CROSS ORIGIN RESOURCE SHARING") ENABLER
 app.use(cors());
 
-//CONTROLERS
-var usersController = require('./controllers/userController.js');
+//USER ROUTES
+const routes = require('./controllers/userController.js');
 
-app.use('/users', usersController);
+app.use("/api", routes);
 
 // DB CONNECTION STRING
 const CONNECTION_STRING = "mongodb+srv://hammiidris:j2c1ivpAj5JIu7Dd@cluster0.gudaofb.mongodb.net/MiraiTech_db?retryWrites=true&w=majority";
-
 
 
 mongoose.connect(CONNECTION_STRING, {
@@ -37,18 +36,16 @@ db.once('open', () => {
   console.log('Connected to MongoDB');
 });
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-// NULL ENDPOINT ERROR
+// Null endpoint error
 app.get('/', (req, res) => {
   res.send('Invalid Endpoint');
 });
 
-// SERVER START
+// Server start
 app.listen(port, () => {
   console.log(`Server is running on port ${port}. URL: http://localhost:${port}`);
 });
-
-
 
 module.exports = app;
