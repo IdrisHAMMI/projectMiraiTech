@@ -13,7 +13,10 @@ const app = express(); //EXPRESS INSTANCE
 app.use(express.json());
 
 // CORS ("CROSS ORIGIN RESOURCE SHARING") ENABLER
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:4200', // Replace with your frontend URL
+  credentials: true,
+}));
 
 //USER ROUTES
 const routes = require('./controllers/userController.js');

@@ -12,44 +12,42 @@ router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
+    // PASSWORD ENCRYPTION
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
-    //PASSWORD ENCRYPTION
-    const salt = await bcrypt.genSalt(10)
-    const hashedPassword = await bcrypt.hash(password, salt)
+    const record = await Users.findOne({ email: email });
 
-    const record = await Users.findOne({email:email})
-
-
-    //IF THE EMAIL IS ALREADY REGISTERED, SEND ERROR MESSAGE.
-    //ELSE, POST INFO TO DATABASE
-    if(record) {
+    // IF THE EMAIL IS ALREADY REGISTERED, SEND ERROR MESSAGE.
+    // ELSE, POST INFO TO DATABASE
+    if (record) {
       return res.status(400).send({
         message: "Email is already registered."
-      })
+      });
     } else {
+      // USER SCHEMA
+      const user = new Users({
+        username: username,
+        email: email,
+        password: hashedPassword
+      });
 
-    //USER SCHEMA
-    const user = new Users({
-      username: username,
-      email: email,
-      password: hashedPassword
-    });
-  }
-    const result = await user.save();
+      const result = await user.save();
 
-    //JWT TOKEN
+      // JWT TOKEN
 
-    const {_id} = await result.toJSON()
-    const token = jwt.sign({_id:_id}, "SECRETPLACEHOLDER")
-    res.cookie("jwt", token, {
-      httpOnly:true,
-      //COOKIE EXPIRATION = 1DAY
-      maxAge: 24*60*60*100
-    })
+      const { _id } = await result.toJSON();
+      const token = jwt.sign({ _id: _id }, "SECRETPLACEHOLDER");
+      res.cookie("jwt", token, {
+        httpOnly: true,
+        // COOKIE EXPIRATION = 1 DAY
+        maxAge: 24 * 60 * 60 * 100
+      });
 
-    res.json({
-      user: result
-    });
+      res.json({
+        user: result
+      });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });

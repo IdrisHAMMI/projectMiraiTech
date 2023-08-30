@@ -25,12 +25,32 @@ export class AuthSignupComponent implements OnInit{
     })
   }
 
+  ValidateEmail = (email:any) => {
+
+    //REGULAR EXPRESSION MATCHING FOR EMAIL
+    var validRegex = /^[a-zA-Z0-9.!#$%'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if(email.match(validRegex)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   submit():void{
     let user = this.form.getRawValue()
     console.log(user)
 
     if(user.username == "" || user.email == "" || user.password == "") {
       Swal.fire("Error","Fill the Fields.", "error")
+    } else if(!this.ValidateEmail(user.email)){
+      Swal.fire("Error", "Enter a valid Email","error")
+    }else{
+        this.http.post("http://localhost:3000/api/register", user, {
+          withCredentials:true
+        })
+        .subscribe(() => this.router.navigate(['/']), (err) => {
+          Swal.fire("Error",err.error.message,"error")
+        })
+      }
     }
   }
-}
