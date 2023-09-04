@@ -53,4 +53,22 @@
 <div class="pl-3"><a href="#">Computers</a></div>
 <div class="pl-7"><a href="#">PC Components</a></div>
 <div class="pl-7"><a href="#">Periphirals</a></div>
+<div class="pl-7">
+  <ul *ngIf="!authenticated">
+    <li>
+  <a href="/authSignup">Sign Up</a>
+    </li>
+    <li>
+  <a href="/authLogin">Sign In</a>
+    </li>
+</ul>
+
+  <ul *ngIf="authenticated">
+    <li>
+  <a href="/logout">Logout</a>
+    </li>
+
+</ul>
+
+</div>
 </mat-toolbar>

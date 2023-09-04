@@ -5,21 +5,27 @@ const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser')
+const jwt = require('jsonwebtoken');
 
 
 const app = express(); //EXPRESS INSTANCE
 
-// BODY PARSER MIDDLEWARE TO PARSE JSON REQUESTS
-app.use(express.json());
-
 // CORS ("CROSS ORIGIN RESOURCE SHARING") ENABLER
+
+app.use(cookieParser())
+
 app.use(cors({
-  origin: 'http://localhost:4200', // Replace with your frontend URL
   credentials: true,
+  origin: ['http://localhost:4200', 'http://localhost:3000']
 }));
 
 //USER ROUTES
 const routes = require('./controllers/userController.js');
+
+
+
+// BODY PARSER MIDDLEWARE TO PARSE JSON REQUESTS
+app.use(express.json());
 
 app.use("/api", routes);
 

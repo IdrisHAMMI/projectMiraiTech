@@ -40,17 +40,26 @@ export class AuthSignupComponent implements OnInit{
     let user = this.form.getRawValue()
     console.log(user)
 
+    //IF CREDENTIALS = NULL || EMAIL ALREADY USED, THROW ERROR.
+    //ELSE, POST THE ENTERED CREDENTIALS TO SERVER AND REDIRECT
+    //USER TO THE INDEX
     if(user.username == "" || user.email == "" || user.password == "") {
       Swal.fire("Error","Fill the Fields.", "error")
     } else if(!this.ValidateEmail(user.email)){
       Swal.fire("Error", "Enter a valid Email","error")
     }else{
-        this.http.post("http://localhost:3000/api/register", user, {
-          withCredentials:true
-        })
-        .subscribe(() => this.router.navigate(['/']), (err) => {
-          Swal.fire("Error",err.error.message,"error")
-        })
+      this.http.post("http://localhost:3000/api/register", user, {
+        withCredentials: true
+      })
+      .subscribe(
+        () => {
+          Swal.fire("Success", "Registration successful! You can now log in to your account.", "success");
+          this.router.navigate(['/']); // Navigate on success
+        },
+        (err) => {
+          Swal.fire("Error", err.error.message, "error");
+        }
+      );
       }
     }
   }
