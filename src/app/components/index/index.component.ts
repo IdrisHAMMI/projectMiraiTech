@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
+import { Emitters } from 'src/app/emitters/emitter';
 
 @Component({
   selector: 'app-index',
@@ -17,10 +18,13 @@ export class IndexComponent implements OnInit {
     })
     .subscribe(
       (res: any) => {
-        this.message = `wtf hello ${res.username}???`;
+        this.message = `Welcome ${res.username}!`;
+        Emitters.authEmitter.emit(true);
       },
       err => {
-        this.message = 'aw...still dont work...';
+        this.message = 'User';
+        Emitters.authEmitter.emit(false);
+
       }
     );
   }

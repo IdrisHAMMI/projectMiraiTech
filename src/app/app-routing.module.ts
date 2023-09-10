@@ -3,12 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { IndexComponent } from './components/index/index.component';
 import { AuthLoginComponent } from './components/auth-login/auth-login.component';
 import { AuthSignupComponent } from './components/auth-signup/auth-signup.component';
-
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent},
   { path: 'authLogin', component: AuthLoginComponent},
   { path: 'authSignup', component: AuthSignupComponent},
+  { path: 'userProfile', component: UserProfileComponent},
   { path: '', redirectTo: 'index', pathMatch: 'full'}
 ];
 
