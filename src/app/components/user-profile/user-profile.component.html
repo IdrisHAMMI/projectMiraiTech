@@ -1,1 +1,47 @@
-<p>user-profile works!</p>
+<app-header></app-header>
+<div class="flex pt-8 pl-8">
+  <!-- Left div -->
+  <div class="w-[17%] bg-sky-400 rounded-md">
+    <div class="">
+      <p class="text-center pt-4">{{username}}</p>
+      <p class="text-center pt-1">REAL USERNAME</p>
+      <ul>
+        <li class="pt-1 pl-2">MY INFO</li>
+        <li class="pt-1 pl-2">MY ADDRESS</li>
+        <li class="pt-1 pl-2 pb-4">MY ORDERS</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Right div -->
+  <div class="bg-gray-200 w-4/5 rounded ml-8">
+    <p class="text-center pt-4">PERSONAL INFO</p>
+<br>
+    <form class="w-[50rem] mx-auto">
+      <div class="flex space-x-4">
+        <label for="username" class="block font-bold">FIRST NAME</label>
+        <input type="text" formControlName="firstname" class="form-input w-full mb-[50px] px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" name="firstname" placeholder="First name..." />
+
+        <label for="username" class="block font-bold">LAST NAME</label>
+        <input type="text" formControlName="lastname" class="form-input w-full mb-[50px] px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" name="lastname" placeholder="Last Name..." />
+      </div>
+
+      <div class="flex space-x-4">
+        <label for="email" class="block font-bold pt-[10px]">EMAIL</label>
+        <input type="text" formControlName="email" class="form-input w-full mb-[50px] px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" name="email" placeholder="Email..." />
+
+        <label for="birth" class="block font-bold">BIRTH DAY</label>
+        <input type="text" formControlName="birth" class="form-input w-full mb-[50px] px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" name="birth" placeholder="Birthday..." />
+      </div>
+
+      <div class="flex justify-center">
+        <button type="submit" name="submit" class="btn py-2 px-4 mb-[30px] bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Register</button>
+      </div>
+
+    </form>
+
+
+
+  </div>
+</div>
+

@@ -77,17 +77,15 @@ router.post("/login", async(req, res) => {
     httpOnly: true,
     maxAge: 24*60*60*1000 //1 DAY TOKEN
   })
+res.send({
+  message: 'wtf it worked???'
+})
 });
 
 
 ////////////////////USER ROUTE///////////////////////
 
 router.get('/user', async (req, res) => {
-
-  //TRY TO VERIFY JWT(cookie)SECRET PASSWORD
-  //IF IT IS THE SAME/VALID, FIND THE USER ID
-  //AND SEND THE DATA, IF NOT THROW ERROR
-
   try {
   const cookie = req.cookies['jwt']
 
@@ -95,7 +93,7 @@ router.get('/user', async (req, res) => {
 
   if (!claims) {
     return res.status(401).send({
-      message: 'Unauthenticated'
+      message: 'nuh uh, not working. try again buckaroo.'
     })
   }
 
@@ -107,20 +105,17 @@ const {password, ...data} = await user.toJSON()
 
 } catch (e) {
   return res.status(401).send({
-    message: 'Unauthenticated'
+    message: 'unauthenticated'
     })
   }
 })
 
 router.post('/logout', (req, res) => {
+  res.cookie('jwt', '', {maxAge: 0})
 
-  //RENDERS THE JWT TOKEN TIME LIMIT TO 0
-  //TO MAKE THE USER LOG OUT OF SESSION
-
-  res.cookie("jwt", "", { maxAge: 0 });
   res.send({
-    message: "logged out successfully!"
-  });
-});
+    message:'logged out'
+  })
+})
 
 module.exports = router;
