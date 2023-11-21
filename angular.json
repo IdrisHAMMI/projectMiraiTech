@@ -61,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "projectMiraiTech:build:production"
+              "buildTarget": "projectMiraiTech:build:production"
             },
             "development": {
-              "browserTarget": "projectMiraiTech:build:development"
+              "buildTarget": "projectMiraiTech:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +72,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "projectMiraiTech:build"
+            "buildTarget": "projectMiraiTech:build"
           }
         },
         "test": {
@@ -103,5 +103,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "b70729eb-9f15-4779-9bc6-c72315446c3c"
   }
 }

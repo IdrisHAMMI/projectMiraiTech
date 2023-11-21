@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 //APP ENVIRONMENT FOR FIREBASE IMPORT
-import { environment } from '../environments/environment';
+//import { environment } from '../environments/environment';
 //HTTP CLIENT IMPORT
 import { HttpClientModule } from '@angular/common/http';
 //HEADER & FOOTER IMPORT
@@ -15,9 +15,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { IndexComponent } from './components/index/index.component';
 
 //FIRESTORM IMPORTS
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { provideFirebaseApp, getApp } from '@angular/fire/app';
-import { initializeApp } from '@angular/fire/app';
+//import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+//import { provideFirebaseApp, getApp } from '@angular/fire/app';
+//import { initializeApp } from '@angular/fire/app';
 
 //ANGULAR MATERIAL COMPONENTS
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -36,7 +36,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AuthSignupComponent } from './components/auth-signup/auth-signup.component';
 import { AuthLoginComponent } from './components/auth-login/auth-login.component';
-import { provideAuth,getAuth } from '@angular/fire/auth';
+//import { provideAuth,getAuth } from '@angular/fire/auth';
 
 
 
@@ -71,10 +71,10 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
     MatSnackBarModule,
 
     //MODULAR SDK FOR FIREBASE
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => getFirestore()),
+    //provideFirebaseApp(() => initializeApp(environment.firebase)),
+    //provideFirestore(() => getFirestore()),
     BrowserAnimationsModule,
-    provideAuth(() => getAuth())
+    //provideAuth(() => getAuth())
   ],
   providers: [],
   bootstrap: [AppComponent]
