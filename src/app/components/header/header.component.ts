@@ -1,29 +1,47 @@
-import { Component } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http'
+import { Emitters } from '../../emiters/emitter'
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  animations: [
-    trigger('fadeInOut', [
-      state('void', style({
-        opacity: 0,
-        transform: 'translateY(-20px)', // or any other initial position
-        display: 'none'
-      })),
-      state('*', style({
-        opacity: 1,
-        transform: 'translateY(0)',
-        display: 'block'
-      })),
-      transition('void <=> *', animate('300ms ease-in-out')),
-    ]),
-  ],
-})
-export class HeaderComponent {
-  isSearchVisible = false;
+  })
+export class HeaderComponent implements OnInit {
 
-  toggleSearch() {
-    this.isSearchVisible = !this.isSearchVisible;
+  authenticated = false
+
+  message: string = ""
+
+  constructor (private http:HttpClient){}
+
+  ngOnInit():void{
+    Emitters.authEmitter.subscribe((auth:boolean) => {
+      this.authenticated = auth
+    })
+
+    this.http.get('http://localhost:3000/api/users', {
+      withCredentials:true
+    })
+    .subscribe((res:any) => {
+      this.message = `Welcome ${res.username}!`;
+      Emitters.authEmitter.emit(true)
+    },
+    (err) => {
+      this.message = "you are not logged in";
+      Emitters.authEmitter.emit(false)
+    })
+  }
+  logout(): void {
+    console.log('Logout method called');
+    this.http.post('http://localhost:3000/api/logout', {}, { withCredentials: true })
+      .subscribe(
+        () => {
+          console.log('Logout successful');
+          Emitters.authEmitter.emit(false);
+        },
+        (error) => {
+          console.error('Logout error:', error);
+        }
+      );
   }
 }

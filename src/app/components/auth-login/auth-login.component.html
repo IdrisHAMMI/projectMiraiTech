@@ -12,19 +12,19 @@
             <h1 class="text-3xl font-bold pt-2">Se Connecter</h1>
           </div>
           <div class="mt-4">
-            <form action="#" class="w-96 mx-auto" method="post">
+            <form [formGroup]="form" (submit)="submit()" class="w-96 mx-auto" method="post">
               <div class="mb-4">
                 <label for="email" class="block font-bold">Email</label>
-                <input type="text" class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" name="email" placeholder="Email" />
+                <input type="text" class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="email" placeholder="Email" />
               </div>
               <div class="mb-4">
                 <label for="password" class="block font-bold">Mot de Passe</label>
-                <input type="password" class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" name="password" placeholder="Mot de Passe" />
+                <input type="password" class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="password" placeholder="Mot de Passe" />
               </div>
               <div class="mt-4">
                 <button type="submit" name="submit" class="btn w-full py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Connection</button>
               </div>
-              <p class="pt-5">Pas de compte? <br><a href="#" class="text-blue-500">Inscrivez vous Maintenant !</a></p>
+              <p class="pt-5">Pas de compte? <br><a href="authSignup" class="text-blue-500">Inscrivez vous Maintenant !</a></p>
             </form>
 
           </div>

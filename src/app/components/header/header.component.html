@@ -16,25 +16,30 @@
 </div>
     <!-- CART BUTTON -->
     <div class="flex items-center">
-      <!-- Cart button -->
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>shopping_cart</mat-icon>
       </button>
 
     <!-- LOGIN BUTTON -->
-    <div routerLink="/authLogin" class="cursor-pointer hover:cursor-pointer ml-2">
+    <div routerLink="/authLogin" class="cursor-pointer hover:cursor-pointer ml-2" *ngIf="!authenticated">
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
         Se Connecter
       </button>
     </div>
-</div>
+    <div routerLink="/" (click)="logout()" class="cursor-pointer hover:cursor-pointer ml-2" *ngIf="authenticated">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+      Se Déconnecter  
+      </button>
+    </div>
+  </div>
   <!-- CART MENU -->
   <mat-menu #menu="matMenu">
     <!-- DYNAMIC CART CONTENT -->
   </mat-menu>
 </mat-toolbar>
 <mat-toolbar class="bg-[#4598F8]" >
-  <div class="pl-3"><a href="#">Computers</a></div>
-  <div class="pl-7"><a href="#">PC Components</a></div>
-  <div class="pl-7"><a href="#">Periphirals</a></div>
+  <!--<div class="pl-3"><a href="#">Computers</a></div>-->
+  <!--<div class="pl-7"><a href="#">PC Components</a></div>-->
+  <!--<div class="pl-7"><a href="#">Periphirals</a></div>-->
+  {{ authenticated ? 'Authenticated' : 'Not Authenticated' }}
 </mat-toolbar>

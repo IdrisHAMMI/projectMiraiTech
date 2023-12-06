@@ -3,7 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http'
 //APP ENVIRONMENT FOR FIREBASE IMPORT
 //import { environment } from '../environments/environment';
 //HTTP CLIENT IMPORT
@@ -59,6 +60,7 @@ import { AuthLoginComponent } from './components/auth-login/auth-login.component
     FormsModule,
     MatSidenavModule,
     MatGridListModule,
+    ReactiveFormsModule,
     MatMenuModule,
     MatButtonModule,
     MatCardModule,
@@ -76,7 +78,11 @@ import { AuthLoginComponent } from './components/auth-login/auth-login.component
     BrowserAnimationsModule,
     //provideAuth(() => getAuth())
   ],
-  providers: [],
+  providers: [
+    //provide: HTTP_INTERCEPTORS,
+    //useClass: AuthLoginComponent,
+    //multi: true
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
