@@ -1,37 +1,38 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const cookieParser = require('cookie-parser')
+const express = require('express');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const app = express(); //EXPRESS INSTANCE
+const app = express(); // EXPRESS INSTANCE
 
 // BODY PARSER MIDDLEWARE TO PARSE JSON REQUESTS
 app.use(express.json());
 
 app.use(cookieParser());
 
-
-
 // CORS ("CROSS ORIGIN RESOURCE SHARING") ENABLER
-app.use(cors({
-  credentials: true,
-  origin: 'http://localhost:4200'
-}));
+app.use(
+  cors({
+    credentials: true,
+    origin: 'http://localhost:4200',
+  })
+);
 
 // DB CONNECTION STRING
-const CONNECTION_STRING = "mongodb+srv://hammiidris:j2c1ivpAj5JIu7Dd@cluster0.gudaofb.mongodb.net/MiraiTech_db?retryWrites=true&w=majority";
+const CONNECTION_STRING =
+  'mongodb+srv://hammiidris:j2c1ivpAj5JIu7Dd@cluster0.gudaofb.mongodb.net/MiraiTech_db?retryWrites=true&w=majority';
 
-
-//CONTROLERS
-var userRoutes = require('./controllers/userController')
+// CONTROLERS
+const userRoutes = require('./controllers/userController');
 
 // TESTING SPACE
-app.use("/api", userRoutes)
+app.use('/api', userRoutes);
 
 mongoose.connect(CONNECTION_STRING, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+  // Remove deprecated options
+  // useNewUrlParser: true,
+  // useUnifiedTopology: true,
 });
 
 const db = mongoose.connection;

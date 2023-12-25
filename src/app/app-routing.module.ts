@@ -15,8 +15,7 @@ const routes: Routes = [
   { path: 'userProfile', component: UserProfileComponent},
   { path: 'userProfile/info', component: UserProfileComponent},  
   { path: 'userProfile/orders', component: UserProfileOrdersComponent},  
-  { path: 'userProfile/addresses', component: UserProfileAddressesComponent},  
-
+  { path: 'userProfile/addresses', component: UserProfileAddressesComponent},
   { path: '', redirectTo: 'index', pathMatch: 'full'}
 ];
 

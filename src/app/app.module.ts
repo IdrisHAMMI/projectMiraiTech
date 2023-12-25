@@ -4,9 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS } from '@angular/common/http'
-//APP ENVIRONMENT FOR FIREBASE IMPORT
-//import { environment } from '../environments/environment';
 //HTTP CLIENT IMPORT
 import { HttpClientModule } from '@angular/common/http';
 //HEADER & FOOTER IMPORT
@@ -39,7 +36,6 @@ import { AuthSignupComponent } from './components/auth-signup/auth-signup.compon
 import { AuthLoginComponent } from './components/auth-login/auth-login.component';
 import { UserProfileOrdersComponent } from './components/user-profile-orders/user-profile-orders.component';
 import { UserProfileAddressesComponent } from './components/user-profile-addresses/user-profile-addresses.component';
-//import { provideAuth,getAuth } from '@angular/fire/auth';
 
 
 
@@ -57,36 +53,28 @@ import { UserProfileAddressesComponent } from './components/user-profile-address
     UserProfileOrdersComponent,
     UserProfileAddressesComponent
     ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    HeaderComponent,
-    MatSidenavModule,
-    MatGridListModule,
-    ReactiveFormsModule,
-    MatMenuModule,
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    MatExpansionModule,
-    MatListModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatBadgeModule,
-    MatSnackBarModule,
-
-    //MODULAR SDK FOR FIREBASE
-    //provideFirebaseApp(() => initializeApp(environment.firebase)),
-    //provideFirestore(() => getFirestore()),
-    BrowserAnimationsModule,
-    //provideAuth(() => getAuth())
-  ],
+    imports: [
+      BrowserModule,
+      AppRoutingModule,
+      HttpClientModule,
+      FormsModule,
+      ReactiveFormsModule,
+      MatSidenavModule,
+      MatGridListModule,
+      MatMenuModule,
+      MatButtonModule,
+      MatCardModule,
+      MatIconModule,
+      MatExpansionModule,
+      MatToolbarModule,
+      MatTableModule,
+      MatBadgeModule,
+      MatSnackBarModule,
+      MatListModule,
+      BrowserAnimationsModule,
+      
+    ],    
   providers: [
-    //provide: HTTP_INTERCEPTORS,
-    //useClass: AuthLoginComponent,
-    //multi: true
   ],
   bootstrap: [AppComponent]
 })
