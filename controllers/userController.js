@@ -39,6 +39,7 @@ const { Users } = require('../models/users');
 //});
 
 
+
 // POST REQUEST TO ADD NEW USER TO DB
 router.post("/register", async (req, res) => {
   try {
@@ -114,6 +115,7 @@ router.post("/register", async (req, res) => {
 //    res.status(500).json({ error: 'Internal Server Error' });
 //  }
 //})
+
 
 router.post("/login", async (req,res) => {
   const user = await Users.findOne({email: req.body.email})

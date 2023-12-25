@@ -37,9 +37,12 @@
     <!-- DYNAMIC CART CONTENT -->
   </mat-menu>
 </mat-toolbar>
-<mat-toolbar class="bg-[#4598F8]" >
+<mat-toolbar class="bg-[#4598F8] mb-[0px]" >
   <!--<div class="pl-3"><a href="#">Computers</a></div>-->
   <!--<div class="pl-7"><a href="#">PC Components</a></div>-->
   <!--<div class="pl-7"><a href="#">Periphirals</a></div>-->
   {{ authenticated ? 'Authenticated' : 'Not Authenticated' }}
+  <a href="/userProfile">
+    <p style="margin-bottom: 0px;">PROFILE PAGE</p>
+  </a>
 </mat-toolbar>

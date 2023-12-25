@@ -37,6 +37,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AuthSignupComponent } from './components/auth-signup/auth-signup.component';
 import { AuthLoginComponent } from './components/auth-login/auth-login.component';
+import { UserProfileOrdersComponent } from './components/user-profile-orders/user-profile-orders.component';
+import { UserProfileAddressesComponent } from './components/user-profile-addresses/user-profile-addresses.component';
 //import { provideAuth,getAuth } from '@angular/fire/auth';
 
 
@@ -51,13 +53,16 @@ import { AuthLoginComponent } from './components/auth-login/auth-login.component
     FooterComponent,
     UserProfileComponent,
     AuthSignupComponent,
-    AuthLoginComponent
+    AuthLoginComponent,
+    UserProfileOrdersComponent,
+    UserProfileAddressesComponent
     ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    HeaderComponent,
     MatSidenavModule,
     MatGridListModule,
     ReactiveFormsModule,
