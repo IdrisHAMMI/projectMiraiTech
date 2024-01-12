@@ -6,7 +6,7 @@ import { AuthSignupComponent } from './components/auth-signup/auth-signup.compon
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfileOrdersComponent } from './components/user-profile-orders/user-profile-orders.component';
 import { UserProfileAddressesComponent } from './components/user-profile-addresses/user-profile-addresses.component';
-
+import { ProductInterfaceComponent } from './components/product-interface/product-interface.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent},
@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'userProfile/info', component: UserProfileComponent},  
   { path: 'userProfile/orders', component: UserProfileOrdersComponent},  
   { path: 'userProfile/addresses', component: UserProfileAddressesComponent},
+  { path: 'product', component: ProductInterfaceComponent},
   { path: '', redirectTo: 'index', pathMatch: 'full'}
 ];
 

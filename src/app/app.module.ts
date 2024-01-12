@@ -36,9 +36,7 @@ import { AuthSignupComponent } from './components/auth-signup/auth-signup.compon
 import { AuthLoginComponent } from './components/auth-login/auth-login.component';
 import { UserProfileOrdersComponent } from './components/user-profile-orders/user-profile-orders.component';
 import { UserProfileAddressesComponent } from './components/user-profile-addresses/user-profile-addresses.component';
-
-
-
+import { ProductInterfaceComponent } from './components/product-interface/product-interface.component';
 
 
 @NgModule({
@@ -51,7 +49,8 @@ import { UserProfileAddressesComponent } from './components/user-profile-address
     AuthSignupComponent,
     AuthLoginComponent,
     UserProfileOrdersComponent,
-    UserProfileAddressesComponent
+    UserProfileAddressesComponent,
+    ProductInterfaceComponent
     ],
     imports: [
       BrowserModule,

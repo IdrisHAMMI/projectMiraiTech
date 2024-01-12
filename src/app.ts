@@ -1,8 +1,15 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
-const mongoose = require('mongoose');
+import express, { Request, Response } from "express";
+import config = require("config");
+import connect from "../utils/connect";
+import routes from './routes';
+
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import mongoose from 'mongoose';
+
+import { createUserHandler } from "../controllers/userController";
+
+const port = config.get<number>('port')
 
 const app = express(); // EXPRESS INSTANCE
 
@@ -19,21 +26,13 @@ app.use(
   })
 );
 
-// DB CONNECTION STRING
-const CONNECTION_STRING =
-  'mongodb+srv://hammiidris:j2c1ivpAj5JIu7Dd@cluster0.gudaofb.mongodb.net/MiraiTech_db?retryWrites=true&w=majority';
-
-// CONTROLERS
-const userRoutes = require('./controllers/userController');
+// CONTROLLERS
+//import productRoutes from '../controllers/productController';
 
 // TESTING SPACE
-app.use('/api', userRoutes);
+app.use('/api/auth', createUserHandler);
+//app.use('/api/items', productRoutes);
 
-mongoose.connect(CONNECTION_STRING, {
-  // Remove deprecated options
-  // useNewUrlParser: true,
-  // useUnifiedTopology: true,
-});
 
 const db = mongoose.connection;
 
@@ -42,14 +41,16 @@ db.once('open', () => {
   console.log('Connected to MongoDB');
 });
 
-const port = 3000;
-
 // NULL ENDPOINT ERROR
 app.get('/', (req, res) => {
   res.send('Invalid Endpoint');
 });
 
 // SERVER START
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log(`Server is running on port ${port}. URL: http://localhost:${port}`);
+
+  await connect();
+
+  routes(app)
 });
