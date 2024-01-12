@@ -2271,6 +2271,13 @@
   dependencies:
     "@types/node" "*"
 
+"@types/compression@^1.7.5":
+  version "1.7.5"
+  resolved "https://registry.npmjs.org/@types/compression/-/compression-1.7.5.tgz"
+  integrity sha512-AAQvK5pxMpaT+nDvhHrsBhLSYG5yQdtkaJE1WYieSNY2mVFKAgmU4ks65rkZD5oqnGCFLyQpUr1CqI4DmUMyDg==
+  dependencies:
+    "@types/express" "*"
+
 "@types/config@^3.3.3":
   version "3.3.3"
   resolved "https://registry.npmjs.org/@types/config/-/config-3.3.3.tgz"

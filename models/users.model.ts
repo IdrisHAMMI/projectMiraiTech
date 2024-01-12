@@ -1,50 +1,26 @@
-import mongoose, { Schema } from 'mongoose';
-import bcrypt from 'bcrypt';
-import config from 'config';
+import mongoose from 'mongoose';
 
-export interface UserDocument extends mongoose.Document {
-  username: string;
-  email: string;
-  password: string;
-  createdAt: Date;
-  updatedAt: Date;
-  comparePassword(candidatePassword: string): Promise<Boolean>
-}
 
-const UserSchema = new Schema<UserDocument>(
-  {
-    username: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-  },
-  {
-    timestamps: true,
+const UserSchema = new mongoose.Schema({
+  username: { type: String, required: true },
+  email: { type: String, required: true },
+  authentication: {
+    password: { type: String, required: true, select: false },
+    salt: { type: String, select: false },
+    sessionToken: { type: String, select: false },
   }
-);
-
-UserSchema.pre('save', async function (next) {
-  const user = this as UserDocument;
-
-  if (!user.isModified('password')) {
-    return next();
-  }
-
-  const salt = await bcrypt.genSalt(config.get<number>('saltWorkFactor'));
-  const hash = bcrypt.hashSync(user.password, salt);
-
-  user.password = hash;
-
-  return next();
 });
 
-UserSchema.methods.comparePassword = async function (
-  candidatePassword: string
-): Promise<boolean> {
-  const user = this as UserDocument;
+export const UserModel = mongoose.model('Users', UserSchema);
 
-  return bcrypt.compare(candidatePassword, user.password).catch((e) => false);
-};
+export const getUsers = () => UserModel.find();
+export const getUserByEmail = (email: string) => UserModel.findOne({ email });
+export const getUserBySessionToken = (sessionToken: string) => UserModel.findOne({
+  'authentication.sessionToken': sessionToken,
+});
 
-const Users = mongoose.model<UserDocument>('Users', UserSchema);
-
-export default Users;
+export const getUserById = (id: string) => UserModel.findById(id);
+export const createUser = (values: Record<string, any>) => new UserModel(values)
+  .save().then((user) => user.toObject());
+export const deleteUserById = (id: string) => UserModel.findOneAndDelete({ _id: id });
+export const updateUserById = (id: string, values: Record<string, any>) => UserModel.findByIdAndUpdate(id, values) 

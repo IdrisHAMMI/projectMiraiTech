@@ -1,56 +1,33 @@
 import express, { Request, Response } from "express";
-import config = require("config");
-import connect from "../utils/connect";
-import routes from './routes';
-
+import http from 'http';
 import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import compression from 'compression';
 import cors from 'cors';
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-import { createUserHandler } from "../controllers/userController";
+import router from "../router/index";
 
-const port = config.get<number>('port')
+const app = express();
 
-const app = express(); // EXPRESS INSTANCE
+app.use(cors({
+  credentials: true,
+}));
 
-// BODY PARSER MIDDLEWARE TO PARSE JSON REQUESTS
-app.use(express.json());
-
+app.use(compression());
 app.use(cookieParser());
+app.use(bodyParser.json());
 
-// CORS ("CROSS ORIGIN RESOURCE SHARING") ENABLER
-app.use(
-  cors({
-    credentials: true,
-    origin: 'http://localhost:4200',
-  })
-);
+const server = http.createServer(app);
 
-// CONTROLLERS
-//import productRoutes from '../controllers/productController';
+server.listen(3000, () => {
+  console.log('Server running on http://localhost:3000/');
+})
 
-// TESTING SPACE
-app.use('/api/auth', createUserHandler);
-//app.use('/api/items', productRoutes);
+const MONGO_URL = "mongodb+srv://hammiidris:j2c1ivpAj5JIu7Dd@cluster0.gudaofb.mongodb.net/MiraiTech_db?retryWrites=true&w=majority";
 
-
-const db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB');
-});
-
-// NULL ENDPOINT ERROR
-app.get('/', (req, res) => {
-  res.send('Invalid Endpoint');
-});
-
-// SERVER START
-app.listen(port, async () => {
-  console.log(`Server is running on port ${port}. URL: http://localhost:${port}`);
-
-  await connect();
-
-  routes(app)
-});
+mongoose.Promise = Promise;
+mongoose.connect(MONGO_URL);
+mongoose.connection.on('error', (error: Error) => console.log(error));
+ 
+app.use('/', router())
