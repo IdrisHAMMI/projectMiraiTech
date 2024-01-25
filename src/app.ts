@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import http from 'http';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
@@ -11,8 +11,10 @@ import router from "../router/index";
 const app = express();
 
 app.use(cors({
+  origin: 'http://localhost:4200',  // Replace with the actual origin of your Angular app
   credentials: true,
 }));
+
 
 app.use(compression());
 app.use(cookieParser());

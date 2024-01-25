@@ -6,7 +6,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": false,
     "esModuleInterop": true,
-    "noImplicitOverride": true,
+    "noImplicitOverride": false,
     "noPropertyAccessFromIndexSignature": false,
     "allowSyntheticDefaultImports": true,
     "noImplicitReturns": true,

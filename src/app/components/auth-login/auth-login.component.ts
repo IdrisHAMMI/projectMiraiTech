@@ -4,6 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
+interface UserLogin {
+  username: string;
+  email: string;
+  password: string;
+}
+
 @Component({
   selector: 'app-auth-login',
   templateUrl: './auth-login.component.html',
@@ -26,13 +32,13 @@ export class AuthLoginComponent implements OnInit {
   }
 
   submit(): void {
-    let Users = this.form.getRawValue()
-    console.log(Users)
+    const user: UserLogin = this.form.getRawValue()
+    console.log(user)
 
-    if (Users.email == "" || Users.password == "" ) {
+    if (user.email == "" || user.password == "" ) {
       Swal.fire('Error', 'Fields are empty', 'error');
     } else {
-      this.http.post("http://localhost:3000/api/login", Users, {
+      this.http.post("http://localhost:3000/auth/login", user, {
         withCredentials: true
       })
       .subscribe(

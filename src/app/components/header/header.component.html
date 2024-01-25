@@ -41,8 +41,13 @@
   <!--<div class="pl-3"><a href="#">Computers</a></div>-->
   <!--<div class="pl-7"><a href="#">PC Components</a></div>-->
   <!--<div class="pl-7"><a href="#">Periphirals</a></div>-->
-  {{ authenticated ? 'Authenticated' : 'Not Authenticated' }}
-  <a href="/userProfile">
+  <div>
+     <p *ngIf="authenticated"><a href="/userProfile">Bienvenue {{ username }}!</a></p>
+
+     <!--<p *ngIf="authenticated"><a href="/userProfile">Votre Compte</a></p>-->
+    <!--<button (click)="logout()">Logout</button>-->
+  </div>
+ <!-- <a href="/userProfile">
     <p style="margin-bottom: 0px;">PROFILE PAGE</p>
-  </a>
+  </a>-->
 </mat-toolbar>

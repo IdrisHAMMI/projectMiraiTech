@@ -1,8 +1,8 @@
 import express from 'express';
 
-import { register, login } from '../controllers/userController';
+import { register, login } from '../controllers/authentication.controller';
 
 export default (router: express.Router) => {
     router.post('/auth/register', register);
-    router.get('/auth/login', login);
+    router.post('/auth/login', login);
 };
