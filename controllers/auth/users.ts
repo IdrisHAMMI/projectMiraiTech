@@ -1,7 +1,7 @@
 import express from 'express';
 
-import { deleteUserById, getUsers, getUserById } from '../models/users.model';
-import { getUserBySessionToken } from '../models/users.model'; 
+import { deleteUserById, getUsers, getUserById } from '../../models/users.model';
+import { getUserBySessionToken } from '../../models/users.model'; 
 
 
 //FETCH ALL USER (THIS WILL ONLY BE USED FOR DEBUGGING/ADMIN PURPOSES) ((THIS IS ALSO A MASSIVE SECURITY FLAW, NEED TO FIND AN ALTERNATIVE))
@@ -77,28 +77,21 @@ export const getAllUsers = async (req: express.Request, res: express.Response) =
  //UPDATES USER DATA (IS USED IN USER PROFILE)
  export const updateUser = async (req: express.Request, res: express.Response) => {
   try {
-    const { id } = req.params;
-    const { username } = req.body;
- 
-    if (!id || !username) {
-      console.log('Missing user ID or username');
-      return res.status(400).json({ error: 'Missing user ID or username' }).end();
-    }
- 
-    const user = await getUserById(id);
-    
-    if (!user) {
-      console.log('User not found');
-      return res.status(404).json({ error: 'User not found' }).end();
-    }
- 
-    user.username = username;
-    await user.save();
- 
-    return res.status(200).json(user).end();
+     const user = req.locals.user;
+     const { shippingDetails } = req.body;
+  
+     if (!user || !shippingDetails) {
+       console.log('Missing user or shipping details');
+       return res.status(400).json({ error: 'Missing user or shipping details' }).end();
+     }
+  
+     user.shippingDetails = shippingDetails;
+     await user.save();
+  
+     return res.status(200).json(user).end();
   } catch (error) {
-    console.log('Error updating user:', error);
-    return res.status(500).json({ error: 'An internal server error occurred' }).end();
+     console.log('Error updating user:', error);
+     return res.status(500).json({ error: 'An internal server error occurred' }).end();
   }
  }
  
