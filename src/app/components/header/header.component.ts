@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { getUserBySessionToken } from '../../../../models/users.model'
 import { Emitters } from '../../emiters/emitter';
 
 @Component({
@@ -36,6 +37,7 @@ export class HeaderComponent implements OnInit {
 
 
   logout(): void {
+    console.log('Logout method called');
     this.http.post('http://localhost:3000/auth/logout', {}, { withCredentials: true })
       .subscribe(
         () => {

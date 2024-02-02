@@ -1,7 +1,7 @@
 import express from 'express';
 
-import { getUserByEmail, createUser } from '../../models/users.model';
-import { authentication, random } from '../../helpers';
+import { getUserByEmail, createUser } from '../models/users.model';
+import { authentication, random } from '../helpers';
 
 export const login = async (req: express.Request, res: express.Response) => {
     try {
@@ -82,11 +82,3 @@ export const login = async (req: express.Request, res: express.Response) => {
     }
    };
    
-   //LOGOUT FUNCTION
-   export const logout = (req: express.Request, res: express.Response) => {
-
-    res.clearCookie('SECRETKEY_STRING'); // Replace 'SESSION_COOKIE_NAME' with your actual session cookie name
-
-    res.status(200).json({ message: 'Logout successful' });
-  };
-  
