@@ -1,51 +1,63 @@
-import mongoose from 'mongoose';
-
+import mongoose, { Schema } from 'mongoose';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const UserSchema = new mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true },
-  authentication: {
-    password: { type: String, required: true, select: false },
-    salt: { type: String, select: false },
-    sessionToken: { type: String, select: false },
-  },
+  password: { type: String, required: true, select: false },
+
   userInfo: {
-    firstName: { type: String  },
-    lastName: { type: String  },
-    birthday: { type: Date },
+      firstName: { type: String },
+      lastName: { type: String },
+      birthday: { type: Date },
   },
   shippingAddress: {
-    firstName: { type: String },
-    lastName: { type: String },
-    roadAddress: { type: String },
-    additionalAddress: { type: String  },
-    postalCode: { type: Number },
-    city: { type: String  },
-    country: { type: String  },
-    phoneNumber: { type: Number  },
-    secondaryPhoneNumber: { type: Number },
+      firstName: { type: String },
+      lastName: { type: String },
+      roadAddress: { type: String },
+      additionalAddress: { type: String },
+      postalCode: { type: Number },
+      city: { type: String },
+      country: { type: String },
+      phoneNumber: { type: Number },
+      secondaryPhoneNumber: { type: Number },
   },
   billingAddress: {
-    firstName: { type: String },
-    lastName: { type: String },
-    roadAddress: { type: String },
-    additionalAddress: { type: String  },
-    postalCode: { type: Number },
-    city: { type: String  },
-    country: { type: String  },
-    phoneNumber: { type: Number  },
-    secondaryPhoneNumber: { type: Number },
+      firstName: { type: String },
+      lastName: { type: String },
+      roadAddress: { type: String },
+      additionalAddress: { type: String },
+      postalCode: { type: Number },
+      city: { type: String },
+      country: { type: String },
+      phoneNumber: { type: Number },
+      secondaryPhoneNumber: { type: Number },
   },
-  
-});
+  isAdmin: {
+      type: Boolean,
+      default: false
+  },
+  roles: {
+      type: [Schema.Types.ObjectId],
+      required: true,
+      ref: "Role"
+  },
+ }, {
+     timestamps: {
+         createdAt: 'created_at',
+         updatedAt: 'updated_at'
+     }
+ });
+ 
+   
 
 export const UserModel = mongoose.model('Users', UserSchema);
 
 export const getUsers = () => UserModel.find();
 export const getUserByEmail = (email: string) => UserModel.findOne({ email });
-export const getUserBySessionToken = (sessionToken: string) => UserModel.findOne({
-  'authentication.sessionToken': sessionToken,
-});
+
 
 //GETS THE USER VIA THEIR OBJECT ID
 export const getUserById = (id: string) => UserModel.findById(id);
@@ -59,3 +71,19 @@ export const createShippingAddress = (values: Record<string, any>) => {
 export const deleteUserById = (id: string) => UserModel.findOneAndDelete({ _id: id });
 //UPDATES USER INFORMATION
 export const updateUserById = (id: string, values: Record<string, any>) => UserModel.findByIdAndUpdate(id, values);
+
+
+export const getUserByJWTToken = async (jwtToken: string) => {
+    try {
+      // Verify the JWT token and decode the payload
+      const decodedToken = jwt.verify(jwtToken, process.env.JWT_SECRET) as { userId: string };
+  
+      // Retrieve the user using the decoded user ID
+      const user = await UserModel.findById(decodedToken.userId);
+  
+      return user;
+    } catch (error) {
+      console.error('Error fetching user by JWT token:', error);
+      throw error;
+    }
+  };

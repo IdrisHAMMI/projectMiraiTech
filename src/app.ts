@@ -20,6 +20,31 @@ app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
 
+//ERROR HANDLER MIDDLEWARE
+app.use((err, req, res, next) => {
+    const statusCode = err.status || 500;
+    const errorMessage = err.message || "Internal Server Error";
+    return res.status(statusCode).json({
+        success: false,
+        status: statusCode,
+        message: errorMessage,
+    })
+});
+
+app.use((obj, req, res, next) => {
+  const statusCode = obj.status || 500;
+  const message = obj.message || "Internal Server Error";
+  return res.status(statusCode).json({
+      success: [200,201,204].some(a=> a === obj.status) ? true: false, // SUCCESS CAN BE EITHER BE EQUAL TO 'SUCCESS' || 'CREATED' || 'CONNECTED', IF THE OBJECT IS 
+                                                                       // EQUAL TO EITHER OF THOSE CODES, THEN THE MESSAGE SUCCESS WILL BE TRUE, OTHERWISE WILL BE FALSE
+      status: statusCode,
+      message: message,
+      data: obj.data
+  });
+});
+
+
+
 const server = http.createServer(app);
 
 server.listen(3000, () => {
