@@ -43,7 +43,6 @@ import nodemailer from "nodemailer"
             console.log('Database error: Failed to create user');
             return res.status(500).json({ error: 'Failed to create user' }).end();
         }
-
         return res.status(200).json(user).end();
     } catch (error) {
         console.log('Internal server error:', error);
@@ -166,7 +165,7 @@ export const sendEmail = async (req, res) => {
       service: "gmail",
       auth: {
         user: "boktaimega007@gmail.com",
-        pass: "skwxsmbtoejkgzzw "
+        pass: "skwxsmbtoejkgzzw"
       }
     });
 

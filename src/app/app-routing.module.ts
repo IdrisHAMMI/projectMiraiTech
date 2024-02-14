@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'userProfile/orders', component: UserProfileOrdersComponent},  
   { path: 'userProfile/addresses', component: UserProfileAddressesComponent},
   { path: 'forgotPassword', component: ForgotPasswordComponent },
-  { path: 'reset/:token ', component: ResetPasswordComponent },
+  { path: 'reset/:token', component: ResetPasswordComponent },
   { path: 'product', component: ProductInterfaceComponent},
   { path: '', redirectTo: 'index', pathMatch: 'full'}
 ];

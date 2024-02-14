@@ -20,6 +20,6 @@ export class AuthService {
   }
 
   resetPasswordService(resetObj: any){
-    return this.http.post<any>(`${apiUrl.authServiceApi}reset-password`, {email: resetObj});
+    return this.http.post<any>(`${apiUrl.authServiceApi}reset-password`, resetObj);
   }
 }

@@ -24,7 +24,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.authService.sendEmailService(this.forgetForm.value.email)
     .subscribe({
       next: (res)=>{
-        alert(res.message);
+        alert("Email Sent!");
         this.forgetForm.reset();
       },
       error: (err)=>{
