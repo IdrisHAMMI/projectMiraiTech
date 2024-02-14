@@ -1,9 +1,11 @@
 import express from 'express';
+import { Error, SentMessageInfo } from 'nodemailer';
 import Role from '../../models/role.model'
 import bcrypt from 'bcryptjs'
 import  jwt  from 'jsonwebtoken';
 import { UserModel, getUserByEmail, createUser } from '../../models/users.model';
-import { createError } from '../../utils/error'
+import TokenSchema from './../../models/userToken.schema';
+import nodemailer from "nodemailer"
 
    //USER REGISTRATION FUNCTION
    export const register = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -53,7 +55,7 @@ import { createError } from '../../utils/error'
 export const registerAdmin = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
       // Fetch role from the database
-      const userRole = await Role.findOne({});
+      const userRole = await Role.findOne({ role: 'Admin' });
       const role = userRole;
       // Rename roles from req.body to avoid conflicts
       const { email, password, username } = req.body;
@@ -140,27 +142,107 @@ export const login = async (req: express.Request, res: express.Response, next: e
   }
 };
 
-//export const fetchUserInfo = async (req: express.Request, res: express.Response) => {
-//  try {
-//    const accessToken = req.cookies["access_token"];
-//
-//    if (!accessToken) {
-//      console.log('access token not found');
-//      return res.status(401).json({ error: 'no bueno'}).end();
-//    }
-//
-//    //const userString = await getUserBy
-//
-//  } catch (error) {
-//    return res.status(500).send("Server error");
-//  }
-//}
-
-
    
-   //LOGOUT FUNCTION
-   export const logout = (req: express.Request, res: express.Response) => {
+export const sendEmail = async (req, res) => {
+  try {
+    const email = req.body.email;
+    const user = await UserModel.findOne({ email: { $regex: '^' + email + '$', $options: 'i' } });
+    if (!user) {
+      return res.status(404).send("User not found with this email");
+    }
 
-    res.status(200).json({ message: 'Logout successful' });
-  };
-  
+    const payload = {
+      email: user.email
+    };
+    const expiryTime = 300;
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: expiryTime });
+
+    const newToken = new TokenSchema({
+      userId: user._id,
+      token: token
+    });
+
+    const mailTransporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "boktaimega007@gmail.com",
+        pass: "skwxsmbtoejkgzzw "
+      }
+    });
+
+    let mailDetails = {
+      from: "boktaimega007@gmail.com",
+      to: email,
+      subject: "Password Reset",
+      html: `
+        <html>
+        <head>
+          <title>Password Reset Request</title>
+        </head>
+        <body>
+          <h1>Password Reset Request</h1>
+          <p>Yo ${user.username}</p>
+          <p>Got your reset request.</p>
+          <a href="${process.env.LIVE_URL}/reset/${token}">
+            <button style="background-color: #4CAF50; color: white; padding:  14px  20px; border: none; cursor: pointer; border-radius:  4px;">
+              Reset Password
+            </button>
+          </a>
+          <p>The token expires in  5 min.</p>
+          <p>Thanks</p>
+        </body>
+        </html>`
+    };
+
+    mailTransporter.sendMail(mailDetails, async (err, data) => {
+      if (err) {
+        console.error("Error sending email:", err);
+        await newToken.save();
+        return res.status(500).send("Something went wrong while sending the email");
+      } else {
+        console.log("Email sent:", data);
+        await newToken.save();
+        return res.status(200).send("Email sent!");
+      }
+    });
+  } catch (error) {
+    console.error("Error in sendEmail function:", error);
+    return res.status(500).send("Internal server error");
+  }
+};
+
+
+
+export const resetPassword = (req, res) => {
+  const token = req.body.token;
+  const newPassword = req.body.password;
+
+  jwt.verify(token, process.env.JWT_SECRET, async(err, data) => {
+      if (err) {
+          if (err.name === 'TokenExpiredError') {
+              return res.status(401).send("Reset link has expired");
+          } else if (err.name === 'JsonWebTokenError') {
+              return res.status(401).send("Invalid reset link");
+          } else {
+              return res.status(500).send("An error occurred while processing the reset link");
+          }
+      } else {
+          const response = data;
+          const user = await UserModel.findOne({email: {$regex: '^'+ response.email +'$', $options: 'i'}});
+          const salt = await bcrypt.genSalt(10);
+          const encryptedPassword = await bcrypt.hash(newPassword, salt);
+          user.password = encryptedPassword;
+
+          try {
+              const updateUser = await UserModel.findOneAndUpdate(
+                  {_id: user._id},
+                  {$set: user},
+                  {new: true}
+              );
+              return res.status(200).send("Password reset successfully!");
+          } catch (error) {
+              return res.status(500).send("Something went wrong (password reset)");
+          }
+      }
+  });
+};

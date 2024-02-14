@@ -32,8 +32,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { AuthSignupComponent } from './components/auth-signup/auth-signup.component';
-import { AuthLoginComponent } from './components/auth-login/auth-login.component';
 import { UserProfileOrdersComponent } from './components/user-profile-orders/user-profile-orders.component';
 import { UserProfileAddressesComponent } from './components/user-profile-addresses/user-profile-addresses.component';
 import { ProductInterfaceComponent } from './components/product-interface/product-interface.component';
@@ -46,8 +44,6 @@ import { ProductInterfaceComponent } from './components/product-interface/produc
     IndexComponent,
     FooterComponent,
     UserProfileComponent,
-    AuthSignupComponent,
-    AuthLoginComponent,
     UserProfileOrdersComponent,
     UserProfileAddressesComponent,
     ProductInterfaceComponent

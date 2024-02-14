@@ -1,50 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
-
-interface User {
-  username: string;
-  email: string;
-  password: string;
-}
+import { Component, OnInit, inject } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { confirmPasswordValidator } from 'src/validators/authValidator';
+import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-auth-signup',
+  standalone:true,
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './auth-signup.component.html',
   styleUrls: ['./auth-signup.component.css'],
 })
 export class AuthSignupComponent implements OnInit {
-  form: FormGroup;
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private http: HttpClient,
-    private router: Router
-  ) {}
+  registerForm: FormGroup;
+  authService = inject(AuthService)
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      username: '',
-      email: '',
-      password: '',
-    });
+    this.registerForm = this.fb.group({
+      username: ['', Validators.required],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+    },
+    {
+      validator: confirmPasswordValidator('password', 'confirmPassword')
+    }
+    );
   }
 
-  submit(): void {
-    const user: User = this.form.getRawValue();
-
-    if (!user.username || !user.email || !user.password) {
-      Swal.fire('Error', 'Please enter all the fields', 'error');
-    } else {
-      this.http.post('http://localhost:3000/auth/register', user, {
-        withCredentials: true,
-      })
-      .subscribe(
-        () => this.router.navigate(['/']),
-        (err) => Swal.fire('Error', err.error.message, 'error')
-      );
-    }
+  register() {
+    this.authService.registerService(this.registerForm.value)
+    .subscribe({
+      next:(res)=>{
+      alert("User Created")
+    },
+    error:(err)=> {
+      console.log(err)
+    }})
   }
 }

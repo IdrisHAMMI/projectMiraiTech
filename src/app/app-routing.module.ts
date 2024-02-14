@@ -7,6 +7,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserProfileOrdersComponent } from './components/user-profile-orders/user-profile-orders.component';
 import { UserProfileAddressesComponent } from './components/user-profile-addresses/user-profile-addresses.component';
 import { ProductInterfaceComponent } from './components/product-interface/product-interface.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component'; 
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent},
@@ -16,6 +18,8 @@ const routes: Routes = [
   { path: 'userProfile/info', component: UserProfileComponent},  
   { path: 'userProfile/orders', component: UserProfileOrdersComponent},  
   { path: 'userProfile/addresses', component: UserProfileAddressesComponent},
+  { path: 'forgotPassword', component: ForgotPasswordComponent },
+  { path: 'reset/:token ', component: ResetPasswordComponent },
   { path: 'product', component: ProductInterfaceComponent},
   { path: '', redirectTo: 'index', pathMatch: 'full'}
 ];

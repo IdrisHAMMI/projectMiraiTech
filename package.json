@@ -64,6 +64,7 @@
     "mongoose-timestamp": "^0.6.0",
     "nanoid": "^5.0.4",
     "ngrx": "^0.0.1-security",
+    "nodemailer": "^6.9.9",
     "nodemon": "^3.0.1",
     "passport": "^0.6.0",
     "passport-google-oauth": "^2.0.0",
