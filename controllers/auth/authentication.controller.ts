@@ -128,6 +128,7 @@ export const login = async (req: express.Request, res: express.Response, next: e
       process.env.JWT_SECRET
     );
 
+    //HTTPONLY IS TRUE TO PREVENT (CROSS SITE SCRIPTING) XSS ATTACKS
     return res.cookie("access_token", token, { httpOnly: true })
       .status(200)
       .json({
@@ -141,7 +142,6 @@ export const login = async (req: express.Request, res: express.Response, next: e
   }
 };
 
-   
 export const sendEmail = async (req, res) => {
   try {
     const email = req.body.email;

@@ -12,6 +12,7 @@ export default (router: express.Router) => {
   //GET BY ID
   router.get('/:id', verifyUser, getById );
 
+  router.get('/api/user', verifyUser)
   //router.get('/users', getUserByJWTToken);
   //router.delete('/users/:id', isAuthenticated, isOwner, deleteUser);
   //router.patch('/updateUser', isAuthenticated, updateUser);

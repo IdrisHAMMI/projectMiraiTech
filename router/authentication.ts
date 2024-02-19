@@ -10,5 +10,4 @@ export default (router: express.Router) => {
     router.post('/auth/login', login);
     router.post('/auth/send-email', sendEmail)
     router.post('/auth/reset-password', resetPassword)
-    //router.post('/auth/logout', logout);
 };

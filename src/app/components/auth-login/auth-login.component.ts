@@ -1,7 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/services/auth.service';
 
@@ -30,7 +29,9 @@ export class AuthLoginComponent implements OnInit {
     this.authService.loginService(this.loginForm.value)
     .subscribe({
       next:(res)=>{
-        this.router.navigate(['index'])
+        localStorage.setItem("UID", res.data._id);
+        this.authService.isLoggedIn$.next(true);
+        this.router.navigate(['index']);
       },
       error:(err) => {
         console.log(err);
