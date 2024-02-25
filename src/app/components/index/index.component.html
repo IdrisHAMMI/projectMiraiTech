@@ -101,11 +101,11 @@
     <p class="pl-[20px] pt-[20px]">Check out our Most Popular Products!
     </p>
   </div>
-  <div class="col-span-2 border border-[#707070]  bg-[#F8F8F8] rounded-[10px] mt-[20PX]">
-    <p class="pl-[20px] pt-[20px]">PLACEHOLDER TITLE</p>
+  <div *ngFor="let product of products" class="col-span-2 border border-[#707070]  bg-[#F8F8F8] rounded-[10px] mt-[20PX]">
+    <p class="pl-[20px] pt-[20px]">{{ product.productName }}</p>
     <div>
       <img src="../assets/staticImg/aio.jpg" alt="gaming_pc" class=" w-[50%] border rounded-[10px] border-[#707070] mx-auto">
-      <p class="text-black text-center pt-[20px]">PLACEHOLDER<br>DESCRIPTION</p>
+      <p class="text-black text-center pt-[20px]">{{ product.productDescription}}</p>
       <p class="text-[#0088FF] font-bold text-center" alt="price">200$</p>
       <div class="flex justify-center pb-4" >
         <button class="bg-[#0088FF] rounded-[5px] w-32 h-8 text-[#FFFFFF]" >ADD TO CART</button>

@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document} from 'mongoose';
 
-interface IProductReview {
+export interface IProductReview {
     productName: string;
     productDescription: string;
     productStock: number;
@@ -9,7 +9,7 @@ interface IProductReview {
     productImageURL: string;
 }
 
-interface IProductReviewDocument extends IProductReview, Document {}
+export interface IProductReviewDocument extends IProductReview, Document {}
 
 const productPreview = new Schema<IProductReviewDocument>({
     productName : {type : String, unique: true },

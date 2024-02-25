@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { apiUrl } from './apiUrl';
+import { apiUrl } from '../apiUrl';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -28,5 +28,4 @@ export class AuthService {
   isLoggedIn(){
     return !!localStorage.getItem("UID");
   }
-
 }

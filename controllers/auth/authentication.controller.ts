@@ -1,11 +1,11 @@
 import express from 'express';
-import { Error, SentMessageInfo } from 'nodemailer';
 import Role from '../../models/role.model'
 import bcrypt from 'bcryptjs'
-import  jwt  from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import { UserModel, getUserByEmail, createUser } from '../../models/users.model';
 import TokenSchema from './../../models/userToken.schema';
 import nodemailer from "nodemailer"
+import mongoose from 'mongoose';
 
    //USER REGISTRATION FUNCTION
    export const register = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -130,12 +130,13 @@ export const login = async (req: express.Request, res: express.Response, next: e
 
     //HTTPONLY IS TRUE TO PREVENT (CROSS SITE SCRIPTING) XSS ATTACKS
     return res.cookie("access_token", token, { httpOnly: true })
-      .status(200)
-      .json({
-        status:  200,
-        message: "Success",
-        data: user
-      });
+    .status(200)
+    .json({
+      status:  200,
+      message: "Success",
+      data: user
+    });
+
   } catch (error) {
     console.error("Error:", error);
     return res.status(500).send("Server error");
@@ -209,8 +210,6 @@ export const sendEmail = async (req, res) => {
     return res.status(500).send("Internal server error");
   }
 };
-
-
 
 export const resetPassword = (req, res) => {
   const token = req.body.token;

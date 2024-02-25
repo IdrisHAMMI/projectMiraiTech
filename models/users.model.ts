@@ -71,19 +71,3 @@ export const createShippingAddress = (values: Record<string, any>) => {
 export const deleteUserById = (id: string) => UserModel.findOneAndDelete({ _id: id });
 //UPDATES USER INFORMATION
 export const updateUserById = (id: string, values: Record<string, any>) => UserModel.findByIdAndUpdate(id, values);
-
-
-export const getUserByJWTToken = async (jwtToken: string) => {
-    try {
-      // Verify the JWT token and decode the payload
-      const decodedToken = jwt.verify(jwtToken, process.env.JWT_SECRET) as { userId: string };
-  
-      // Retrieve the user using the decoded user ID
-      const user = await UserModel.findById(decodedToken.userId);
-  
-      return user;
-    } catch (error) {
-      console.error('Error fetching user by JWT token:', error);
-      throw error;
-    }
-  };

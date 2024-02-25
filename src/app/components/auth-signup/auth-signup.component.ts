@@ -2,7 +2,9 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { confirmPasswordValidator } from 'src/validators/authValidator';
-import { AuthService } from 'src/services/auth.service';
+import { AuthService } from 'src/services/auth/auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-auth-signup',
@@ -14,6 +16,7 @@ import { AuthService } from 'src/services/auth.service';
 export class AuthSignupComponent implements OnInit {
   registerForm: FormGroup;
   authService = inject(AuthService)
+  router = inject(Router);
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
@@ -33,7 +36,8 @@ export class AuthSignupComponent implements OnInit {
     this.authService.registerService(this.registerForm.value)
     .subscribe({
       next:(res)=>{
-      alert("User Created")
+      this.router.navigate(['index']);
+      //  alert("User Created")
     },
     error:(err)=> {
       console.log(err)

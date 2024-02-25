@@ -1,20 +1,17 @@
-import { verifyAdmin, verifyUser } from './../utils/verifyToken';
+import { verifyAdmin } from './../utils/verifyToken';
 import express from 'express';
-
-import { login } from './../controllers/auth/authentication.controller'
-import { getUserByJWTToken } from './../models/users.model';
-import { getAllUsers, getById } from './../controllers/auth/users';
-
+import { getById } from './../controllers/auth/users';
+import { getUsernameById } from './../utils/fetchUser';
+import { fetchProducts } from './../controllers/auth/products.controller';
+//import { getCurrentUser } from './../src/middleware/fetchUser';
 
 export default (router: express.Router) => {
   //GET ALL USER ROUTE
-  router.get('/', verifyAdmin, getAllUsers );
-  //GET BY ID
-  router.get('/:id', verifyUser, getById );
+  router.get('auth/api/user/data/:id', verifyAdmin, getById );
 
-  router.get('/api/user', verifyUser)
-  //router.get('/users', getUserByJWTToken);
-  //router.delete('/users/:id', isAuthenticated, isOwner, deleteUser);
-  //router.patch('/updateUser', isAuthenticated, updateUser);
-  //router.post('/logout', isAuthenticated);
+  //GET BY ID
+  router.get('/auth/:id', getUsernameById );
+
+  router.get('/api/products', fetchProducts)
 };
+
