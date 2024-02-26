@@ -1,5 +1,5 @@
 import express from 'express';
-import Role from '../models/role.model'
+import Role from '../../models/role.model'
 
 
 export const newRole = async (req: express.Request, res: express.Response, next: express.NextFunction) => {

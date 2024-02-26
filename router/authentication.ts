@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { register, login, registerAdmin, sendEmail, resetPassword } from '../controllers/auth/authentication.controller';
-import { newRole } from './role';
+import { newRole } from '../controllers/auth/role.controller';
 
 export default (router: express.Router) => {
     router.post('/auth/role', newRole)

@@ -1,11 +1,10 @@
 import express from 'express';
 import Role from '../../models/role.model'
 import bcrypt from 'bcryptjs'
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import { UserModel, getUserByEmail, createUser } from '../../models/users.model';
 import TokenSchema from './../../models/userToken.schema';
 import nodemailer from "nodemailer"
-import mongoose from 'mongoose';
 
    //USER REGISTRATION FUNCTION
    export const register = async (req: express.Request, res: express.Response, next: express.NextFunction) => {

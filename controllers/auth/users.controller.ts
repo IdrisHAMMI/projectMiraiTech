@@ -1,4 +1,4 @@
-import { UserModel } from './../../models/users.model';
+import { UserModel } from '../../models/users.model';
 import express from 'express';
 
 import { deleteUserById, getUsers, getUserById } from '../../models/users.model';
