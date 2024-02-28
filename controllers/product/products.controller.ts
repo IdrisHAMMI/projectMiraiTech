@@ -3,7 +3,6 @@ import IProductReviewDocument from '../../models/product.model'
 
 export const createProduct = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
-        
         const { productName, productDescription, productStock, productBrand, productPrice, productImageURL } = req.body;
         const newProduct = new IProductReviewDocument ({
             productName,

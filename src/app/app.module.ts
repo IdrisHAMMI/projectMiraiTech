@@ -35,7 +35,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserProfileOrdersComponent } from './components/user-profile-orders/user-profile-orders.component';
 import { UserProfileAddressesComponent } from './components/user-profile-addresses/user-profile-addresses.component';
 import { ProductInterfaceComponent } from './components/product-interface/product-interface.component';
-
+import { AddproductsComponent } from './components/addproducts/addproducts.component';
 
 @NgModule({
   declarations: [
@@ -46,8 +46,9 @@ import { ProductInterfaceComponent } from './components/product-interface/produc
     UserProfileComponent,
     UserProfileOrdersComponent,
     UserProfileAddressesComponent,
-    ProductInterfaceComponent
-    ],
+    ProductInterfaceComponent,
+    AddproductsComponent
+  ],
     imports: [
       BrowserModule,
       AppRoutingModule,

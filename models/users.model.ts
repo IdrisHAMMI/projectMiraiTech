@@ -1,5 +1,4 @@
 import mongoose, { Schema } from 'mongoose';
-import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -7,24 +6,12 @@ const UserSchema = new mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true, select: false },
-
   userInfo: {
       firstName: { type: String },
       lastName: { type: String },
       birthday: { type: Date },
   },
   shippingAddress: {
-      firstName: { type: String },
-      lastName: { type: String },
-      roadAddress: { type: String },
-      additionalAddress: { type: String },
-      postalCode: { type: Number },
-      city: { type: String },
-      country: { type: String },
-      phoneNumber: { type: Number },
-      secondaryPhoneNumber: { type: Number },
-  },
-  billingAddress: {
       firstName: { type: String },
       lastName: { type: String },
       roadAddress: { type: String },
