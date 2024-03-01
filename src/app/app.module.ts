@@ -36,6 +36,7 @@ import { UserProfileOrdersComponent } from './components/user-profile-orders/use
 import { UserProfileAddressesComponent } from './components/user-profile-addresses/user-profile-addresses.component';
 import { ProductInterfaceComponent } from './components/product-interface/product-interface.component';
 import { AddproductsComponent } from './components/addproducts/addproducts.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,8 @@ import { AddproductsComponent } from './components/addproducts/addproducts.compo
       
     ],    
   providers: [
+  
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

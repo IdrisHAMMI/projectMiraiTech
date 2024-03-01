@@ -3,15 +3,15 @@ import { Request, Response, NextFunction } from 'express';
 
 export const createShippingAddress = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        // Retrieve UID from local storage
-        const uid = req.headers.uid; // Assuming the UID is sent in headers
+        // RETREVE UID FROM LOCAL STORAGE
+        const uid = req.headers.uid; 
                 
         if (!uid) {
             res.status(400).json({ error: 'UID not provided in headers' });
             return;
         }
 
-        // Find the user by UID
+        //FIND THE USER'S ID VIA THE LOCAL STORAGE'S UID HEADER
         const user = await UserModel.findById(uid);
 
         if (!user) {
@@ -19,10 +19,8 @@ export const createShippingAddress = async (req: Request, res: Response, next: N
             return;
         }
 
-        // Extract shipping address data from request body
         const { firstName, lastName, roadAddress, additionalAddress, postalCode, city, country, phoneNumber, secondaryPhoneNumber } = req.body;
 
-        // Update user's shippingAddress
         user.shippingAddress = {
             firstName,
             lastName,

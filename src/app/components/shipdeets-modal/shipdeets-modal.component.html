@@ -1,0 +1,49 @@
+<h2 mat-dialog-title class="dialog-title-style">Shipping Form</h2>
+<div mat-dialog-content>
+    <form class="w-96 mx-auto">
+            
+        <div class="mb-4">
+          <label for="username" class="block font-bold">Nom</label>
+          <input type="text"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="username" placeholder="Username" />
+        </div>
+
+        <div class="mb-4">
+          <label for="email" class="block font-bold">Prenom</label>
+          <input type="text"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="email" placeholder="Email" />
+        </div>
+        <div class="mb-4">
+          <label for="password" class="block font-bold">Votre Adresse</label>
+          <input type="password"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="password" placeholder="Password" />
+        </div>
+        
+        <div class="mb-4">
+          <label for="confirmPassword" class="block font-bold">Complement d'Adresse</label>
+          <input type="confirmPassword"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="confirmPassword" placeholder="Confirm your password" />
+        </div>
+          
+        <div class="mb-4">
+            <label for="confirmPassword" class="block font-bold">Code Postal</label>
+            <input type="confirmPassword"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="confirmPassword" placeholder="Confirm your password" />
+          </div>
+          
+          <div class="mb-4">
+            <label for="confirmPassword" class="block font-bold">Vile</label>
+            <input type="confirmPassword"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="confirmPassword" placeholder="Confirm your password" />
+          </div>
+          
+          <div class="mb-4">
+            <label for="confirmPassword" class="block font-bold">Pays</label>
+            <input type="confirmPassword"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="confirmPassword" placeholder="Confirm your password" />
+          </div>
+          
+          <div class="mb-4">
+            <label for="confirmPassword" class="block font-bold">Numero de Telephone</label>
+            <input type="confirmPassword"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="confirmPassword" placeholder="Confirm your password" />
+          </div>
+      </form>
+</div>
+
+<div mat-dialog-actions class="dialog-actions-style">
+    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-sm" (click)="closepopup()" >Close Form</button>
+    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-sm ml-3">Envoyer</button>
+</div>
