@@ -1,49 +1,49 @@
 <h2 mat-dialog-title class="dialog-title-style">Shipping Form</h2>
 <div mat-dialog-content>
-    <form class="w-96 mx-auto">
+    <form [formGroup]="userShippingForm" class="w-96 mx-auto">
             
         <div class="mb-4">
-          <label for="username" class="block font-bold">Nom</label>
-          <input type="text"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="username" placeholder="Username" />
+          <label for="lastname" class="block font-bold">Nom</label>
+          <input type="text"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="lastName" placeholder="Nom" />
         </div>
 
         <div class="mb-4">
-          <label for="email" class="block font-bold">Prenom</label>
-          <input type="text"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="email" placeholder="Email" />
+          <label for="lastname" class="block font-bold">Prenom</label>
+          <input type="text"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="firstName" placeholder="Prenom" />
         </div>
         <div class="mb-4">
-          <label for="password" class="block font-bold">Votre Adresse</label>
-          <input type="password"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="password" placeholder="Password" />
+          <label for="roadAddress" class="block font-bold">Votre Adresse</label>
+          <input type="text"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="roadAddress" placeholder="Adresse" />
         </div>
         
         <div class="mb-4">
-          <label for="confirmPassword" class="block font-bold">Complement d'Adresse</label>
-          <input type="confirmPassword"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="confirmPassword" placeholder="Confirm your password" />
+          <label for="additionalAddress" class="block font-bold">Complement d'Adresse</label>
+          <input type="text"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="additionalAddress" placeholder="Complement D'Adresse" />
         </div>
           
         <div class="mb-4">
-            <label for="confirmPassword" class="block font-bold">Code Postal</label>
-            <input type="confirmPassword"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="confirmPassword" placeholder="Confirm your password" />
+            <label for="postalCode" class="block font-bold">Code Postal</label>
+            <input type="text"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="postalCode" placeholder="Code Postal" />
           </div>
           
           <div class="mb-4">
-            <label for="confirmPassword" class="block font-bold">Vile</label>
-            <input type="confirmPassword"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="confirmPassword" placeholder="Confirm your password" />
+            <label for="city" class="block font-bold">Vile</label>
+            <input type="text"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="city" placeholder="Vile" />
           </div>
           
           <div class="mb-4">
-            <label for="confirmPassword" class="block font-bold">Pays</label>
-            <input type="confirmPassword"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="confirmPassword" placeholder="Confirm your password" />
+            <label for="country" class="block font-bold">Pays</label>
+            <input type="text"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="country" placeholder="Pays" />
           </div>
           
           <div class="mb-4">
-            <label for="confirmPassword" class="block font-bold">Numero de Telephone</label>
-            <input type="confirmPassword"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="confirmPassword" placeholder="Confirm your password" />
+            <label for="phoneNumber" class="block font-bold">Numero de Telephone</label>
+            <input type="text"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="phoneNumber" placeholder="Numero de Telephone" />
           </div>
       </form>
 </div>
 
 <div mat-dialog-actions class="dialog-actions-style">
     <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-sm" (click)="closepopup()" >Close Form</button>
-    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-sm ml-3">Envoyer</button>
+    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-sm ml-3" (click)="addShipping()">Envoyer</button>
 </div>

@@ -14,9 +14,8 @@ import { AuthService } from 'src/services/auth/auth.service';
 })
 export class AuthLoginComponent implements OnInit {
 
-  fb = inject(FormBuilder);
-  authService = inject(AuthService);
-  router = inject(Router);
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
+
   loginForm !: FormGroup;
 
   ngOnInit(): void {
