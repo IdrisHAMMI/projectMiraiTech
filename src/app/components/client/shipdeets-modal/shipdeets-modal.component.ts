@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
-import { UserService } from '../../../services/user/user.service';
+import { UserService } from '../../../../services/user/user.service';
 import { HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-shipdeets-modal',

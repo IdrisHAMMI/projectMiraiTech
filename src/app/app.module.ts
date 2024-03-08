@@ -7,10 +7,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 //HTTP CLIENT IMPORT
 import { HttpClientModule } from '@angular/common/http';
 //HEADER & FOOTER IMPORT
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/client/header/header.component';
+import { FooterComponent } from './components/client/footer/footer.component';
 //INDEX IMPORT
-import { IndexComponent } from './components/index/index.component';
+import { IndexComponent } from './components/client/index/index.component';
 
 //FIRESTORM IMPORTS
 //import { provideFirestore, getFirestore } from '@angular/fire/firestore';
@@ -31,12 +31,16 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { UserProfileOrdersComponent } from './components/user-profile-orders/user-profile-orders.component';
-import { UserProfileAddressesComponent } from './components/user-profile-addresses/user-profile-addresses.component';
-import { ProductInterfaceComponent } from './components/product-interface/product-interface.component';
-import { AddproductsComponent } from './components/addproducts/addproducts.component';
+import { UserProfileComponent } from './components/client/user-profile/user-profile.component';
+import { UserProfileOrdersComponent } from './components/client/user-profile-orders/user-profile-orders.component';
+import { UserProfileAddressesComponent } from './components/client/user-profile-addresses/user-profile-addresses.component';
+import { ProductInterfaceComponent } from './components/client/product-interface/product-interface.component';
+import { AddproductsComponent } from './components/client/addproducts/addproducts.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
+import { AdminSidenavComponent } from './components/admin/admin-sidenav/admin-sidenav.component';
+import { AdminBodyComponent } from './components/admin/admin-body/admin-body.component';
+import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 
 @NgModule({
   declarations: [
@@ -48,31 +52,35 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     UserProfileOrdersComponent,
     UserProfileAddressesComponent,
     ProductInterfaceComponent,
-    AddproductsComponent
+    AddproductsComponent,
+    AdminPanelComponent,
+    AdminSidenavComponent,
+    AdminBodyComponent,
+    AdminHomeComponent
   ],
-    imports: [
-      BrowserModule,
-      AppRoutingModule,
-      HttpClientModule,
-      FormsModule,
-      ReactiveFormsModule,
-      MatSidenavModule,
-      MatGridListModule,
-      MatMenuModule,
-      MatButtonModule,
-      MatCardModule,
-      MatIconModule,
-      MatExpansionModule,
-      MatToolbarModule,
-      MatTableModule,
-      MatBadgeModule,
-      MatSnackBarModule,
-      MatListModule,
-      BrowserAnimationsModule,
-      
-    ],    
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSidenavModule,
+    MatGridListModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatExpansionModule,
+    MatToolbarModule,
+    MatTableModule,
+    MatBadgeModule,
+    MatSnackBarModule,
+    MatListModule,
+    BrowserAnimationsModule,
+    
+  ],    
   providers: [
-  
+    
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]

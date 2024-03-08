@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from './../../../services/product/product.service';
-import { IProductReviewDocument } from './../../../../models/product.model'; // Correct import
+import { ProductService } from './../../../../services/product/product.service';
+import { IProductReviewDocument } from './../../../../../models/product.model'; // Correct import
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',

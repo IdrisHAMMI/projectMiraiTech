@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IndexComponent } from './components/index/index.component';
-import { AuthLoginComponent } from './components/auth-login/auth-login.component';
-import { AuthSignupComponent } from './components/auth-signup/auth-signup.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { UserProfileOrdersComponent } from './components/user-profile-orders/user-profile-orders.component';
-import { UserProfileAddressesComponent } from './components/user-profile-addresses/user-profile-addresses.component';
-import { ProductInterfaceComponent } from './components/product-interface/product-interface.component';
-import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component'; 
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { IndexComponent } from './components/client/index/index.component';
+import { AuthLoginComponent } from './components/client/auth-login/auth-login.component';
+import { AuthSignupComponent } from './components/client/auth-signup/auth-signup.component';
+import { UserProfileComponent } from './components/client/user-profile/user-profile.component';
+import { UserProfileOrdersComponent } from './components/client/user-profile-orders/user-profile-orders.component';
+import { UserProfileAddressesComponent } from './components/client/user-profile-addresses/user-profile-addresses.component';
+import { ProductInterfaceComponent } from './components/client/product-interface/product-interface.component';
+import { ForgotPasswordComponent } from './components/client/forgot-password/forgot-password.component'; 
+import { ResetPasswordComponent } from './components/client/reset-password/reset-password.component';
+import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
+import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent},
@@ -21,6 +23,7 @@ const routes: Routes = [
   { path: 'forgotPassword', component: ForgotPasswordComponent },
   { path: 'reset/:token', component: ResetPasswordComponent },
   { path: 'product', component: ProductInterfaceComponent},
+  { path: 'admin/home', component: AdminHomeComponent},
   { path: '', redirectTo: 'index', pathMatch: 'full'}
 ];
 
