@@ -2,47 +2,61 @@ import mongoose, { Schema } from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const UserSchema = new mongoose.Schema({
-  username: { type: String, required: true },
-  email: { type: String, required: true },
-  password: { type: String, required: true, select: false },
-  userInfo: {
-      firstName: { type: String },
-      lastName: { type: String },
-      birthday: { type: Date },
-  },
-  shippingAddress: {
-      firstName: { type: String },
-      lastName: { type: String },
-      roadAddress: { type: String },
-      additionalAddress: { type: String },
-      postalCode: { type: String },
-      city: { type: String },
-      country: { type: String },
-      phoneNumber: { type: String }, 
-      secondaryPhoneNumber: { type: String },
-  },
-  isAdmin: {
-      type: Boolean,
-      default: false
-  },
-  roles: {
-      type: [Schema.Types.ObjectId],
-      required: true,
-      ref: "Role"
-  },
- }, {
-     timestamps: {
-         createdAt: 'created_at',
-         updatedAt: 'updated_at'
-     }
- });
- 
-   
+export interface IUserModel {
+    username: string;
+    email: string;
+    password: string;
+    shippingAddress: {
+        firstName: string;
+        lastName: string;
+        roadAddress: string;
+        additionalAddress: string;
+        postalCode: string;
+        city: string;
+        country: string;
+        phoneNumber: string;
+        secondaryPhoneNumber: string;
+    };
+    isAdmin: boolean; // Directly use the boolean type
+    roles: mongoose.Types.ObjectId[]; // Simplified for clarity
+}
 
-export const UserModel = mongoose.model('Users', UserSchema);
+const UserSchema = new Schema<IUserModel>({
+    username: { type: String, required: true },
+    email: { type: String, required: true },
+    password: { type: String, required: true, select: false },
+    shippingAddress: {
+        firstName: { type: String },
+        lastName: { type: String },
+        roadAddress: { type: String },
+        additionalAddress: { type: String },
+        postalCode: { type: String },
+        city: { type: String },
+        country: { type: String },
+        phoneNumber: { type: String },
+        secondaryPhoneNumber: { type: String },
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
+    roles: {
+        type: [{ type: Schema.Types.ObjectId, ref: "Role" }],
+        required: true,
+    },
+}, {
+    timestamps: {
+        createdAt: 'created_at',
+        updatedAt: 'updated_at'
+    }
+});
+
+export interface IUserModelEx extends IUserModel, Document {}
+
+export const UserModel = mongoose.model<IUserModel>('Users', UserSchema);
 
 export const getUsers = () => UserModel.find();
+
 export const getUserByEmail = (email: string) => UserModel.findOne({ email });
 
 
@@ -50,11 +64,6 @@ export const getUserByEmail = (email: string) => UserModel.findOne({ email });
 export const getUserById = (id: string) => UserModel.findById(id);
 //CREATES USER
 export const createUser = (values: Record<string, any>) => new UserModel(values).save().then((user) => user.toObject());
-//CREATES SHIPPING ADDRESS
-export const createShippingAddress = (values: Record<string, any>) => {
-  return new UserModel(values).save().then((user) => user.toObject());
- } 
+
 //DELETES A USER
 export const deleteUserById = (id: string) => UserModel.findOneAndDelete({ _id: id });
-//UPDATES USER INFORMATION
-export const updateUserById = (id: string, values: Record<string, any>) => UserModel.findByIdAndUpdate(id, values);

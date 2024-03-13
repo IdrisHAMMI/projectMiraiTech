@@ -9,11 +9,11 @@ import { apiUrl } from '../apiUrl';
 })
 export class ProductService {
   constructor(private http: HttpClient) { }
-
+  //CREATES PRODUCT
   createProduct(product: IProductReviewDocument): Observable<IProductReviewDocument> {
     return this.http.post<IProductReviewDocument>(`${apiUrl.productServiceApi}newProduct`, product);
   }
-  
+  //FETCHES PRODUCTS
   getProducts(): Observable<IProductReviewDocument[]> {
     return this.http.get<IProductReviewDocument[]>(`${apiUrl.productServiceApi}`);
   }

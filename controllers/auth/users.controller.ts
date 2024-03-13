@@ -1,15 +1,16 @@
+import { IUserModelEx } from './../../models/users.model';
 import { UserModel } from '../../models/users.model';
 import express from 'express';
 
-import { deleteUserById, getUsers, getUserById } from '../../models/users.model';
+import { deleteUserById} from '../../models/users.model';
 
 
 //FETCH ALL USER (THIS WILL ONLY BE USED FOR DEBUGGING/ADMIN PURPOSES) ((THIS IS ALSO A MASSIVE SECURITY FLAW, NEED TO FIND AN ALTERNATIVE))
-export const getAllUsers = async (req: express.Request, res: express.Response) => {
+export const getAllUsers = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
     const users = await UserModel.find();
     
-    return res.status(200).json({ users })
+    return res.json( users )
     } catch (error) {
       return res.status(500).json({ error: 'An internal server error occurred' }).end();
   }

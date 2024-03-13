@@ -11,6 +11,8 @@ import { ForgotPasswordComponent } from './components/client/forgot-password/for
 import { ResetPasswordComponent } from './components/client/reset-password/reset-password.component';
 import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
+import { AdminUsersComponent } from './components/admin/admin-users/admin-users.component';
+import { AdminProductsComponent } from './components/admin/admin-products/admin-products.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent},
@@ -24,7 +26,9 @@ const routes: Routes = [
   { path: 'reset/:token', component: ResetPasswordComponent },
   { path: 'product', component: ProductInterfaceComponent},
   { path: 'admin/home', component: AdminHomeComponent},
-  { path: '', redirectTo: 'index', pathMatch: 'full'}
+  { path: 'admin/user', component: AdminUsersComponent},
+  { path: 'admin/products', component: AdminProductsComponent},
+  { path: '', redirectTo: 'index', pathMatch: 'full'},
 ];
 
 @NgModule({

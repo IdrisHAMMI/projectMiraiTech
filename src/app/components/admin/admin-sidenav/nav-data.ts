@@ -12,12 +12,6 @@ export const navbarData = [
     },
 
     {
-        routeLink: 'admin/userAdmin',
-        icon: 'fa-solid fa-user-group-crown',
-        label: 'Admin'
-    },
-
-    {
         routeLink: 'admin/products',
         icon: 'fa-regular fa-cart-shopping',
         label: 'Products'

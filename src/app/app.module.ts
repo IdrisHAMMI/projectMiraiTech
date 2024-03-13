@@ -41,6 +41,8 @@ import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.
 import { AdminSidenavComponent } from './components/admin/admin-sidenav/admin-sidenav.component';
 import { AdminBodyComponent } from './components/admin/admin-body/admin-body.component';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
+import { AdminUsersComponent } from './components/admin/admin-users/admin-users.component';
+import { AdminProductsComponent } from './components/admin/admin-products/admin-products.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,7 @@ import { AdminHomeComponent } from './components/admin/admin-home/admin-home.com
     AdminPanelComponent,
     AdminSidenavComponent,
     AdminBodyComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
   ],
   imports: [
     BrowserModule,
