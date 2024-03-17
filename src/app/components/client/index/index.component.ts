@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from './../../../../services/product/product.service';
-import { IProductReviewDocument } from './../../../../../models/product.model'; // Correct import
+import { IProductDocument } from './../../../../../models/product.model'; // Correct import
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
@@ -8,7 +8,7 @@ import { IProductReviewDocument } from './../../../../../models/product.model'; 
 })
 export class IndexComponent implements OnInit{
   
-  products: IProductReviewDocument[] = [];
+  products: IProductDocument[] = [];
 
   constructor(private productService: ProductService) { }
 

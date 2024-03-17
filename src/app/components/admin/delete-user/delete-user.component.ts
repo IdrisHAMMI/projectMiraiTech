@@ -10,10 +10,6 @@ export class DeleteUserComponent {
 
   constructor(private api: AdminPanelService){}
 
-  ngOnInit(): void {
-      
-  }
-
   deleteUser(id: string){
     this.api.deleteUsers(id)
     .subscribe({

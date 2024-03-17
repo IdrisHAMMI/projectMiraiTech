@@ -17,8 +17,8 @@ export interface IUserModel {
         phoneNumber: string;
         secondaryPhoneNumber: string;
     };
-    isAdmin: boolean; // Directly use the boolean type
-    roles: mongoose.Types.ObjectId[]; // Simplified for clarity
+    isAdmin: boolean; 
+    roles: mongoose.Types.ObjectId[]; 
 }
 
 const UserSchema = new Schema<IUserModel>({

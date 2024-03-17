@@ -6,6 +6,8 @@ import { ProductService } from 'src/services/product/product.service';
 import { AddProductModalComponent } from '../add-product-modal/add-product-modal.component';
 import { EditProductModalComponent } from '../edit-product-modal/edit-product-modal.component';
 import { DeleteProductModalComponent } from '../delete-product-modal/delete-product-modal.component';
+import { AdminPanelComponent } from '../admin-panel/admin-panel.component';
+import { AdminPanelService } from 'src/services/admin/adminpanel.service';
 
 @Component({
   selector: 'app-admin-products',
@@ -17,7 +19,7 @@ export class AdminProductsComponent implements OnInit {
   displayedColumns: string[] = ['_id', 'productBrand', 'productDescription', 'productName', 'action'];
   dataSource!: MatTableDataSource<any>;
 
-  constructor(private dialog: MatDialog, private api: ProductService) { }
+  constructor(private dialog: MatDialog, private api: AdminPanelService) { }
 
   ngOnInit(): void {
     this.fetchProducts();
@@ -37,10 +39,16 @@ export class AdminProductsComponent implements OnInit {
     })
   }
 
-  deleteProduct(): void {
-    this.dialog.open(DeleteProductModalComponent, {
-      width: '60%',
-      height: '800px'
+  deleteProduct(id: string){
+    this.api.deleteProduct(id)
+    .subscribe({
+      next:(res)=>{
+        alert("User deleted!");
+        this.fetchProducts();
+      },
+      error:()=>{
+      alert("error while deleting record")
+      }
     })
   }
 

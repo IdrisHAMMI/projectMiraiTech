@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IUserModelEx } from './../../../models/users.model';
-import {IProductReviewDocument} from './../../../models/product.model'; // Import the product interface
+import {IProductDocument} from './../../../models/product.model'; // Import the product interface
 import { apiUrl } from '../apiUrl';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class AdminPanelService {
 
   constructor(private http: HttpClient) { }
 
-  //ADMIN USER SECTION
+  //ADMIN USER SECTION//
 
   //FETCHES USER
   fetchUsers(): Observable<IUserModelEx[]> { 
@@ -24,10 +24,18 @@ export class AdminPanelService {
     return this.http.delete<IUserModelEx[]>(`${apiUrl.adminPanelApi}delete/users/${id}`);
   }
 
-  //ADMIN PRODUCT SECTION
+  //ADMIN PRODUCT SECTION//
 
   //CREATES PRODUCT
-  createProduct(product: IProductReviewDocument): Observable<IProductReviewDocument> {
-    return this.http.post<IProductReviewDocument>(`${apiUrl.productServiceApi}newProduct`, product);
+  createProduct(product: IProductDocument): Observable<IProductDocument> {
+    return this.http.post<IProductDocument>(`${apiUrl.productServiceApi}newProduct`, product);
+  }
+  //FETCHES PRODUCT
+  getProducts(): Observable<IProductDocument[]> {
+     return this.http.get<IProductDocument[]>(`${apiUrl.productServiceApi}`);
+  }
+    //DELETES USER
+  deleteProduct(id: string) {                            
+    return this.http.delete<IProductDocument[]>(`${apiUrl.adminPanelApi}delete/product/${id}`);
   }
 }

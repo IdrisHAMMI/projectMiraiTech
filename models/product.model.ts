@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document} from 'mongoose';
 
-export interface IProductReview {
+export interface IProductModel {
     productName: string;
     productDescription: string;
     productStock: number;
@@ -9,9 +9,7 @@ export interface IProductReview {
     productImageURL: string;
 }
 
-export interface IProductReviewDocument extends IProductReview, Document {}
-
-const productPreview = new Schema<IProductReviewDocument>({
+const ProductSchema = new Schema<IProductModel>({
     productName : {type : String, unique: true },
     productDescription : {type : String},
     productStock: {type: Number},
@@ -19,5 +17,8 @@ const productPreview = new Schema<IProductReviewDocument>({
     productPrice : {type: Number},
     productImageURL: { type: String }
 })
+export interface IProductDocument extends IProductModel, Document {}
 
-export default mongoose.model<IProductReviewDocument>('productPreview', productPreview);
+export const ProductModel = mongoose.model<IProductDocument>('product', ProductSchema);
+
+export const deleteProductById = (id: string) => ProductModel.findOneAndDelete({ _id: id });

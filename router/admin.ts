@@ -1,7 +1,6 @@
 import express from 'express';
 import { getAllUsers, deleteUser } from './../controllers/auth/users.controller';
-import { createProduct, fetchProducts } from './../controllers/product/products.controller';
-import { deleteUserById } from './../models/users.model';
+import { createProduct, fetchProducts, deleteProduct } from './../controllers/product/products.controller';
 
 
 export default (router: express.Router) => {
@@ -14,7 +13,10 @@ export default (router: express.Router) => {
   //GET PRODUCT DATA (ADMIN)
   router.get('/api/products', fetchProducts);
   
-  //ADD PRODUCTS
+  //ADD PRODUCTS (ADMIN)
   router.post('/api/products/newProduct', createProduct)
+
+  //DELETE PRODUCT (ADMIN)
+  router.delete('/api/admin/delete/product/:id', deleteProduct)
 };
 

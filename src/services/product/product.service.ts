@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {IProductReviewDocument} from './../../../models/product.model'; // Import the product interface
+import {IProductDocument} from './../../../models/product.model'; // Import the product interface
 import { apiUrl } from '../apiUrl';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { apiUrl } from '../apiUrl';
 export class ProductService {
   constructor(private http: HttpClient) { }
   //FETCHES PRODUCTS
-  getProducts(): Observable<IProductReviewDocument[]> {
-    return this.http.get<IProductReviewDocument[]>(`${apiUrl.productServiceApi}`);
+  getProducts(): Observable<IProductDocument[]> {
+    return this.http.get<IProductDocument[]>(`${apiUrl.productServiceApi}`);
   }
 }
