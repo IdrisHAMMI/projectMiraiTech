@@ -1,0 +1,45 @@
+<div mat-dialog-title class="dialog-title-style">
+    <h1>Ajouter un Produit</h1>
+</div>
+
+<div [formGroup]="productForm" class="w-96 mx-auto mt-4" mat-dialog-content>
+    
+  <mat-form-field  class="w-[100%]" appearance="fill">
+    <mat-label>Nom du Produit</mat-label>
+    <input matInput formControlName="productName">
+  </mat-form-field>
+
+  <mat-form-field class="w-[100%]" appearance="fill">
+    <mat-label>Description du Produit</mat-label>
+    <textarea matInput formControlName="productDescription"></textarea>
+  </mat-form-field>
+
+  <mat-form-field class="w-[100%]" appearance="fill">
+    <mat-label>Stock du Produit</mat-label>
+    <input matInput formControlName="productStock">
+  </mat-form-field>
+  <mat-form-field class="w-[100%]" appearance="fill">
+    <mat-label>Marque du Produit</mat-label>
+    <mat-select formControlName="productBrand">
+        <mat-option value="ASUS">ASUS</mat-option>
+        <mat-option value="MSI">MSI</mat-option>
+        <mat-option value="Gigabyte">Gigabyta</mat-option>
+        <mat-option value="Intel">Intel</mat-option>
+    </mat-select>
+  </mat-form-field>
+    <br>
+  <!--<div class="pb-4">
+    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
+    <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+  </div>-->
+
+    </div>
+      <!--<mat-label>Image du Produit</mat-label>
+      <input type="file" (change)="onFileSelected($event)">--> <!--NEED TO ADD LOGIC-->
+
+
+    
+<div mat-dialog-actions class="dialog-actions-style">
+    <button mat-raised-button color="primary" (click)="addProduct()">Ajouter</button>
+    <button mat-raised-button color="warn">Annuler</button>
+</div>

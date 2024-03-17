@@ -30,12 +30,14 @@ import { MatTableModule } from '@angular/material/table';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
+import { MatFormFieldModule } from '@angular/material/form-field'; 
+import { MatSelectModule} from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserProfileComponent } from './components/client/user-profile/user-profile.component';
 import { UserProfileOrdersComponent } from './components/client/user-profile-orders/user-profile-orders.component';
 import { UserProfileAddressesComponent } from './components/client/user-profile-addresses/user-profile-addresses.component';
 import { ProductInterfaceComponent } from './components/client/product-interface/product-interface.component';
-import { AddproductsComponent } from './components/client/addproducts/addproducts.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
 import { AdminSidenavComponent } from './components/admin/admin-sidenav/admin-sidenav.component';
@@ -43,7 +45,10 @@ import { AdminBodyComponent } from './components/admin/admin-body/admin-body.com
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { AdminUsersComponent } from './components/admin/admin-users/admin-users.component';
 import { AdminProductsComponent } from './components/admin/admin-products/admin-products.component';
-
+import { AddProductModalComponent } from './components/admin/add-product-modal/add-product-modal.component';
+import { EditUserModalComponent } from './components/admin/edit-user-modal/edit-user-modal.component';
+import { DeleteProductModalComponent } from './components/admin/delete-product-modal/delete-product-modal.component';
+import { DeleteUserComponent } from './components/admin/delete-user/delete-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,11 +59,15 @@ import { AdminProductsComponent } from './components/admin/admin-products/admin-
     UserProfileOrdersComponent,
     UserProfileAddressesComponent,
     ProductInterfaceComponent,
-    AddproductsComponent,
     AdminPanelComponent,
     AdminSidenavComponent,
     AdminBodyComponent,
     AdminHomeComponent,
+    AdminProductsComponent,
+    AddProductModalComponent,
+    EditUserModalComponent,
+    AdminUsersComponent,
+    DeleteUserComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +88,10 @@ import { AdminProductsComponent } from './components/admin/admin-products/admin-
     MatSnackBarModule,
     MatListModule,
     BrowserAnimationsModule,
-    
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatSnackBarModule
   ],    
   providers: [
     

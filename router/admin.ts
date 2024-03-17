@@ -1,14 +1,20 @@
 import express from 'express';
-import { getAllUsers } from './../controllers/auth/users.controller';
+import { getAllUsers, deleteUser } from './../controllers/auth/users.controller';
+import { createProduct, fetchProducts } from './../controllers/product/products.controller';
+import { deleteUserById } from './../models/users.model';
 
 
 export default (router: express.Router) => {
   //GET USERS (ADMIN)
   router.get('/api/admin/data/users', getAllUsers)
-  //GET PRODUCTS
-  //TO BE ADDED//
+  
+  //DELETE USER (ADMIN)
+  router.delete('/api/admin/delete/users/:id', deleteUser)
+
+  //GET PRODUCT DATA (ADMIN)
+  router.get('/api/products', fetchProducts);
   
   //ADD PRODUCTS
-  //TO BE ADDED//
+  router.post('/api/products/newProduct', createProduct)
 };
 

@@ -1,7 +1,10 @@
 <div class="text-center">
     <h1>Gestion & Ajout des Produits</h1>
     </div>
-
+    <div class="text-right">
+      <button mat-raised-button color="primary" (click)="createProduct()" class="">Ajouter un Produit<mat-icon>add_shopping_cart</mat-icon></button>
+    </div>
+    
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
         <ng-container matColumnDef="_id">
@@ -14,21 +17,26 @@
           <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
         </ng-container>
       
-        <!-- Name Column -->
         <ng-container matColumnDef="productBrand">
           <th mat-header-cell *matHeaderCellDef> Product Brand </th>
           <td mat-cell *matCellDef="let element"> {{element.productBrand}} </td>
         </ng-container>
       
-        <!-- Weight Column -->
         <ng-container matColumnDef="productDescription">
           <th mat-header-cell *matHeaderCellDef> Product Description </th>
           <td mat-cell *matCellDef="let element"> {{element.productDescription}} </td>
         </ng-container>
       
-      
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element">
+            <button  mat-icon-button color="primary" (click)="editProduct()"><mat-icon>edit</mat-icon></button>
+            <button  mat-icon-button color="warn" (click)="deleteProduct()"><mat-icon>delete</mat-icon></button>
+          </td>
+        </ng-container>
+        
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      
       
