@@ -3,7 +3,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { AdminPanelService } from './../../../../services/admin/adminpanel.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditUserModalComponent } from '../edit-user-modal/edit-user-modal.component';
-import { DeleteUserComponent } from '../delete-user/delete-user.component';
+import { CreateUserModalAdminComponent } from '../create-user-modal-admin/create-user-modal-admin.component';
 
 
 @Component({
@@ -42,7 +42,12 @@ export class AdminUsersComponent implements OnInit {
     })
   }
 
-
+  createUser(){
+    this.dialog.open(CreateUserModalAdminComponent, {
+      width: '30%',
+      height: '600px'
+    })
+  }
 
   getUsers() {
     this.api.fetchUsers()

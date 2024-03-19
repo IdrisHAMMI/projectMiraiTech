@@ -53,8 +53,14 @@ import nodemailer from "nodemailer"
 export const registerAdmin = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
       // Fetch role from the database
-      const userRole = await Role.findOne({ role: 'Admin' });
+      let isAdmin = false;
+      const userRole = await Role.findOne({ role: req.body.role });
       const role = userRole;
+      
+      if (userRole && userRole.role === 'Admin') {
+        isAdmin = true;
+      }
+
       // Rename roles from req.body to avoid conflicts
       const { email, password, username } = req.body;
 
@@ -78,7 +84,7 @@ export const registerAdmin = async (req: express.Request, res: express.Response,
           email,
           username,
           roles: role,
-          isAdmin: true,
+          isAdmin,
           password: hashedPassword
       });
 

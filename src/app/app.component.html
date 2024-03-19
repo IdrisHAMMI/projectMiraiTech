@@ -1,4 +1,4 @@
-<!-- Check if the current route matches the admin restricted pages -->
+
 <ng-container *ngIf="isOnAdminRestrictedPage()">
     <app-admin-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-admin-sidenav>
   </ng-container>
@@ -7,6 +7,5 @@
       [collapsed]="isSideNavCollapsed"
       [screenWidth]="screenWidth">
   </app-admin-body>
-  
-  <router-outlet></router-outlet>
+<router-outlet></router-outlet>
   

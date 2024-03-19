@@ -1,0 +1,46 @@
+<div mat-dialog-title class="dialog-title-style">
+    <h1>Créer un Utilisateur</h1>
+</div>
+
+<div [formGroup]="userForm" class="w-96 mx-auto mt-4" mat-dialog-content>
+    
+    <mat-form-field class="w-[100%]" appearance="fill">
+        <mat-label>Nom D'utilisateur</mat-label>
+        <input formControlName="username" matInput>
+      </mat-form-field>
+    
+      <mat-form-field class="w-[100%]" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input formControlName="email" matInput>
+      </mat-form-field>
+    
+      <mat-form-field class="w-[100%]" appearance="fill">
+        <mat-label>Mot de Passe</mat-label>
+        <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"><mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon></button>
+          
+      </mat-form-field>
+    
+      <mat-form-field class="w-[100%]" appearance="fill">
+        <mat-label>Modifier Privilege de L'utilisateur</mat-label>
+        <mat-select formControlName="role">
+            <mat-option value="User">Client</mat-option>
+            <mat-option value="Admin">Admin</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <br>
+  <!--<div class="pb-4">
+    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
+    <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+  </div>-->
+
+      <!--<mat-label>Image du Produit</mat-label>
+      <input type="file" (change)="onFileSelected($event)">--> <!--NEED TO ADD LOGIC-->
+
+
+    
+<div mat-dialog-actions class="dialog-actions-style">
+    <button mat-raised-button color="primary" (click)="createUser()">Ajouter</button>
+    <button mat-raised-button color="warn">Annuler</button>
+</div>

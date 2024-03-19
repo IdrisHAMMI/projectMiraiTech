@@ -6,7 +6,6 @@ import { AuthSignupComponent } from './components/client/auth-signup/auth-signup
 import { UserProfileComponent } from './components/client/user-profile/user-profile.component';
 import { UserProfileOrdersComponent } from './components/client/user-profile-orders/user-profile-orders.component';
 import { UserProfileAddressesComponent } from './components/client/user-profile-addresses/user-profile-addresses.component';
-import { ProductInterfaceComponent } from './components/client/product-interface/product-interface.component';
 import { ForgotPasswordComponent } from './components/client/forgot-password/forgot-password.component'; 
 import { ResetPasswordComponent } from './components/client/reset-password/reset-password.component';
 import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
@@ -24,12 +23,12 @@ const routes: Routes = [
   { path: 'userProfile/addresses', component: UserProfileAddressesComponent},
   { path: 'forgotPassword', component: ForgotPasswordComponent },
   { path: 'reset/:token', component: ResetPasswordComponent },
-  { path: 'product', component: ProductInterfaceComponent},
   { path: 'admin/home', component: AdminHomeComponent},
   { path: 'admin/user', component: AdminUsersComponent},
   { path: 'admin/products', component: AdminProductsComponent},
   { path: '', redirectTo: 'index', pathMatch: 'full'},
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

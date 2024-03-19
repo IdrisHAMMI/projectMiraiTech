@@ -19,6 +19,10 @@ export class AdminPanelService {
     return this.http.get<IUserModelEx[]>(`${apiUrl.adminPanelApi}data/users`);
   }
 
+  createUsers(user: IUserModelEx): Observable<IUserModelEx> {
+    return this.http.post<IUserModelEx>(`${apiUrl.adminPanelApi}create/users`, user);
+  }
+
   //DELETES USER
   deleteUsers(id: string) {                            
     return this.http.delete<IUserModelEx[]>(`${apiUrl.adminPanelApi}delete/users/${id}`);

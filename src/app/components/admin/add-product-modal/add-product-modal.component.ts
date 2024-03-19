@@ -12,7 +12,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AddProductModalComponent implements OnInit {
 
   productForm !: FormGroup;
-  actionButton : string = "Save"
 
   constructor(private formBuilder : FormBuilder,
      private api : AdminPanelService,

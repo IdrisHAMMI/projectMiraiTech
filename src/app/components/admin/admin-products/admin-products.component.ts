@@ -1,12 +1,8 @@
-import { createProduct } from './../../../../../controllers/product/products.controller';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { ProductService } from 'src/services/product/product.service';
 import { AddProductModalComponent } from '../add-product-modal/add-product-modal.component';
 import { EditProductModalComponent } from '../edit-product-modal/edit-product-modal.component';
-import { DeleteProductModalComponent } from '../delete-product-modal/delete-product-modal.component';
-import { AdminPanelComponent } from '../admin-panel/admin-panel.component';
 import { AdminPanelService } from 'src/services/admin/adminpanel.service';
 
 @Component({
@@ -43,7 +39,7 @@ export class AdminProductsComponent implements OnInit {
     this.api.deleteProduct(id)
     .subscribe({
       next:(res)=>{
-        alert("User deleted!");
+        alert("Product deleted!");
         this.fetchProducts();
       },
       error:()=>{

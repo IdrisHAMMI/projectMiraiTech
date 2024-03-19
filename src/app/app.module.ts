@@ -47,8 +47,10 @@ import { AdminUsersComponent } from './components/admin/admin-users/admin-users.
 import { AdminProductsComponent } from './components/admin/admin-products/admin-products.component';
 import { AddProductModalComponent } from './components/admin/add-product-modal/add-product-modal.component';
 import { EditUserModalComponent } from './components/admin/edit-user-modal/edit-user-modal.component';
-import { DeleteProductModalComponent } from './components/admin/delete-product-modal/delete-product-modal.component';
 import { DeleteUserComponent } from './components/admin/delete-user/delete-user.component';
+import { CreateUserModalAdminComponent } from './components/admin/create-user-modal-admin/create-user-modal-admin.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +69,8 @@ import { DeleteUserComponent } from './components/admin/delete-user/delete-user.
     AddProductModalComponent,
     EditUserModalComponent,
     AdminUsersComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    CreateUserModalAdminComponent
   ],
   imports: [
     BrowserModule,
