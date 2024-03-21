@@ -1,1 +1,37 @@
-<p>edit-product-modal works!</p>
+<div mat-dialog-title class="dialog-title-style">
+    <h1>Modifier un Produit</h1>
+</div>
+
+<div [formGroup]="productForm" class="w-96 mx-auto mt-4" mat-dialog-content>
+
+  <mat-form-field  class="w-[100%]" appearance="fill">
+    <mat-label>Nom du Produit</mat-label>
+    <input matInput formControlName="productName">
+  </mat-form-field>
+
+  <mat-form-field class="w-[100%]" appearance="fill">
+    <mat-label>Description du Produit</mat-label>
+    <textarea matInput formControlName="productDescription"></textarea>
+  </mat-form-field>
+
+  <mat-form-field class="w-[100%]" appearance="fill">
+    <mat-label>Stock du Produit</mat-label>
+    <input matInput  min="0" step="1" formControlName="productStock" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+  </mat-form-field>
+
+  <mat-form-field class="w-[100%]" appearance="fill">
+    <mat-label>Marque du Produit</mat-label>
+    <mat-select formControlName="productBrand">
+        <mat-option value="ASUS">ASUS</mat-option>
+        <mat-option value="MSI">MSI</mat-option>
+        <mat-option value="Gigabyte">Gigabyte</mat-option>
+        <mat-option value="Intel">Intel</mat-option>
+    </mat-select>
+  </mat-form-field>
+    <br>
+    </div>
+
+<div mat-dialog-actions class="dialog-actions-style">
+    <button mat-raised-button color="primary" (click)="editProduct()">Editer</button>
+    <button mat-raised-button color="warn">Annuler</button>
+</div>

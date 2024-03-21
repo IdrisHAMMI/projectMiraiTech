@@ -23,6 +23,33 @@ export const createProduct = async (req: express.Request, res: express.Response,
     }
 }
 
+// UPDATE PRODUCT DATA
+export const updateProduct = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  try {
+      
+      const { productName, productDescription, productStock, productBrand, productPrice, productImageURL } = req.body;
+
+      const updatedProduct = await ProductModel.findByIdAndUpdate(req.params._id, {
+          productName,
+          productDescription,
+          productStock,
+          productBrand,
+          productPrice,
+          productImageURL
+      }, { new: true });
+
+      if (!updatedProduct) {
+          return res.status(404).json({ error: 'Product not found' });
+      }
+
+      return res.status(201).json(updatedProduct);
+  } catch(error) {
+      console.error('Error updating product:', error);
+      return res.status(500).json({ error: 'An error occurred while updating the product' });
+  }
+}
+
+
 //FECTHES PRODUCT DATA
 export const fetchProducts = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {

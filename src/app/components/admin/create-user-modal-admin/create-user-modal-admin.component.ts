@@ -27,7 +27,6 @@ export class CreateUserModalAdminComponent implements OnInit {
       this.userForm = this.formBuilder.group({
        username: ['', Validators.required],
        email: ['', [Validators.required, Validators.email]],
-       password: ['', Validators.required],
        role: ['User', Validators.required]
       });
   }
@@ -37,7 +36,7 @@ export class CreateUserModalAdminComponent implements OnInit {
     this.api.createUsers(this.userForm.value)
     .subscribe({
       next:(res)=> {
-        alert("Creation success!")
+        this.snackBar.open('Utilisateur Crée!', 'Fermer', {duration: 2000});
       },
       error:(err)=> {
         console.log(err)

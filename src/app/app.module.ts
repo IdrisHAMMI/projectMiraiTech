@@ -47,8 +47,8 @@ import { AdminUsersComponent } from './components/admin/admin-users/admin-users.
 import { AdminProductsComponent } from './components/admin/admin-products/admin-products.component';
 import { AddProductModalComponent } from './components/admin/add-product-modal/add-product-modal.component';
 import { EditUserModalComponent } from './components/admin/edit-user-modal/edit-user-modal.component';
-import { DeleteUserComponent } from './components/admin/delete-user/delete-user.component';
 import { CreateUserModalAdminComponent } from './components/admin/create-user-modal-admin/create-user-modal-admin.component';
+import { EditProductModalComponent } from './components/admin/edit-product-modal/edit-product-modal.component';
 
 
 @NgModule({
@@ -69,8 +69,8 @@ import { CreateUserModalAdminComponent } from './components/admin/create-user-mo
     AddProductModalComponent,
     EditUserModalComponent,
     AdminUsersComponent,
-    DeleteUserComponent,
-    CreateUserModalAdminComponent
+    CreateUserModalAdminComponent,
+    EditProductModalComponent
   ],
   imports: [
     BrowserModule,

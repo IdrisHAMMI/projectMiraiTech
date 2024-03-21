@@ -4,6 +4,7 @@ import { AdminPanelService } from './../../../../services/admin/adminpanel.servi
 import { MatDialog } from '@angular/material/dialog';
 import { EditUserModalComponent } from '../edit-user-modal/edit-user-modal.component';
 import { CreateUserModalAdminComponent } from '../create-user-modal-admin/create-user-modal-admin.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -13,27 +14,34 @@ import { CreateUserModalAdminComponent } from '../create-user-modal-admin/create
 })
 export class AdminUsersComponent implements OnInit {
 
-  displayedColumns : string[] = ['_id','username', 'email', 'action'];
+  displayedColumns : string[] = ['_id','username', 'email', 'isAdmin', 'action'];
   dataSource!: MatTableDataSource<any>
 
-  constructor(private dialog: MatDialog, private api : AdminPanelService){}
+  constructor(private dialog: MatDialog,
+      private snackBar: MatSnackBar,
+      private api : AdminPanelService){}
 
   ngOnInit(): void {
     this.getUsers();
   }
 
-  editUser() {
-    this.dialog.open(EditUserModalComponent, {
+  editUser(editData: any) {
+    const dialogRef = this.dialog.open(EditUserModalComponent, {
       width: '30%',
-      height: '600px'
-    })
+      height: '600px',
+      data: editData,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getUsers();
+    });
   }
 
   deleteUser(id: string){
     this.api.deleteUsers(id)
     .subscribe({
       next:(res)=>{
-        alert("User deleted!");
+        this.snackBar.open('Utilisateur Supprimé!', 'Fermer', {duration: 2000});
         this.getUsers();
       },
       error:()=>{
@@ -43,10 +51,14 @@ export class AdminUsersComponent implements OnInit {
   }
 
   createUser(){
-    this.dialog.open(CreateUserModalAdminComponent, {
+   const dialogRef = this.dialog.open(CreateUserModalAdminComponent, {
       width: '30%',
       height: '600px'
-    })
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      this.getUsers();
+    });
   }
 
   getUsers() {

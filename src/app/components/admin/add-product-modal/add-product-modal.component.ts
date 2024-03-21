@@ -27,23 +27,13 @@ export class AddProductModalComponent implements OnInit {
       productBrand: ['', Validators.required],
       productPrice: ['', Validators.required],
     });
-   
-  //  if(this.editData) {
-  //    this.actionButton = "Update"
-  //    this.productForm.controls['productName'].setValue(this.editData.productName);
-  //    this.productForm.controls['productDescription'].setValue(this.editData.productDescription);
-  //    this.productForm.controls['productStock'].setValue(this.editData.productStock);
-  //    this.productForm.controls['productBrand'].setValue(this.editData.productBrand);
-  //    this.productForm.controls['productPrice'].setValue(this.editData.productPrice);
-//
-  //  }
   }
 
   addProduct(){
     this.api.createProduct(this.productForm.value)
     .subscribe({
       next:(res)=> {
-        alert("Creation success!")
+        this.snackBar.open('Produit Ajouté!', 'Fermer', {duration: 2000});
       },
       error:(err)=> {
         console.log(err)

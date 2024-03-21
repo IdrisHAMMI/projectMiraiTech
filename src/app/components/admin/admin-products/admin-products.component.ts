@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AddProductModalComponent } from '../add-product-modal/add-product-modal.component';
 import { EditProductModalComponent } from '../edit-product-modal/edit-product-modal.component';
 import { AdminPanelService } from 'src/services/admin/adminpanel.service';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
@@ -12,34 +12,44 @@ import { AdminPanelService } from 'src/services/admin/adminpanel.service';
 })
 export class AdminProductsComponent implements OnInit {
 
-  displayedColumns: string[] = ['_id', 'productBrand', 'productDescription', 'productName', 'action'];
+  displayedColumns: string[] = ['_id', 'productBrand', 'productDescription', 'productName', 'productStock', 'productPrice', 'action'];
   dataSource!: MatTableDataSource<any>;
 
-  constructor(private dialog: MatDialog, private api: AdminPanelService) { }
+  constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private api: AdminPanelService) { }
 
   ngOnInit(): void {
     this.fetchProducts();
   }
 
   createProduct() {
-    this.dialog.open(AddProductModalComponent, {
+    const dialogRef = this.dialog.open(AddProductModalComponent, {
         width: '30%',
         height: '600px'
-      })
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.fetchProducts();
+      });
+
     }
 
-  editProduct(): void {
-    this.dialog.open(EditProductModalComponent , {
-      width: '60%',
-      height: '800px'
-    })
+  editProduct(editData: any) {
+    const dialogRef = this.dialog.open(EditProductModalComponent , {
+      width: '30%',
+      height: '600px',
+      data: editData,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.fetchProducts();
+    });
   }
 
   deleteProduct(id: string){
     this.api.deleteProduct(id)
     .subscribe({
       next:(res)=>{
-        alert("Product deleted!");
+        this.snackBar.open('Produit Supprimé!', 'Fermer', {duration: 2000});
         this.fetchProducts();
       },
       error:()=>{

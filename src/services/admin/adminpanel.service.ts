@@ -18,9 +18,14 @@ export class AdminPanelService {
   fetchUsers(): Observable<IUserModelEx[]> { 
     return this.http.get<IUserModelEx[]>(`${apiUrl.adminPanelApi}data/users`);
   }
-
+  //CREATES A USER
   createUsers(user: IUserModelEx): Observable<IUserModelEx> {
     return this.http.post<IUserModelEx>(`${apiUrl.adminPanelApi}create/users`, user);
+  }
+
+  //EDITS USER DATA
+  editUser(_id: string, user: any): Observable<IUserModelEx> {
+    return this.http.put<IUserModelEx>(`${apiUrl.adminPanelApi}update/users/${_id}`, user);
   }
 
   //DELETES USER
@@ -30,10 +35,16 @@ export class AdminPanelService {
 
   //ADMIN PRODUCT SECTION//
 
-  //CREATES PRODUCT
+  //CREATES A PRODUCT
   createProduct(product: IProductDocument): Observable<IProductDocument> {
     return this.http.post<IProductDocument>(`${apiUrl.productServiceApi}newProduct`, product);
   }
+
+   //EDITS PRODUCT DATA
+  editProduct( _id: string, product: any): Observable<IProductDocument> {
+     return this.http.put<IProductDocument>(`${apiUrl.adminPanelApi}product/update/${_id}`, product);
+  }
+
   //FETCHES PRODUCT
   getProducts(): Observable<IProductDocument[]> {
      return this.http.get<IProductDocument[]>(`${apiUrl.productServiceApi}`);
