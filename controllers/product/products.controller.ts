@@ -4,8 +4,14 @@ import  { ProductModel, deleteProductById } from '../../models/product.model'
 //CREATES PRODUCT DATA
 export const createProduct = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
-        const { productName, productDescription, productStock, productBrand, productPrice, productImageURL } = req.body;
-        const newProduct = new ProductModel ({
+        const { productName, productDescription, productStock, productBrand, productPrice } = req.body;
+
+        let productImageURL: string | undefined;
+        if (req.file) {
+            productImageURL = req.file.filename;
+        }
+
+        const newProduct = new ProductModel({
             productName,
             productDescription,
             productStock,
@@ -16,12 +22,11 @@ export const createProduct = async (req: express.Request, res: express.Response,
 
         const savedProduct = await newProduct.save();
         res.status(201).json(savedProduct);
-    } catch(error) {
+    } catch (error) {
         console.error('Error creating product:', error);
-        //DUPLICATE KEY ERROR (Error displays when creating the same request with the same exact value of the product name twice)
         res.status(500).json({ error: 'An error occurred while creating the product' });
     }
-}
+};
 
 // UPDATE PRODUCT DATA
 export const updateProduct = async (req: express.Request, res: express.Response, next: express.NextFunction) => {

@@ -48,3 +48,7 @@ Thumbs.db
 
 # Config
 .env
+
+# Dyanmic Image Folder
+
+/src/assets/upload

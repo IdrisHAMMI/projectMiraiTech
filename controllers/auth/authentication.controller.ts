@@ -71,11 +71,11 @@ export const registerAdmin = async (req: express.Request, res: express.Response,
       }
 
       // Check if email already exists
-      const existingUser = await getUserByEmail(email);
-      if (existingUser) {
-          console.log('Database error: Email is already in use');
-          return res.status(400).json({ error: 'Email is already in use' }).end();
-      }
+        const existingUser = await getUserByEmail(email);
+        if (existingUser) {
+            console.log('Database error: Email is already in use');
+            return res.status(400).json({ error: 'Email is already in use' }).end();
+        }
 
       const salt = await bcrypt.genSalt(10)
       const hashedPassword = await bcrypt.hash(req.body.password,salt);

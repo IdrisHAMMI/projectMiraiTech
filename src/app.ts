@@ -5,8 +5,8 @@ import bodyParser from 'body-parser';
 import compression from 'compression';
 import cors from 'cors';
 import mongoose from "mongoose";
-
 import router from "../router/config";
+import path from 'path';
 
 const app = express();
 
@@ -22,9 +22,11 @@ app.use(bodyParser.json());
 
 const server = http.createServer(app);
 
+
 server.listen(3000, () => {
   console.log('Server running on http://localhost:3000/');
 })
+
 
 const MONGO_URL = "mongodb+srv://hammiidris:j2c1ivpAj5JIu7Dd@cluster0.gudaofb.mongodb.net/MiraiTech_db?retryWrites=true&w=majority";
 

@@ -2,7 +2,7 @@ import express from 'express';
 import { getAllUsers, deleteUser, updateUser } from './../controllers/auth/users.controller';
 import { createProduct, fetchProducts, deleteProduct, updateProduct } from './../controllers/product/products.controller';
 import { registerAdmin } from './../controllers/auth/authentication.controller';
-
+import { upload } from './../controllers/upload-multer/upload'
 
 export default (router: express.Router) => {
   //CREATE USER (ADMIN)
@@ -24,7 +24,8 @@ export default (router: express.Router) => {
   router.put('/api/admin/product/update/:_id', updateProduct);
 
   //ADD PRODUCTS (ADMIN)
-  router.post('/api/products/newProduct', createProduct);
+  //CONSOLIDATING ROUTE AND HANDLING FOR IMAGE UPLOAD
+  router.post('/api/products/newProduct', upload.single('productImageURL'), createProduct);
 
   //DELETE PRODUCT (ADMIN)
   router.delete('/api/admin/delete/product/:id', deleteProduct);

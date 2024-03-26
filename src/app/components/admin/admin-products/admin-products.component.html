@@ -18,6 +18,13 @@
             <td mat-cell *matCellDef="let element"> {{element._id}} </td>
           </ng-container>
 
+        <ng-container matColumnDef="productImageURL">
+          <th mat-header-cell *matHeaderCellDef> Product Name </th>
+          <td mat-cell *matCellDef="let element"> 
+            <img [src]="element.productImageURL" alt="Product Image" class="rounded-xl my-2" height="75" width="75">
+           </td>
+        </ng-container>
+
         <ng-container matColumnDef="productName">
           <th mat-header-cell *matHeaderCellDef> Product Name </th>
           <td mat-cell *matCellDef="let element"> {{element.productName}} </td>

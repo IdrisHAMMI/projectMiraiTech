@@ -27,6 +27,7 @@ export class CreateUserModalAdminComponent implements OnInit {
       this.userForm = this.formBuilder.group({
        username: ['', Validators.required],
        email: ['', [Validators.required, Validators.email]],
+       password: ['', Validators.required],
        role: ['User', Validators.required]
       });
   }
@@ -39,7 +40,26 @@ export class CreateUserModalAdminComponent implements OnInit {
         this.snackBar.open('Utilisateur Crée!', 'Fermer', {duration: 2000});
       },
       error:(err)=> {
-        console.log(err)
+        switch(err.error.error) {
+          case 'Missing email, password, or username':
+            this.snackBar.open('Les cases de L\'utilisateur, Mot de passe ou Email sont vides.', 'Fermer', {
+              duration: 3000,
+              panelClass: ['error-snackbar']
+            });
+          break;
+          case 'Email is already in use':
+            this.snackBar.open('Cette Email est deja pris.', 'Fermer', {
+              duration: 3000,
+              panelClass: ['error-snackbar']
+            });
+          break;
+          case 'Failed to create user':
+            this.snackBar.open('Une erreur est survenu. Veuillez essayer plus tard.', 'Fermer', {
+              duration: 3000,
+              panelClass: ['error-snackbar']
+            });
+          break;
+        }
       }
     })
   }

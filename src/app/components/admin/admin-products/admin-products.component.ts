@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AdminProductsComponent implements OnInit {
 
-  displayedColumns: string[] = ['_id', 'productBrand', 'productDescription', 'productName', 'productStock', 'productPrice', 'action'];
+  displayedColumns: string[] = ['_id', 'productBrand', 'productDescription', 'productName', 'productStock', 'productPrice', 'productImageURL', 'action'];
   dataSource!: MatTableDataSource<any>;
 
   constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private api: AdminPanelService) { }
@@ -59,14 +59,16 @@ export class AdminProductsComponent implements OnInit {
   }
 
   fetchProducts() {
-    this.api.getProducts()
-      .subscribe({
-        next: (res) => {
-          this.dataSource = new MatTableDataSource(res);
-        },
-        error: (err) => {
-          alert("error while fetching products data");
-        }
-      });
+    this.api.getProducts().subscribe({
+      next: (res) => {
+        res.forEach((product: any) => {
+          product.productImageURL = 'assets/upload/' + product.productImageURL;
+        });
+        this.dataSource = new MatTableDataSource(res);
+      },
+      error: (err) => {
+        alert("error while fetching products data");
+      }
+    });
   }
 }

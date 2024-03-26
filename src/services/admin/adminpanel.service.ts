@@ -36,8 +36,8 @@ export class AdminPanelService {
   //ADMIN PRODUCT SECTION//
 
   //CREATES A PRODUCT
-  createProduct(product: IProductDocument): Observable<IProductDocument> {
-    return this.http.post<IProductDocument>(`${apiUrl.productServiceApi}newProduct`, product);
+  createProduct(formData: FormData): Observable<IProductDocument> {
+    return this.http.post<IProductDocument>(`${apiUrl.productServiceApi}newProduct`, formData);
   }
 
    //EDITS PRODUCT DATA

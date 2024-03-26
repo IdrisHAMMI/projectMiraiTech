@@ -15,6 +15,7 @@ export const getAllUsers = async (req: express.Request, res: express.Response, n
   }
  };
  
+ //FETCHES USERS BY OBJECT ID
  export const getById = async (req: express.Request, res: express.Response): Promise<express.Response> => {
   try {
     const user = await UserModel.findById(req.params.id);

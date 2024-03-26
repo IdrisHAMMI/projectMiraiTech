@@ -28,16 +28,28 @@ export class EditUserModalComponent implements OnInit {
         role: ['User', Validators.required]
       })
     }
-
     editUser (){
       this.api.editUser(this.editData._id, this.userForm.value)
       .subscribe({
         next:(res)=> {
-          this.snackBar.open('Utilisateur Modifié!', 'Fermer', {duration: 2000});
+          this.snackBar.open('Utilisateur Modifié!', 'Fermer', {duration: 3000});
           this.userForm.reset();
         },
-        error:()=> {
-          alert("error while modifying user data")
+        error:(err)=> {
+          switch (err.error.error) {
+            case 'Email is already in use':
+              this.snackBar.open('Cette Email est deja pris.', 'Fermer', {
+                duration: 3000,
+                panelClass: ['error-snackbar']
+              });
+              break;
+            case 'Missing email, or username':
+              this.snackBar.open('Les cases de L\'utilisateur ou Email sont vides.', 'Fermer', 
+                {duration: 3000, 
+                panelClass: ['error-snackbar']
+              });
+              break;
+            }
         }
       })
     }
