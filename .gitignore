@@ -50,5 +50,4 @@ Thumbs.db
 .env
 
 # Dyanmic Image Folder
-
 /src/assets/upload

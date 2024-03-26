@@ -28,7 +28,7 @@ export class AddProductModalComponent implements OnInit {
         productStock: ['', Validators.required],
         productBrand: ['', Validators.required],
         productPrice: ['', Validators.required],
-        productImageURL: [''] // Add the productImageURL field
+        productImageURL: ['']
       });
     }
   
@@ -44,7 +44,7 @@ export class AddProductModalComponent implements OnInit {
       formData.append('productBrand', this.productForm.get('productBrand')!.value);
       formData.append('productPrice', this.productForm.get('productPrice')!.value);
       
-      // Check if a file has been selected
+    // CHECK IF A FILE HAS BEEN SELECTED
       if (this.selectedFile) {
         formData.append('productImageURL', this.selectedFile);
       }

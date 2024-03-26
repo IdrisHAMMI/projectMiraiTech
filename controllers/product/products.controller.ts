@@ -32,8 +32,13 @@ export const createProduct = async (req: express.Request, res: express.Response,
 export const updateProduct = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
       
-      const { productName, productDescription, productStock, productBrand, productPrice, productImageURL } = req.body;
+      const { productName, productDescription, productStock, productBrand, productPrice } = req.body;
 
+      let productImageURL: string | undefined;
+        if (req.file) {
+            productImageURL = req.file.filename;
+        }
+        
       const updatedProduct = await ProductModel.findByIdAndUpdate(req.params._id, {
           productName,
           productDescription,

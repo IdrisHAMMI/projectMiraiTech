@@ -18,6 +18,11 @@
     <mat-label>Stock du Produit</mat-label>
     <input matInput  min="0" step="1" formControlName="productStock" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
   </mat-form-field>
+  
+  <mat-form-field class="w-[100%]" appearance="fill">
+    <mat-label>Prix du Produit</mat-label>
+    <input matInput  min="0" step="1" formControlName="productPrice" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+  </mat-form-field>
 
   <mat-form-field class="w-[100%]" appearance="fill">
     <mat-label>Marque du Produit</mat-label>
@@ -29,6 +34,10 @@
     </mat-select>
   </mat-form-field>
     <br>
+      <div class="pb-4">
+        <label for="file" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload file</label>
+        <input id="file" type="file" (change)="onFileSelected($event)" name="file-product" formControlName="productImageURL" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+      </div>
     </div>
 
 <div mat-dialog-actions class="dialog-actions-style">

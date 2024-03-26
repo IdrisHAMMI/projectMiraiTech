@@ -21,7 +21,7 @@ export default (router: express.Router) => {
   router.get('/api/products', fetchProducts);
   
   //UPDATE PRODUCT (ADMIN)
-  router.put('/api/admin/product/update/:_id', updateProduct);
+  router.put('/api/admin/product/update/:_id', upload.single('productImageURL'), updateProduct);
 
   //ADD PRODUCTS (ADMIN)
   //CONSOLIDATING ROUTE AND HANDLING FOR IMAGE UPLOAD
