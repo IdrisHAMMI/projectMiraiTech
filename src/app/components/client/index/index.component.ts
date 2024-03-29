@@ -13,13 +13,17 @@ export class IndexComponent implements OnInit{
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe(
-      products => {
-        this.products = products;
+    this.productService.getProducts().subscribe({
+      next: (res) => {
+        res.forEach((product: any) => {
+          product.productImageURL = 'assets/upload/' + product.productImageURL;
+        });
+        this.products = res;
       },
-      error => {
-        console.error('Error fetching products:', error);
+      error: (err) => {
+        console.error('Error fetching products:', err);
+        alert("error while fetching products data");
       }
-    );
+    });
   }
 }

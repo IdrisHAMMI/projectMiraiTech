@@ -96,15 +96,15 @@
 <!--TOP DEALS CONTAINER-->
 <!--TOP DEALS NEEDS TO BE RANDOMIZED-->
 <p class="text-center pt-[60px] pb-[10px]">Top Deals By Category</p>
-<div class="grid grid-cols-12 gap-4 border border-[#707070] bg-[#F8F8F8] pb-[60px] pt-[20px]">
-  <div>
-    <p class="pl-[20px] pt-[20px]">Check out our Most Popular Products!
+<div class="text-center grid grid-cols-12 gap-4 border border-[#707070] bg-[#F8F8F8] pb-[60px] pt-[20px]">
+  <div class="">
+    <p class="pl-[20px] pt-[20px] ">Check out our Most Popular Products!
     </p>
   </div>
   <div *ngFor="let product of products" class="col-span-2 border border-[#707070]  bg-[#F8F8F8] rounded-[10px] mt-[20PX]">
-    <p class="pl-[20px] pt-[20px]">{{ product.productName }}</p>
+    <p class="m">{{ product.productName }}</p>
     <div>
-      <img src="../assets/staticImg/aio.jpg" alt="gaming_pc" class=" w-[50%] border rounded-[10px] border-[#707070] mx-auto">
+          <img [src]="product.productImageURL" class="rounded-xl my-2 mx-auto" height="200" width="200">
       <p class="text-black text-center pt-[20px]">{{ product.productDescription}}</p>
       <p class="text-[#0088FF] font-bold text-center" alt="price">200$</p>
       <div class="flex justify-center pb-4" >

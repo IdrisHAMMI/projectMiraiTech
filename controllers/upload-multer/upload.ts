@@ -3,6 +3,7 @@ import path from 'path';
 
 //MULTER FILE UPLOAD LIBRARY
 
+//DEFINES FILE STORAGE & FILE NAMEING STRUCTURE
 export const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, path.join('src/assets/upload'));
@@ -12,5 +13,13 @@ export const storage = multer.diskStorage({
     },
   });
   
-export const upload = multer({ storage })
+  const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/webp') {
+       cb(null, true);
+    } else {
+       cb(new Error('INVALID_FILE_TYPE'));
+    }
+   };
+
+export const upload = multer({ storage, fileFilter })
 

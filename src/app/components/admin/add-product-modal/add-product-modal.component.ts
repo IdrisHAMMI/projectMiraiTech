@@ -1,8 +1,11 @@
+import { fetchBrands } from './../../../../../controllers/product/products.controller';
+import { IProductDocument } from './../../../../../models/product.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
 import { AdminPanelService } from './../../../../services/admin/adminpanel.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -14,12 +17,15 @@ export class AddProductModalComponent implements OnInit {
 
   productForm !: FormGroup;
   selectedFile: File | undefined;
+  brandName: any;
+  categoryName: any;
 
   constructor(private formBuilder : FormBuilder,
      private api : AdminPanelService,
      private snackBar: MatSnackBar,
-     @Inject(MAT_DIALOG_DATA) public editData: any,
-     private dialogRef : MatDialogRef<AddProductModalComponent>){}
+     @Inject(MAT_DIALOG_DATA) public data: any,
+     private dialogRef : MatDialogRef<AddProductModalComponent>,
+     private http: HttpClient) {}
 
      ngOnInit(): void {
       this.productForm = this.formBuilder.group({
@@ -27,21 +33,32 @@ export class AddProductModalComponent implements OnInit {
         productDescription: ['', Validators.required],
         productStock: ['', Validators.required],
         productBrand: ['', Validators.required],
+        productCategory: ['', Validators.required],
         productPrice: ['', Validators.required],
         productImageURL: ['']
       });
+      this.api.getBrands().subscribe((data: any)=> {
+        this.brandName = data;
+      })
+
+      this.api.getCategory().subscribe((data: any)=> {
+        this.categoryName = data
+      })
     }
   
     onFileSelected(event: any) {
       this.selectedFile = event.target.files[0];
     }
-  
+
+
+
     addProduct() {
       const formData = new FormData();
       formData.append('productName', this.productForm.get('productName')!.value);
       formData.append('productDescription', this.productForm.get('productDescription')!.value);
       formData.append('productStock', this.productForm.get('productStock')!.value);
       formData.append('productBrand', this.productForm.get('productBrand')!.value);
+      formData.append('productCategory', this.productForm.get('productCategory')!.value);
       formData.append('productPrice', this.productForm.get('productPrice')!.value);
       
     // CHECK IF A FILE HAS BEEN SELECTED
@@ -49,15 +66,17 @@ export class AddProductModalComponent implements OnInit {
         formData.append('productImageURL', this.selectedFile);
       }
 
-
       this.api.createProduct(formData)
         .subscribe({
           next: (res) => {
             this.snackBar.open('Produit Ajouté!', 'Fermer', { duration: 2000 });
           },
           error: (err) => {
-            console.log(err);
-          }
+              this.snackBar.open('An error occurred', 'Close', {
+                duration: 3000,
+                panelClass: ['error-snackbar']
+              });
+            }
         });
     }
   }

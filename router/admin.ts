@@ -1,6 +1,6 @@
 import express from 'express';
 import { getAllUsers, deleteUser, updateUser } from './../controllers/auth/users.controller';
-import { createProduct, fetchProducts, deleteProduct, updateProduct } from './../controllers/product/products.controller';
+import { createProduct, fetchProducts, deleteProduct, updateProduct, createBrand, createCategory, fetchBrands, fetchCategory } from './../controllers/product/products.controller';
 import { registerAdmin } from './../controllers/auth/authentication.controller';
 import { upload } from './../controllers/upload-multer/upload'
 
@@ -20,12 +20,25 @@ export default (router: express.Router) => {
   //GET PRODUCT DATA (ADMIN)
   router.get('/api/products', fetchProducts);
   
+  //GET PRODUCT BRAND DATA (ADMIN)
+  router.get('/api/products/brands', fetchBrands);
+  
+  //GET PRODUCT BRAND DATA (ADMIN)
+  router.get('/api/products/category', fetchCategory);
+
   //UPDATE PRODUCT (ADMIN)
+  //CONSOLIDATING ROUTE AND HANDLING FOR IMAGE UPLOAD
   router.put('/api/admin/product/update/:_id', upload.single('productImageURL'), updateProduct);
 
   //ADD PRODUCTS (ADMIN)
   //CONSOLIDATING ROUTE AND HANDLING FOR IMAGE UPLOAD
   router.post('/api/products/newProduct', upload.single('productImageURL'), createProduct);
+
+  //ADD PRODUCT BRAND
+  router.post('/api/products/brand', createBrand)
+
+  //ADD PRODUCT BRAND
+  router.post('/api/products/type', createCategory)
 
   //DELETE PRODUCT (ADMIN)
   router.delete('/api/admin/delete/product/:id', deleteProduct);

@@ -46,9 +46,20 @@ export class AdminPanelService {
   }
 
   //FETCHES PRODUCT
-  getProducts(): Observable<IProductDocument[]> {
-     return this.http.get<IProductDocument[]>(`${apiUrl.productServiceApi}`);
+  getProducts(): Observable<any[]> {
+     return this.http.get<string[]>(`${apiUrl.productServiceApi}`);
   }
+  
+  //FETCHES BRANDS
+  getBrands(): Observable<any[]> {
+    return this.http.get<string[]>(`${apiUrl.productServiceApi}brands`);
+ }
+
+  //FETCHES BRANDS
+  getCategory(): Observable<any[]> {
+    return this.http.get<string[]>(`${apiUrl.productServiceApi}category`);
+ }
+
     //DELETES USER
   deleteProduct(id: string) {                            
     return this.http.delete<IProductDocument[]>(`${apiUrl.adminPanelApi}delete/product/${id}`);

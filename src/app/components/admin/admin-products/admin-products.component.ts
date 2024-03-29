@@ -1,3 +1,4 @@
+import { IProductDocument } from './../../../../../models/product.model';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
@@ -5,6 +6,7 @@ import { AddProductModalComponent } from '../add-product-modal/add-product-modal
 import { EditProductModalComponent } from '../edit-product-modal/edit-product-modal.component';
 import { AdminPanelService } from 'src/services/admin/adminpanel.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
@@ -12,8 +14,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AdminProductsComponent implements OnInit {
 
-  displayedColumns: string[] = ['_id', 'productBrand', 'productDescription', 'productName', 'productStock', 'productPrice', 'productImageURL', 'action'];
+  displayedColumns: string[] = ['_id', 'brandName', 'categoryName', 'productName', 'productStock', 'productPrice', 'productImageURL', 'action'];
   dataSource!: MatTableDataSource<any>;
+  products: IProductDocument[] = [];
 
   constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private api: AdminPanelService) { }
 
@@ -24,7 +27,8 @@ export class AdminProductsComponent implements OnInit {
   createProduct() {
     const dialogRef = this.dialog.open(AddProductModalComponent, {
         width: '30%',
-        height: '600px'
+        height: '650px',
+        data: { products: this.products }
       });
 
       dialogRef.afterClosed().subscribe(result => {
