@@ -3,9 +3,5 @@
     <app-admin-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-admin-sidenav>
   </ng-container>
   
-  <app-admin-body *ngIf="isOnAdminRestrictedPage()"
-      [collapsed]="isSideNavCollapsed"
-      [screenWidth]="screenWidth">
-  </app-admin-body>
 <router-outlet></router-outlet>
   
