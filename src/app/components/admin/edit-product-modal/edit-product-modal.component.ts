@@ -13,6 +13,8 @@ export class EditProductModalComponent implements OnInit {
 
   productForm!: FormGroup
   selectedFile: File | undefined;
+  brandName: any;
+  categoryName : any;
 
   constructor(private formBuilder : FormBuilder, 
     private api: AdminPanelService,
@@ -29,24 +31,36 @@ export class EditProductModalComponent implements OnInit {
       productDescription: ['', Validators.required],
       productStock: ['', Validators.required],
       productBrand: ['', Validators.required],
+      productCategory: ['', Validators.required],
       productPrice: ['', Validators.required],
       productImageURL: ['']
-
     })
+
+    //FETCHES PRODUCT BRAND DATA
+    this.api.getBrands().subscribe((data: any)=> {
+      this.brandName = data;
+    })
+
+    //FETCHES PRODUCT CATEGORY DATA
+    this.api.getCategory().subscribe((data: any)=> {
+      this.categoryName = data
+      })
+     
 }
 
-onFileSelected(event: any) {
-  this.selectedFile = event.target.files[0];
-}
+    //WHEN THE FILE IS SELECTED, THE TARGET DATA (said file) WILL BE UPLOADED
+    onFileSelected(event: any) {
+      this.selectedFile = event.target.files[0];
+    }
 
-
-editProduct() {
-  const formData = new FormData();
-    formData.append('productName', this.productForm.get('productName')!.value);
-    formData.append('productDescription', this.productForm.get('productDescription')!.value);
-    formData.append('productStock', this.productForm.get('productStock')!.value);
-    formData.append('productBrand', this.productForm.get('productBrand')!.value);
-    formData.append('productPrice', this.productForm.get('productPrice')!.value);
+  editProduct() {
+      const formData = new FormData();
+      formData.append('productName', this.productForm.get('productName')!.value);
+      formData.append('productDescription', this.productForm.get('productDescription')!.value);
+      formData.append('productStock', this.productForm.get('productStock')!.value);
+      formData.append('productBrand', this.productForm.get('productBrand')!.value);
+      formData.append('productCategory', this.productForm.get('productCategory')!.value);
+      formData.append('productPrice', this.productForm.get('productPrice')!.value);
     
     // CHECK IF A FILE HAS BEEN SELECTED
     if (this.selectedFile) {

@@ -3,36 +3,40 @@
 </div>
 
 <div [formGroup]="productForm" class="w-96 mx-auto mt-4" mat-dialog-content>
-
-  <mat-form-field  class="w-[100%]" appearance="fill">
-    <mat-label>Nom du Produit</mat-label>
-    <input matInput formControlName="productName">
-  </mat-form-field>
-
-  <mat-form-field class="w-[100%]" appearance="fill">
-    <mat-label>Description du Produit</mat-label>
-    <textarea matInput formControlName="productDescription"></textarea>
-  </mat-form-field>
-
-  <mat-form-field class="w-[100%]" appearance="fill">
-    <mat-label>Stock du Produit</mat-label>
-    <input matInput  min="0" step="1" formControlName="productStock" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-  </mat-form-field>
+    
+    <mat-form-field  class="w-[100%]" appearance="fill">
+      <mat-label>Nom du Produit</mat-label>
+      <input matInput formControlName="productName">
+    </mat-form-field>
   
-  <mat-form-field class="w-[100%]" appearance="fill">
-    <mat-label>Prix du Produit</mat-label>
-    <input matInput  min="0" step="1" formControlName="productPrice" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-  </mat-form-field>
-
-  <mat-form-field class="w-[100%]" appearance="fill">
-    <mat-label>Marque du Produit</mat-label>
-    <mat-select formControlName="productBrand">
-        <mat-option value="ASUS">ASUS</mat-option>
-        <mat-option value="MSI">MSI</mat-option>
-        <mat-option value="Gigabyte">Gigabyte</mat-option>
-        <mat-option value="Intel">Intel</mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field class="w-[100%]" appearance="fill">
+      <mat-label>Description du Produit</mat-label>
+      <textarea matInput formControlName="productDescription"></textarea>
+    </mat-form-field>
+  
+    <mat-form-field class="w-[100%]" appearance="fill">
+      <mat-label>Stock du Produit</mat-label>
+      <input matInput  min="0" step="1" formControlName="productStock" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+    </mat-form-field>
+  
+    <mat-form-field class="w-[100%]" appearance="fill">
+      <mat-label>Prix du Produit</mat-label>
+      <input matInput  min="0" step="1" formControlName="productPrice" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+    </mat-form-field>
+  
+    <mat-form-field class="w-[100%]" appearance="fill">
+      <mat-label>Marque du Produit</mat-label>
+      <mat-select formControlName="productBrand">
+        <mat-option *ngFor="let brand of brandName" [value]="brand.brandName"> {{ brand.brandName}}</mat-option>
+      </mat-select>
+     </mat-form-field>
+  
+     <mat-form-field class="w-[100%]" appearance="fill">
+      <mat-label>Categorie du Produit</mat-label>
+      <mat-select formControlName="productCategory">
+        <mat-option *ngFor="let category of categoryName" [value]="category.categoryName"> {{ category.categoryName}} </mat-option>
+      </mat-select>
+     </mat-form-field>
     <br>
       <div class="pb-4">
         <label for="file" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload file</label>

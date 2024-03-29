@@ -35,10 +35,10 @@ export default (router: express.Router) => {
   router.post('/api/products/newProduct', upload.single('productImageURL'), createProduct);
 
   //ADD PRODUCT BRAND
-  router.post('/api/products/brand', createBrand)
+  router.post('/api/products/newBrand', createBrand)
 
   //ADD PRODUCT BRAND
-  router.post('/api/products/type', createCategory)
+  router.post('/api/products/newType', createCategory)
 
   //DELETE PRODUCT (ADMIN)
   router.delete('/api/admin/delete/product/:id', deleteProduct);

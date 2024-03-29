@@ -23,10 +23,16 @@ const routes: Routes = [
   { path: 'userProfile/addresses', component: UserProfileAddressesComponent},
   { path: 'forgotPassword', component: ForgotPasswordComponent },
   { path: 'reset/:token', component: ResetPasswordComponent },
-  { path: 'admin/home', component: AdminHomeComponent},
-  { path: 'admin/user', component: AdminUsersComponent},
-  { path: 'admin/products', component: AdminProductsComponent},
-  { path: '', redirectTo: 'index', pathMatch: 'full'},
+  // Admin panel routes
+  {
+    path: 'admin',
+    component: AdminPanelComponent,
+    children: [
+      { path: 'home', component: AdminHomeComponent },
+      { path: 'user', component: AdminUsersComponent },
+      { path: 'products', component: AdminProductsComponent },
+    ]
+  },
 ];
 
 

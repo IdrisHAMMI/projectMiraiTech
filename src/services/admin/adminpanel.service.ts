@@ -3,7 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IUserModelEx } from './../../../models/users.model';
 import {IProductDocument} from './../../../models/product.model'; // Import the product interface
+import {IBrandSchema} from './../../../models/brand.model'
 import { apiUrl } from '../apiUrl';
+import { ICategorySchema } from 'models/category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +52,16 @@ export class AdminPanelService {
      return this.http.get<string[]>(`${apiUrl.productServiceApi}`);
   }
   
+  //CREATES A BRAND
+  addBrand(brandName: any): Observable<IBrandSchema> {
+    return this.http.post<IBrandSchema>(`${apiUrl.productServiceApi}newBrand`, brandName);
+  }
+
+  //CREATES A BRAND
+  addCategory(categoryName: any): Observable<ICategorySchema> {
+    return this.http.post<ICategorySchema>(`${apiUrl.productServiceApi}newType`, categoryName);
+  }
+
   //FETCHES BRANDS
   getBrands(): Observable<any[]> {
     return this.http.get<string[]>(`${apiUrl.productServiceApi}brands`);

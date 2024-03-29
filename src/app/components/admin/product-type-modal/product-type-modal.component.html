@@ -1,1 +1,15 @@
-<p>product-type-modal works!</p>
+<div mat-dialog-title class="dialog-title-style">
+    <h1>Modifier un Produit</h1>
+</div>
+
+<div [formGroup]="categoryForm" class="w-96 mx-auto mt-4" mat-dialog-content>
+
+  <mat-form-field class="w-[100%]" appearance="fill">
+    <mat-label>Nom de la Marque</mat-label>
+    <input matInput formControlName="categoryName">
+  </mat-form-field>
+
+<div mat-dialog-actions class="dialog-actions-style">
+    <button mat-raised-button color="primary" (click)="addCategory()">Ajouter</button>
+    <button mat-raised-button color="warn">Annuler</button>
+</div>

@@ -1,5 +1,9 @@
 import mongoose from 'mongoose';
 
+export interface IBrandSchema {
+    brandName: string;
+}
+
 
 const BrandSchema = new mongoose.Schema(
     {
@@ -13,7 +17,7 @@ const BrandSchema = new mongoose.Schema(
         createdAt: 'created_at',
         updatedAt: 'updated_at' 
     }
-}
-);
+});
+export interface IBrandDocument extends IBrandSchema, Document {}
 
-export default mongoose.model('Brand', BrandSchema);
+export const BrandModel = mongoose.model<IBrandSchema>('Brand', BrandSchema);

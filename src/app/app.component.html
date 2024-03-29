@@ -1,12 +1,11 @@
 
 <ng-container *ngIf="isOnAdminRestrictedPage()">
     <app-admin-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-admin-sidenav>
-  
+  </ng-container>
   
   <app-admin-body *ngIf="isOnAdminRestrictedPage()"
       [collapsed]="isSideNavCollapsed"
       [screenWidth]="screenWidth">
   </app-admin-body>
-</ng-container>
 <router-outlet></router-outlet>
   

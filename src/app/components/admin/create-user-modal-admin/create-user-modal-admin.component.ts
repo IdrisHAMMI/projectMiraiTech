@@ -18,9 +18,7 @@ export class CreateUserModalAdminComponent implements OnInit {
   constructor(private formBuilder : FormBuilder,
     private api : AdminPanelService,
     private snackBar: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) public editData: any,
-    private dialogRef : MatDialogRef<CreateUserModalAdminComponent>
-    )
+    @Inject(MAT_DIALOG_DATA) public editData: any)
     {}
 
     ngOnInit(): void {

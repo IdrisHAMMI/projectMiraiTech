@@ -37,9 +37,7 @@
       <mat-option *ngFor="let category of categoryName" [value]="category.categoryName"> {{ category.categoryName}} </mat-option>
     </mat-select>
    </mat-form-field>
-
     <br>
-
   <div class="pb-4">
     <label for="file" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload file</label>
     <input id="file" type="file" (change)="onFileSelected($event)" name="file-product" formControlName="productImageURL" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">

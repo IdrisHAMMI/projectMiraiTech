@@ -34,7 +34,7 @@ export class AppComponent {
 
   isOnAdminRestrictedPage(): boolean {
     // DEFINES THE PATHS OF ADMIN RESTRICTED PAGES
-    const adminRestrictedPaths = ['admin/home', 'admin/user', 'admin/product']; // Example paths
+    const adminRestrictedPaths = ['home', 'user', 'product']; // Example paths
     // GET THE CURRENT URL
     const currentUrl = this.router.url;
     // CROSS REFERENCE THE CURRENT ROUTE URL & SEE IF IT MATCHES WITH ANY OF THE ADMIN RESTRICTED PATHS

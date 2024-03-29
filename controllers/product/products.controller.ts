@@ -1,7 +1,6 @@
 import express from 'express' 
-import Brand from '../../models/brand.model';
 import ProductCategory from '../../models/category.model';
-import  BrandSchema from '../../models/brand.model';
+import { BrandModel } from '../../models/brand.model';
 import { ProductModel, deleteProductById } from '../../models/product.model';
 import File from 'multer'
 
@@ -9,7 +8,7 @@ import File from 'multer'
 export const createProduct = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
 
-        const productBrand = await Brand.findOne({});
+        const productBrand = await BrandModel.findOne({});
         const productCategory = await ProductCategory.findOne({});
 
         const brand = productBrand;
@@ -45,7 +44,13 @@ export const createProduct = async (req: express.Request, res: express.Response,
 export const updateProduct = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
       
-      const { productName, productDescription, productStock, productBrand, productPrice } = req.body;
+      const { productName, productDescription, productStock, productPrice } = req.body;
+
+      const productBrand = await BrandModel.findOne({});
+      const productCategory = await ProductCategory.findOne({});
+
+      const brand = productBrand;
+      const category = productCategory; 
 
       let productImageURL: string | undefined;
         if (req.file) {
@@ -56,8 +61,9 @@ export const updateProduct = async (req: express.Request, res: express.Response,
           productName,
           productDescription,
           productStock,
-          productBrand,
           productPrice,
+          productBrand: brand,
+          productCategory: category,
           productImageURL
       }, { new: true });
 
@@ -88,7 +94,7 @@ export const fetchProducts = async (req: express.Request, res: express.Response,
 //FECTHES PRODUCT DATA
 export const fetchBrands = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
-        const brand = await BrandSchema.find();
+        const brand = await BrandModel.find();
         res.json(brand); // Sending back the fetched products
     } catch (error) {
         console.error('CANT FETCH PRODUCTS', error);
@@ -135,14 +141,15 @@ export const deleteProduct = async (req: express.Request, res: express.Response)
 //ADD PRODUCT BRAND
 export const createBrand = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
-        if(req.body.brandName && req.body.brandName !== ''){
-            const newBrand = new BrandSchema(req.body);
+        if (req.body.brandName && req.body.brandName!== '') {
+            const newBrand = new BrandModel(req.body);
             await newBrand.save();
-            return res.send("Brand Created!");
+            return res.status(201).json({ message: "Brand Created" });
         } else {
-            return res.status(400).send("Bad Request! (BRAND FUNCTION)");
+            return res.status(400).json({ error: "Brand Name is required" });
         }
     } catch (error) {
+        console.error('Error creating brand:', error);
         return res.status(500).json({ error: 'An error occurred while creating the Brand' });
     }
 };
@@ -153,11 +160,12 @@ export const createCategory = async (req: express.Request, res: express.Response
         if(req.body.categoryName && req.body.categoryName !== ''){
             const newType = new ProductCategory(req.body);
             await newType.save();
-            return res.send("Product Type Created!");
+            return res.status(201).json({ message: "Product Type Created" });
         } else {
-            return res.status(400).send("Bad Request! (PRODUCT TYPE FUNCTION)");
+            return res.status(400).json({ error: "Category Name is required" });
         }
     } catch (error) {
-        return res.status(500).json({ error: 'An error occurred while creating the Product Type!' });
+        console.error('Error creating category:', error);
+        return res.status(500).json({ error: 'An error occurred while creating the Product Type' });
     }
 };

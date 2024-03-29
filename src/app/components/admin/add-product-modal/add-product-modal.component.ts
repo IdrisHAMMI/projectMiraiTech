@@ -1,5 +1,3 @@
-import { fetchBrands } from './../../../../../controllers/product/products.controller';
-import { IProductDocument } from './../../../../../models/product.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
 import { AdminPanelService } from './../../../../services/admin/adminpanel.service';
@@ -24,7 +22,6 @@ export class AddProductModalComponent implements OnInit {
      private api : AdminPanelService,
      private snackBar: MatSnackBar,
      @Inject(MAT_DIALOG_DATA) public data: any,
-     private dialogRef : MatDialogRef<AddProductModalComponent>,
      private http: HttpClient) {}
 
      ngOnInit(): void {
@@ -37,15 +34,19 @@ export class AddProductModalComponent implements OnInit {
         productPrice: ['', Validators.required],
         productImageURL: ['']
       });
+
+      //FETCHES PRODUCT BRAND DATA
       this.api.getBrands().subscribe((data: any)=> {
         this.brandName = data;
       })
 
+      //FETCHES PRODUCT CATEGORY DATA
       this.api.getCategory().subscribe((data: any)=> {
         this.categoryName = data
       })
     }
-  
+    
+    //WHEN THE FILE IS SELECTED, THE TARGET DATA (said file) WILL BE UPLOADED
     onFileSelected(event: any) {
       this.selectedFile = event.target.files[0];
     }

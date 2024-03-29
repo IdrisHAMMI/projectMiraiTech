@@ -49,6 +49,9 @@ import { AddProductModalComponent } from './components/admin/add-product-modal/a
 import { EditUserModalComponent } from './components/admin/edit-user-modal/edit-user-modal.component';
 import { CreateUserModalAdminComponent } from './components/admin/create-user-modal-admin/create-user-modal-admin.component';
 import { EditProductModalComponent } from './components/admin/edit-product-modal/edit-product-modal.component';
+import { ProductTypeModalComponent } from './components/admin/product-type-modal/product-type-modal.component';
+import { ProductBrandModalComponent } from './components/admin/product-brand-modal/product-brand-modal.component';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -70,7 +73,9 @@ import { EditProductModalComponent } from './components/admin/edit-product-modal
     EditUserModalComponent,
     AdminUsersComponent,
     CreateUserModalAdminComponent,
-    EditProductModalComponent
+    EditProductModalComponent,
+    ProductTypeModalComponent,
+    ProductBrandModalComponent
   ],
   imports: [
     BrowserModule,
@@ -94,7 +99,9 @@ import { EditProductModalComponent } from './components/admin/edit-product-modal
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatPaginator,
+    MatPaginatorModule
   ],    
   providers: [
     

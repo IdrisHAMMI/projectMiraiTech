@@ -1,19 +1,19 @@
 <div class="text-center">
     <h1>Gestion & Ajout des Produits</h1>
-    </div>
+</div>
    
-    <div class="flex flex-row-reverse my-5">
+  <div class="flex flex-row-reverse my-5">
       
     <div class="text-right">
       <button mat-raised-button color="primary" (click)="createProduct()" class="">Ajouter un Produit<mat-icon>add_shopping_cart</mat-icon></button>
     </div>
 
     <div class="text-right mr-[10px]">
-      <button mat-raised-button color="primary" class="">Ajouter un Type de Produit<mat-icon>keyboard</mat-icon></button>
+      <button mat-raised-button color="primary" (click)="addCategory()">Ajouter un Type de Produit<mat-icon>keyboard</mat-icon></button>
     </div>
 
     <div class="text-right  mr-[10px]">
-      <button mat-raised-button color="primary" class="">Ajouter une Marque de Produit<mat-icon>branding_watermark</mat-icon></button>
+      <button mat-raised-button color="primary" (click)="addBrand()">Ajouter une Marque de Produit<mat-icon>branding_watermark</mat-icon></button>
     </div>
   </div>
 
@@ -69,3 +69,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
       
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements">
+    </mat-paginator>

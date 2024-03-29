@@ -1,18 +1,18 @@
 export const navbarData = [
     {
-        routeLink: 'admin/home',
+        routeLink: 'home',
         icon: 'fal fa-home',
         label: 'Dashboard'
     },
 
     {
-        routeLink: 'admin/user',
+        routeLink: 'user',
         icon: 'fa-regular fa-user-group',
         label: 'User'
     },
 
     {
-        routeLink: 'admin/products',
+        routeLink: 'products',
         icon: 'fa-regular fa-cart-shopping',
         label: 'Products'
     }

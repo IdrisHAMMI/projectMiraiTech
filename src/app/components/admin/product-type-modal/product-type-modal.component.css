@@ -1,0 +1,9 @@
+.dialog-title-style {
+    border-bottom: 1px solid black;
+    padding: 25px 0 0px 50px;
+}
+
+.dialog-actions-style {
+    text-align: right;
+    padding-right: 200px;
+}

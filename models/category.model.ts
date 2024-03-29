@@ -1,5 +1,9 @@
 import mongoose from 'mongoose';
 
+export interface ICategorySchema {
+    categoryName: string,
+}
+
 //PRODUCT IDENTETY TYPE SCHEMA
 const ProductTypeSchema = new mongoose.Schema(
     {
@@ -13,7 +17,8 @@ const ProductTypeSchema = new mongoose.Schema(
         createdAt: 'created_at',
         updatedAt: 'updated_at' 
     }
-}
-);
+});
+
+export interface ICategoryDocument extends ICategorySchema, Document {}
 
 export default mongoose.model('ProductCategory', ProductTypeSchema);
