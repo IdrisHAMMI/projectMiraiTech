@@ -6,7 +6,7 @@ export const navbarData = [
     },
 
     {
-        routeLink: 'user',
+        routeLink: 'users',
         icon: 'fa-regular fa-user-group',
         label: 'User'
     },

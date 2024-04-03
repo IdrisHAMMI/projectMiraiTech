@@ -1,20 +1,46 @@
 <app-header></app-header>
 
-<div class="grid grid-cols-12 gap-4 border border-[#707070] bg-[#F8F8F8] pb-[60px] pt-[20px]">
-    <div>
-      <p class="pl-[20px] pt-[20px]">Check out our Most Popular Products!
-      </p>
-    </div>
-    <div class="col-span-2 border border-[#707070]  bg-[#F8F8F8] rounded-[10px] mt-[20PX]">
-      <p class="pl-[20px] pt-[20px]">PLACEHOLDER TITLE</p>
-      <div>
-        <img src="../assets/staticImg/aio.jpg" alt="gaming_pc" class=" w-[50%] border rounded-[10px] border-[#707070] mx-auto">
-        <p class="text-black text-center pt-[20px]">PLACEHOLDER<br>DESCRIPTION</p>
-        <p class="text-[#0088FF] font-bold text-center" alt="price">200$</p>
-        <div class="flex justify-center pb-4" >
-          <button class="bg-[#0088FF] rounded-[5px] w-32 h-8 text-[#FFFFFF]" >ADD TO CART</button>
-        </div>
-  
+<div class="bg-gray-100 dark:bg-gray-800 py-8">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div *ngFor="let product of products" class="flex flex-col md:flex-row -mx-4">
+          <div  class="md:flex-1 px-4">
+              <div  class="h-[460px] rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
+                  <img [src]="product.productImageURL" class="w-full h-full object-cover" alt="Product Image">
+              </div>
+              <div class="flex -mx-2 mb-4">
+                  <div class="w-1/2 px-2">
+                      <button class="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700">Add to Cart</button>
+                  </div>
+              </div>
+          </div>
+          <div class="md:flex-1 px-4">
+              <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">{{product.productName}}</h2>
+              <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
+                  ante justo. Integer euismod libero id mauris malesuada tincidunt.
+              </p>
+              <div class="flex mb-4">
+                  <div class="mr-4">
+                      <span class="font-bold text-gray-700 dark:text-gray-300">Price:</span>
+                      <span class="text-gray-600 dark:text-gray-300">{{ product.productPrice}}$</span>
+                  </div>
+                  <div class="mr-4">
+                    <span class="font-bold text-gray-700 dark:text-gray-300">Brand:</span>
+                    <span class="text-gray-600 dark:text-gray-300">MSI</span>
+                </div>
+                  <div>
+                      <span class="font-bold text-gray-700 dark:text-gray-300">Availability:</span>
+                      <span class="text-gray-600 dark:text-gray-300">In Stock</span>
+                  </div>
+              </div>
+            
+              <div>
+                  <span class="font-bold text-gray-700 dark:text-gray-300">Product Description:</span>
+                  <p class="text-gray-600 dark:text-gray-300 text-sm mt-2">
+                      {{ product.productDescription }}
+                  </p>
+              </div>
+          </div>
       </div>
-    </div>
   </div>
+</div>

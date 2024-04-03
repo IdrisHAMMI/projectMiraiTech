@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from './../../../../services/product/product.service';
 import { IProductDocument } from './../../../../../models/product.model'; // Correct import
+import { ProductDisplayService } from 'src/services/product-display/product-display.service';
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
@@ -9,8 +10,9 @@ import { IProductDocument } from './../../../../../models/product.model'; // Cor
 export class IndexComponent implements OnInit{
   
   products: IProductDocument[] = [];
-
-  constructor(private productService: ProductService) { }
+  
+  constructor(private productService: ProductService,
+    private productDisplayApi: ProductDisplayService) { }
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe({
@@ -25,5 +27,9 @@ export class IndexComponent implements OnInit{
         alert("error while fetching products data");
       }
     });
+  }
+
+  onProductClick(product: any) {
+    this.productDisplayApi.selectedProduct = product;
   }
 }

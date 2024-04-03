@@ -7,13 +7,13 @@ import { apiUrl } from '../apiUrl';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class ProductDisplayService {
+
+  selectedProduct: any;
+
   constructor(private http: HttpClient) { }
-  //FETCHES PRODUCTS
-  getProducts(): Observable<IProductDocument[]> {
-    return this.http.get<IProductDocument[]>(`${apiUrl.productServiceApi}`);
-  }
-  getProductsById(): Observable<IProductDocument[]> {
-    return this.http.get<IProductDocument[]>(`${apiUrl.productServiceApi}:_id`);
+  
+  getProductsById(id: string): Observable<IProductDocument[]> {
+    return this.http.get<IProductDocument[]>(`${apiUrl.productServiceApi}get/${id}`);
   }
 }

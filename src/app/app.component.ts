@@ -34,7 +34,8 @@ export class AppComponent {
 
   isOnAdminRestrictedPage(): boolean {
     // DEFINES THE PATHS OF ADMIN RESTRICTED PAGES
-    const adminRestrictedPaths = ['home', 'user', 'product']; // Example paths
+    const adminRestrictedPaths = ['home', 'users', 'products'];
+    
     // GET THE CURRENT URL
     const currentUrl = this.router.url;
     // CROSS REFERENCE THE CURRENT ROUTE URL & SEE IF IT MATCHES WITH ANY OF THE ADMIN RESTRICTED PATHS
@@ -42,7 +43,7 @@ export class AppComponent {
   }
 
   updateSidebarVisibility(): void {
-    // CHECK IF THE CURRENT ROUT MATCHES THE ADMIN RESTRICTED PAGES AND UPDATE SIDEBAR VISIBILITY
+    // CHECK IF THE CURRENT ROUTE MATCHES THE ADMIN RESTRICTED PAGES AND UPDATE SIDEBAR VISIBILITY
     this.isSideNavCollapsed = !this.isOnAdminRestrictedPage();
   }
 }

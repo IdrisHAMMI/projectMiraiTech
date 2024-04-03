@@ -12,6 +12,7 @@ import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { AdminUsersComponent } from './components/admin/admin-users/admin-users.component';
 import { AdminProductsComponent } from './components/admin/admin-products/admin-products.component';
+import { ProductInterfaceComponent } from './components/client/product-interface/product-interface.component';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent},
@@ -23,13 +24,14 @@ const routes: Routes = [
   { path: 'userProfile/addresses', component: UserProfileAddressesComponent},
   { path: 'forgotPassword', component: ForgotPasswordComponent },
   { path: 'reset/:token', component: ResetPasswordComponent },
-  // Admin panel routes
+  { path: 'productItem/:id', component: ProductInterfaceComponent},
+  // ADMIN PANEL ROUTES
   {
     path: 'admin',
     component: AdminPanelComponent,
     children: [
       { path: 'home', component: AdminHomeComponent },
-      { path: 'user', component: AdminUsersComponent },
+      { path: 'users', component: AdminUsersComponent },
       { path: 'products', component: AdminProductsComponent },
     ]
   },

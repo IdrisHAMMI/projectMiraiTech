@@ -90,6 +90,15 @@ export const fetchProducts = async (req: express.Request, res: express.Response,
     }
 }
 
+export const fetchProductsById = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    try {
+        const product = await ProductModel.findById(req.params.id).populate('productCategory', 'categoryName').populate('productBrand', 'brandName');
+        res.json(product); 
+    } catch (error) {
+        console.error('CANT FETCH PRODUCTS', error);
+        res.status(500).json({error: 'Internal Error'});
+    }
+}
 
 //FECTHES PRODUCT DATA
 export const fetchBrands = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
