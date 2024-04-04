@@ -77,9 +77,6 @@ export class AdminProductsComponent implements AfterViewInit {
   fetchProducts() {
     this.api.getProducts().subscribe({
       next: (res) => {
-        res.forEach((product: any) => {
-          product.productImageURL = 'assets/upload/' + product.productImageURL;
-        });
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
       },

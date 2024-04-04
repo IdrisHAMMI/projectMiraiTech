@@ -17,9 +17,6 @@ export class IndexComponent implements OnInit{
   ngOnInit(): void {
     this.productService.getProducts().subscribe({
       next: (res) => {
-        res.forEach((product: any) => {
-          product.productImageURL = 'assets/upload/' + product.productImageURL;
-        });
         this.products = res;
       },
       error: (err) => {

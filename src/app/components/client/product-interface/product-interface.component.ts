@@ -1,7 +1,5 @@
-import { IProductDocument } from './../../../../../models/product.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { result } from 'lodash';
 import { ProductDisplayService } from 'src/services/product-display/product-display.service';
 
 @Component({
@@ -17,9 +15,8 @@ export class ProductInterfaceComponent implements OnInit {
   ngOnInit(): void {
     let productId = this.route.snapshot.paramMap.get('id');
     
-    if (productId) { // Use productId instead of this.productId
+    if (productId) { //IF PRODUCT ID IS PASSED THEN SUBSCRIBE TO API
       this.api.getProductsById(productId).subscribe((result) => {
-        
         this.products = [result];
       });
     }

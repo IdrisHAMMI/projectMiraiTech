@@ -9,7 +9,7 @@ export const storage = multer.diskStorage({
       cb(null, path.join('src/assets/upload'));
     },
     filename: function (req, file, cb) {
-      cb(null, file.originalname);
+      cb(null, 'upload_' + Date.now() + path.extname(file.originalname));
     },
   });
   
