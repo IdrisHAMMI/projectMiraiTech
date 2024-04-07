@@ -2,7 +2,6 @@ import express from 'express'
 import ProductCategory from '../../models/category.model';
 import { BrandModel } from '../../models/brand.model';
 import { ProductModel, deleteProductById } from '../../models/product.model';
-import File from 'multer'
 
 //CREATES PRODUCT DATA
 export const createProduct = async (req: express.Request, res: express.Response, next: express.NextFunction) => {

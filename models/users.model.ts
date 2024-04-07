@@ -19,7 +19,6 @@ export interface IUserModel {
     };
     isAdmin: boolean; 
     roles: mongoose.Types.ObjectId[];
-    cart: mongoose.Types.ObjectId[];
 }
 
 const UserSchema = new Schema<IUserModel>({
@@ -45,7 +44,6 @@ const UserSchema = new Schema<IUserModel>({
         type: [{ type: Schema.Types.ObjectId, ref: "Role" }],
         required: true,
     },
-    cart: [{ type: Schema.Types.ObjectId, ref: "Products"}],
 }, {
     timestamps: {
         createdAt: 'created_at',
