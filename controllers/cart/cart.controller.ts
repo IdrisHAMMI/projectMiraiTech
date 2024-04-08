@@ -3,13 +3,21 @@ import { CartModel } from '../../models/cart.model';
 
 export const addToCart = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
-        const { productId, ownerId } = req.body;
+        const {  ownerId , productId} = req.body;
 
-        const cart = new CartModel({
-            ownerId,
-            productId
-        })
+        let cart = await CartModel.findOne({ ownerId });
 
+        if (cart) {
+            // IF A CART ENTRY ALREADY EXISTS, THEN POST ONLY THE ADDED PRODUCT TO THE ARRAY
+            cart.productId.push(productId);
+        } else {
+            // ELSE IF THE ENTRY DOESNT EXIST, CREATE A NEW ONE
+            cart = new CartModel({
+                ownerId,
+                productId: [productId] //INIT PRODUCT ID ARRAY WITH THE NEW PROD ID 
+            });
+        }
+        //SAVES THE CART DATA
         const savedCart = await cart.save();
 
         if(!savedCart) {
@@ -28,8 +36,8 @@ export const getCart = async (req: express.Request, res: express.Response, next:
     try {
         const ownerId = req.params.id; //USER ID IN CART MODEL
 
-        // Find the cart documents for the specified user
-        const cart = await CartModel.find({ ownerId }).populate('productId');
+        // FIND THE CART DOCUMENT FOR THE DESIGNATED USER
+        const cart = await CartModel.find({ ownerId }).populate('productId').populate('ownerId');
 
         res.status(200).json(cart);
     } catch (error) {

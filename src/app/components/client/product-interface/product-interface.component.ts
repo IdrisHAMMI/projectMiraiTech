@@ -10,7 +10,9 @@ import { ProductDisplayService } from 'src/services/product-display/product-disp
  
 export class ProductInterfaceComponent implements OnInit {
   products: any; 
-  constructor(private route: ActivatedRoute, private api: ProductDisplayService) {}
+  
+  constructor(private route: ActivatedRoute, 
+    private api: ProductDisplayService) {}
 
   ngOnInit(): void {
     let productId = this.route.snapshot.paramMap.get('id');
@@ -21,4 +23,21 @@ export class ProductInterfaceComponent implements OnInit {
       });
     }
   }
+
+  addToCart(productId: string) {
+    const ownerId = localStorage.getItem('UID');
+    if (!ownerId) {
+      console.error('Owner ID not found in local storage');
+      return; //EXIT EARLY IF THE USER ID IS NOT FOUND
+    }
+
+    this.api.addToCart(productId, ownerId).subscribe(
+    (res) => {
+      console.log('Product added to cart:', res);
+    },
+    (error) => {
+      console.error('Error adding product to cart:', error);
+    }
+  );
+}
 }
