@@ -39,5 +39,5 @@ export class ProductInterfaceComponent implements OnInit {
       console.error('Error adding product to cart:', error);
     }
   );
-}
+ }
 }

@@ -39,9 +39,9 @@ export const getCart = async (req: express.Request, res: express.Response, next:
         // FIND THE CART DOCUMENT FOR THE DESIGNATED USER
         const cart = await CartModel.find({ ownerId }).populate('productId').populate('ownerId');
 
-        res.status(200).json(cart);
+        return res.json( cart );
     } catch (error) {
         console.error('Error fetching cart:', error);
-        res.status(500).json({ error: 'An error occurred while fetching cart' });
+        return res.status(500).json({ error: 'An error occurred while fetching cart' });
     }
 };

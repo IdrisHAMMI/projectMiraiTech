@@ -51,7 +51,8 @@ import { CreateUserModalAdminComponent } from './components/admin/create-user-mo
 import { EditProductModalComponent } from './components/admin/edit-product-modal/edit-product-modal.component';
 import { ProductTypeModalComponent } from './components/admin/product-type-modal/product-type-modal.component';
 import { ProductBrandModalComponent } from './components/admin/product-brand-modal/product-brand-modal.component';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { CartComponent } from './components/client/cart/cart.component';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
     CreateUserModalAdminComponent,
     EditProductModalComponent,
     ProductTypeModalComponent,
-    ProductBrandModalComponent
+    ProductBrandModalComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

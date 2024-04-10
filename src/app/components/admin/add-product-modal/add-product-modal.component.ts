@@ -21,8 +21,7 @@ export class AddProductModalComponent implements OnInit {
   constructor(private formBuilder : FormBuilder,
      private api : AdminPanelService,
      private snackBar: MatSnackBar,
-     @Inject(MAT_DIALOG_DATA) public data: any,
-     private http: HttpClient) {}
+     @Inject(MAT_DIALOG_DATA) public data: any) {}
 
      ngOnInit(): void {
       this.productForm = this.formBuilder.group({
