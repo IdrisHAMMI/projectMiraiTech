@@ -3,45 +3,71 @@ import { CartModel } from '../../models/cart.model';
 
 export const addToCart = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
-        const {  ownerId , productId} = req.body;
+        const { ownerId, productId } = req.body;
 
         let cart = await CartModel.findOne({ ownerId });
 
         if (cart) {
-            // IF A CART ENTRY ALREADY EXISTS, THEN POST ONLY THE ADDED PRODUCT TO THE ARRAY
-            cart.productId.push(productId);
+            //IF A CART ENTRY ALREADY EXISTS, FIND THE PRODUCT IN THE CART AND UPDATE ITS QUANTITY
+            const productIndex = cart.items.findIndex(item => item.productId === productId);
+            if (productIndex !== -1) {
+                //IF THE PRODUCT ALREADY EXISTS IN THE CART THEN INCREMENT ITS QUANTITY
+                cart.items[productIndex].quantity++;
+            } else {
+                // IF IT DOESNT EXIST THEN ADD IT WITH A VALUE QUANTITY OF 1
+                cart.items.push({ productId, quantity: 1 });
+            }
         } else {
-            // ELSE IF THE ENTRY DOESNT EXIST, CREATE A NEW ONE
+            // IF THE CART ENTRY DOESNT EXIST, CREATE A NEW ONE WITH A VALUE QUANTITY OF 1
             cart = new CartModel({
                 ownerId,
-                productId: [productId] //INIT PRODUCT ID ARRAY WITH THE NEW PROD ID 
+                items: [{ productId, quantity: 1 }]
             });
         }
-        //SAVES THE CART DATA
-        const savedCart = await cart.save();
 
-        if(!savedCart) {
-            console.log('cant find user id')
-        }
+        const savedCart = await cart.save();
 
         return res.status(201).json(savedCart);
     } catch (error) {
         console.error('Error adding product to cart:', error);
         return res.status(500).json({ error: 'An error occurred while adding the product to cart' });
-    
-        };
-}
+    }
+};
 
 export const getCart = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
-        const ownerId = req.params.id; //USER ID IN CART MODEL
+        const ownerId = req.params.id; // USER ID IN CART MODEL
 
         // FIND THE CART DOCUMENT FOR THE DESIGNATED USER
-        const cart = await CartModel.find({ ownerId }).populate('productId').populate('ownerId');
+        const cart = await CartModel.findOne({ ownerId }).populate('items.productId');
 
-        return res.json( cart );
+        return res.json(cart);
     } catch (error) {
         console.error('Error fetching cart:', error);
         return res.status(500).json({ error: 'An error occurred while fetching cart' });
     }
+    
 };
+
+export const deleteCartRecord = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    try {
+        const ownerId = req.params.id; 
+        const productId = req.params.productId;
+
+        // Find the cart document for the designated user and update it
+        const cart = await CartModel.findOneAndUpdate(
+            { ownerId },
+            { $pull: { items: { productId } } }, // Remove the specified product from the items array
+            { new: true } // Return the updated document
+        );
+
+        if (!cart) {
+            return res.status(404).json({ error: 'Cart not found' });
+        }
+
+        return res.json(cart);
+    } catch (error) {
+        console.error('Error deleting product from cart:', error);
+        return res.status(500).json({ error: 'An error occurred while deleting product from cart' });
+    }
+}

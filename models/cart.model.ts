@@ -1,28 +1,35 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
 
-export interface ICartModel {
-    //USER ID (Owner of the cart) 
-    ownerId: mongoose.Types.ObjectId,
-    
-    //PRODUCT ID (Will be populated to display product content)
-    productId: mongoose.Types.ObjectId[],
+
+export interface CartItem {
+    productId: mongoose.Types.ObjectId;
+    quantity: number;
 }
 
-const CartSchema = new Schema<ICartModel>({
+export interface ICartModel {
+    // USER ID (Owner of the cart) 
+    ownerId: mongoose.Types.ObjectId;
+    
+    // ARRAY OF CART ITEMS (Inside that array will be the Products)
+    items: CartItem[];
+}
+
+export const CartSchema = new Schema<ICartModel>({
     ownerId: {
         type: Schema.Types.ObjectId,
         required: true,
         unique: true,
         ref: 'Users'
     },
-    productId: {
-        type: [{ type: Schema.Types.ObjectId, ref: "product"}],
-        required: true,
-        ref: 'product'
-    }
+    items: [
+        {
+            productId: { type: Schema.Types.ObjectId, ref: "product" },
+            quantity: { type: Number, default: 1 } // DEFAULT QUANTITY IS 1
+        }
+    ]
 });
 
 
-export interface ICart extends ICartModel , Document {}
+export interface ICart extends ICartModel, Document {}
 
-export const CartModel = mongoose.model<ICart>('cart', CartSchema);
+export const CartModel = mongoose.model<ICart>('Cart', CartSchema);

@@ -27,4 +27,9 @@ export class ProductDisplayService {
   getCart(ownerId: string): Observable<ICartModel[]> {
     return this.http.get<ICartModel[]>(`${apiUrl.cartServiceApi}get/${ownerId}`)
   }
+
+  removeCartProduct(ownerId: string, productId: string): Observable<ICartModel[]> {
+    return this.http.delete<ICartModel[]>(`${apiUrl.cartServiceApi}${ownerId}/delete/${productId}`);
+   }
+   
 }

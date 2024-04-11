@@ -1,4 +1,4 @@
-import { addToCart, getCart } from './../controllers/cart/cart.controller';
+import { addToCart, deleteCartRecord, getCart } from './../controllers/cart/cart.controller';
 import { createProduct, fetchProducts, fetchProductsById} from './../controllers/product/products.controller';
 import express from 'express';
 
@@ -14,4 +14,7 @@ export default (router: express.Router) => {
     
     //ADD CHOSEN PRODUCT TO USER
     router.get('/api/cart/get/:id', getCart)
+
+    //DELETE CART ITEM
+    router.delete('/api/cart/:id/delete/:productId', deleteCartRecord)
 }
