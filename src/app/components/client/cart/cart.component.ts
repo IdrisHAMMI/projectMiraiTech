@@ -9,7 +9,7 @@ import { ChangeDetectorRef } from '@angular/core';
 
 export class CartComponent implements OnInit {
   cartData: any;
-
+  totalAmount: number = 0;
   constructor(private api: ProductDisplayService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
@@ -18,7 +18,7 @@ export class CartComponent implements OnInit {
        this.api.getCart(id).subscribe(
          data => {
            this.cartData = data;
-           console.log('Cart Data:', this.cartData); // Add this line to log the received data
+           this.calculateTotalAmount();
          },
          error => {
            console.error('Error fetching cart:', error);
@@ -27,7 +27,22 @@ export class CartComponent implements OnInit {
     }
   }
 
+  incrementQuantity(product: any) {
+    product.quantity++; // Increment quantity locally
+  }
+  
+  calculateTotalAmount() {
+    this.totalAmount = 0; //RESET "TOTALAMOUNT" BEFORE RECALCULATING
+    // ITERATE OVER "CARTDATA" AND SUM UP THE PRODUCT PRICES
+    for (let cartItem of this.cartData) {
+      for (let product of cartItem.productId) {
+        this.totalAmount += product.productPrice;
+      }
+    }
+    console.log('Total Amount:', this.totalAmount); // Add this line for debugging
+  }
+
   cartPayment() {
-    // Your cart payment logic
+    
   }
 }
