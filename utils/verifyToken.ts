@@ -1,11 +1,13 @@
+import { environment } from "./../environment/environment";
 import jwt  from "jsonwebtoken";
+
 
 //CHECKS IF THERE IS A TOKEN IN THE BROWSER
 export const verifyToken = (req, res, next)=> {
     const token = req.cookies.access_token;
     if(!token)
         return res.status(500).send('tests')
-    jwt.verify(token, process.env.JWT_SECRET, (error, user) =>{
+    jwt.verify(token, environment.JWT_SECRET, (error, user) =>{
         if(error) {
             return res.status(500).send('test')
         } else {

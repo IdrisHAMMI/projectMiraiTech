@@ -2,9 +2,10 @@ import express from 'express';
 import Role from '../../models/role.model'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken';
-import { UserModel, getUserByEmail, createUser } from '../../models/users.model';
 import TokenSchema from './../../models/userToken.schema';
 import nodemailer from "nodemailer"
+import { UserModel, getUserByEmail, createUser } from '../../models/users.model';
+import { environment } from './../../environment/environment';
 
    //USER REGISTRATION FUNCTION
    export const register = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -130,7 +131,7 @@ export const login = async (req: express.Request, res: express.Response, next: e
 
     const token = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin, roles: user.roles },
-      process.env.JWT_SECRET
+      environment.JWT_SECRET
     );
 
     //HTTPONLY IS TRUE TO PREVENT (CROSS SITE SCRIPTING) XSS ATTACKS
@@ -160,7 +161,7 @@ export const sendEmail = async (req, res) => {
       email: user.email
     };
     const expiryTime = 300;
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: expiryTime });
+    const token = jwt.sign(payload, environment.JWT_SECRET, { expiresIn: expiryTime });
 
     const newToken = new TokenSchema({
       userId: user._id,
@@ -188,7 +189,7 @@ export const sendEmail = async (req, res) => {
           <h1>Password Reset Request</h1>
           <p>Yo ${user.username}</p>
           <p>Got your reset request.</p>
-          <a href="${process.env.LIVE_URL}/reset/${token}">
+          <a href="${environment.LIVE_URL}/reset/${token}">
             <button style="background-color: #4CAF50; color: white; padding:  14px  20px; border: none; cursor: pointer; border-radius:  4px;">
               Reset Password
             </button>
@@ -220,7 +221,7 @@ export const resetPassword = (req, res) => {
   const token = req.body.token;
   const newPassword = req.body.password;
 
-  jwt.verify(token, process.env.JWT_SECRET, async(err, data) => {
+  jwt.verify(token, environment.JWT_SECRET, async(err, data) => {
       if (err) {
           if (err.name === 'TokenExpiredError') {
               return res.status(401).send("Reset link has expired");

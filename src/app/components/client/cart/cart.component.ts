@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { IPayPalConfig, ICreateOrderRequest, IClientAuthorizeCallbackData } from 'ngx-paypal';
 import { ProductDisplayService } from 'src/services/product-display/product-display.service';
-import { ChangeDetectorRef } from '@angular/core';
+import { environment } from './../../../../../environment/environment';
+import { PaymentSuccessComponent } from '../payment-success/payment-success.component';
+import { MatDialog } from '@angular/material/dialog';
+
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -9,10 +14,17 @@ import { ChangeDetectorRef } from '@angular/core';
 
 export class CartComponent implements OnInit {
   cartData: any;
+  cartItems: any[] = [];
+
   totalAmount: number = 0;
-  constructor(private api: ProductDisplayService, private cdr: ChangeDetectorRef) {}
+  constructor(private api: ProductDisplayService,
+    private dialog: MatDialog
+  ) {}
+
+  public payPalConfig ?: IPayPalConfig
 
   ngOnInit(): void {
+    this.initConfig();
     const id = localStorage.getItem('UID');
     if (id) {
       this.fetchCartData(id);
@@ -35,7 +47,12 @@ export class CartComponent implements OnInit {
   calculateTotalAmount() {
     if (this.cartData && this.cartData.items) {
       this.totalAmount = this.cartData.items.reduce((total, item) => {
-        return total + (item.productId.productPrice * item.quantity);
+        // CHECKS IF item.productId IS DEFINED BEFORE ACCESSING productPrice 
+        if (item.productId && item.productId.productPrice) {
+          return total + (item.productId.productPrice * item.quantity);
+        } else {
+          return total; // SKIP THE ITEM IF IT RETURNS UNDEFINED
+        }
       }, 0);
     }
   }
@@ -64,7 +81,79 @@ export class CartComponent implements OnInit {
     })
   }
 
-  cartPayment() {
+  
+//PAYPAL INIT CONFIG 
+private initConfig(): void {
+  this.payPalConfig = {
+    clientId: environment.PAYPAL_CLIENT_ID,
+    currency: 'EUR',
+    createOrderOnClient: (data) => {
+      const purchaseUnits = [{
+        reference_id: 'default',
+        amount: {
+          currency_code: 'EUR',
+          value: this.totalAmount.toFixed(2), // Total amount for the order
+          breakdown: {
+            item_total: {
+              currency_code: 'EUR',
+              value: this.totalAmount.toFixed(2)
+            }
+          }
+        },
+        items: this.cartData.items.map((item) => ({
+          name: item.productId.productName,
+          quantity: item.quantity,
+          unit_amount: {
+            currency_code: 'EUR',
+            value: (item.productId.productPrice * item.quantity).toFixed(2)
+          }
+        }))
+      }];
     
-  }
+      const order: ICreateOrderRequest = {
+        intent: 'CAPTURE',
+        purchase_units: purchaseUnits
+      };
+    
+      return order;
+    },
+    advanced: {
+      commit: 'true',
+      
+    },
+    style: {
+      label: 'paypal',
+      layout: 'vertical'
+    },
+    onApprove: (data, actions) => {
+      console.log('onApprove - transaction was approved byut not authorized', data, actions);
+      actions.order.get().then(details => {
+        console.log('onApprove - you can get full order details inside onApprove: ', details)
+      })
+    },
+    onClientAuthorization: (authorization: IClientAuthorizeCallbackData) => {
+      const items = authorization.purchase_units[0].items; // ACCESS ITEMS FROM AUTH DATA
+      const amount = authorization.purchase_units[0].amount.value; // ACCESS AMOUNT FROM AUTH DATA
+    
+      const dialogRef = this.dialog.open(PaymentSuccessComponent, {
+        width: '60%',
+        height: '720px',
+        data: { items: items, amount: amount } 
+      });
+    },
+    
+    onCancel: (data, actions) => {
+      // Handle cancellation
+    },
+    onError: (err) => {
+      // Handle errors
+    },
+    onClick: (data) => {
+    }
+    
+  };
 }
+
+}
+
+

@@ -1,7 +1,7 @@
 <mat-toolbar class="max-w-7x1 mx-auto border-x justify-between" style="height:  99px;">
   <!-- Left section with logo -->
   <div class="flex items-center">
-    <a href="/index">
+    <a routerLink="/index">
       <img src="../../../assets/staticImg/index_logo.png" alt="logo" routerLink="home" style="width:110px; margin-left:  20px;">
     </a>
   </div>
@@ -18,21 +18,18 @@
       </ng-container>
 
       <ng-container *ngIf="isLoggedIn" class="cursor-pointer hover:cursor-pointer">
-        <h4 class="px-3" *ngIf="isLoggedIn"><a href="/userProfile">Votre Compte</a></h4>
+        <h4 class="px-3" *ngIf="isLoggedIn"><a routerLink="/userProfile">Votre Compte</a></h4>
         <button (click)="logout()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
           Se Déconnecter   
         </button>
       </ng-container>
 
       <!-- CART BUTTON -->
-      <button mat-icon-button [matMenuTriggerFor]="menu">
+      <button mat-icon-button routerLink="/cart">
         <mat-icon>shopping_cart</mat-icon>
       </button>
     </div>
 
 
   <!-- CART MENU -->
-  <mat-menu #menu="matMenu">
-    <!-- DYNAMIC CART CONTENT -->
-  </mat-menu>
 </mat-toolbar>

@@ -11,6 +11,7 @@ import { HeaderComponent } from './components/client/header/header.component';
 import { FooterComponent } from './components/client/footer/footer.component';
 //INDEX IMPORT
 import { IndexComponent } from './components/client/index/index.component';
+import { NgxStripeModule } from 'ngx-stripe';
 
 //FIRESTORM IMPORTS
 //import { provideFirestore, getFirestore } from '@angular/fire/firestore';
@@ -53,6 +54,8 @@ import { ProductTypeModalComponent } from './components/admin/product-type-modal
 import { ProductBrandModalComponent } from './components/admin/product-brand-modal/product-brand-modal.component';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { CartComponent } from './components/client/cart/cart.component';
+import { NgxPayPalModule } from 'ngx-paypal';
+import { PaymentSuccessComponent } from './components/client/payment-success/payment-success.component';
 
 
 @NgModule({
@@ -77,7 +80,8 @@ import { CartComponent } from './components/client/cart/cart.component';
     EditProductModalComponent,
     ProductTypeModalComponent,
     ProductBrandModalComponent,
-    CartComponent
+    CartComponent,
+    PaymentSuccessComponent
   ],
   imports: [
     BrowserModule,
@@ -103,7 +107,8 @@ import { CartComponent } from './components/client/cart/cart.component';
     MatInputModule,
     MatSnackBarModule,
     MatPaginator,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgxPayPalModule
   ],    
   providers: [
     

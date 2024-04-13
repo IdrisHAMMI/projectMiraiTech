@@ -31,5 +31,5 @@ export class ProductDisplayService {
   removeCartProduct(ownerId: string, productId: string): Observable<ICartModel[]> {
     return this.http.delete<ICartModel[]>(`${apiUrl.cartServiceApi}${ownerId}/delete/${productId}`);
    }
-   
+
 }

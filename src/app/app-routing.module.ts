@@ -16,6 +16,7 @@ import { ProductInterfaceComponent } from './components/client/product-interface
 import { CartComponent } from './components/client/cart/cart.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/index', pathMatch: 'full' },
   { path: 'index', component: IndexComponent},
   { path: 'authLogin', component: AuthLoginComponent},
   { path: 'authSignup', component: AuthSignupComponent},
@@ -27,7 +28,7 @@ const routes: Routes = [
   { path: 'reset/:token', component: ResetPasswordComponent },
   { path: 'productItem/:id', component: ProductInterfaceComponent},
   { path: 'cart', component: CartComponent},
-
+  { path: '**', redirectTo: '/index' },
   // ADMIN PANEL ROUTES
   {
     path: 'admin',

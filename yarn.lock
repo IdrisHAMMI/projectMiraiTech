@@ -167,7 +167,7 @@
     symbol-observable "4.0.0"
     yargs "17.7.2"
 
-"@angular/common@^17.0.0 || ^18.0.0", "@angular/common@^17.0.8", "@angular/common@17.0.8":
+"@angular/common@^17.0.0 || ^18.0.0", "@angular/common@^17.0.8", "@angular/common@>= 15.0.0", "@angular/common@>=17.0.0 <18.0.0", "@angular/common@17.0.8":
   version "17.0.8"
   resolved "https://registry.npmjs.org/@angular/common/-/common-17.0.8.tgz"
   integrity sha512-fFfwtdg7H+OkqnvV/ENu8F8KGfgIiH16DDbQqYY5KQyyQB+SMsoVW29F1fGx6Y30s7ZlsLOy6cHhgrw74itkSw==
@@ -195,7 +195,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/core@^17.0.0", "@angular/core@^17.0.0 || ^18.0.0", "@angular/core@^17.0.8", "@angular/core@17.0.8":
+"@angular/core@^17.0.0", "@angular/core@^17.0.0 || ^18.0.0", "@angular/core@^17.0.8", "@angular/core@>= 15.0.0", "@angular/core@>=17.0.0 <18.0.0", "@angular/core@17.0.8":
   version "17.0.8"
   resolved "https://registry.npmjs.org/@angular/core/-/core-17.0.8.tgz"
   integrity sha512-tzYsK24LdkNuKNJK6efF4XOqspvF/qOe9j/n1Y61a6mNvFwsJFGbcmdZMby4hI/YRm6oIDoIIFjSep8ycp6Pbw==
@@ -2222,6 +2222,11 @@
   version "3.1.0"
   resolved "https://registry.npmjs.org/@socket.io/component-emitter/-/component-emitter-3.1.0.tgz"
   integrity sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg==
+
+"@stripe/stripe-js@^3.3.0", "@stripe/stripe-js@>=3.0.0 <4.0.0":
+  version "3.3.0"
+  resolved "https://registry.npmjs.org/@stripe/stripe-js/-/stripe-js-3.3.0.tgz"
+  integrity sha512-dUgAsko9KoYC1U2TIawHzbkQJzPoApxCc1Qf6/j318d1ArViyh6ROHVYTxnU3RlOQL/utUD9I4/QoyiCowsgrw==
 
 "@tsconfig/node10@^1.0.7":
   version "1.0.9"
@@ -6160,6 +6165,20 @@ ngrx@^0.0.1-security:
   resolved "https://registry.npmjs.org/ngrx/-/ngrx-0.0.1-security.tgz"
   integrity sha512-3hYh1th9Arjoh7mA3KvOt7NB/ZGynOwibYUYftovFRAojsqtI+WZpa51JZ0u+INv3Lcvbi5qkJYupar17aLGdg==
 
+ngx-paypal@^11.0.0:
+  version "11.0.0"
+  resolved "https://registry.npmjs.org/ngx-paypal/-/ngx-paypal-11.0.0.tgz"
+  integrity sha512-ABISig5C868S3KAylZr1iG9/ydjBDqqKOyuPBpaPeqDfkBz2kSZsgX+JXvrS4oT7C3SFf3NOrN3h1ECaltx1/g==
+  dependencies:
+    tslib "^2.3.0"
+
+ngx-stripe@^17.2.0:
+  version "17.2.0"
+  resolved "https://registry.npmjs.org/ngx-stripe/-/ngx-stripe-17.2.0.tgz"
+  integrity sha512-thi0FvDVpo/hmt8Yl2JlJ9M++FR9O5y83cfHZL2YHQf8GYFvT7wax7wy3DzX25CCAD3FGd9tZ4mitgDdW7kdIg==
+  dependencies:
+    tslib "^2.3.0"
+
 node-addon-api@^5.0.0:
   version "5.1.0"
   resolved "https://registry.npmjs.org/node-addon-api/-/node-addon-api-5.1.0.tgz"
@@ -6442,6 +6461,11 @@ ora@^5.4.1, ora@5.4.1:
     strip-ansi "^6.0.0"
     wcwidth "^1.0.1"
 
+os-browserify@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.npmjs.org/os-browserify/-/os-browserify-0.3.0.tgz"
+  integrity sha512-gjcpUc3clBf9+210TRaDWbf+rZZZEshZ+DlXMRCeAjp0xhTrnQsKHypIy1J3d5hKdUzj69t708EHtU8P6bUn0A==
+
 os-tmpdir@~1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/os-tmpdir/-/os-tmpdir-1.0.2.tgz"
@@ -6655,6 +6679,11 @@ passport@^0.6.0:
     passport-strategy "1.x.x"
     pause "0.0.1"
     utils-merge "^1.0.1"
+
+path-browserify@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/path-browserify/-/path-browserify-1.0.1.tgz"
+  integrity sha512-b7uo2UCUOYZcnF/3ID0lulOJi/bafxa1xPe7ZPsammBSpjSWQkjNxlt635YGS2MiR9GjvuXCtz2emr3jbsz98g==
 
 path-exists@^4.0.0:
   version "4.0.0"
