@@ -16,4 +16,7 @@ export class ProductService {
   getProductsById(): Observable<IProductDocument[]> {
     return this.http.get<IProductDocument[]>(`${apiUrl.productServiceApi}:_id`);
   }
+  getProductByQuery(query: string): Observable<IProductDocument[]> {
+    return this.http.get<IProductDocument[]>(`${apiUrl.productServiceApi}search/${query}`,);
+  }
 }

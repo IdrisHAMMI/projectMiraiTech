@@ -81,7 +81,12 @@ export const updateProduct = async (req: express.Request, res: express.Response,
 //FECTHES PRODUCT DATA
 export const fetchProducts = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
-        const product = await ProductModel.find().populate('productCategory', 'categoryName').populate('productBrand', 'brandName');
+        const product = await ProductModel.find().populate({
+            path: 'productCategory'
+        })
+        .populate({
+            path: 'productBrand'
+        });
         res.json(product); 
     } catch (error) {
         console.error('CANT FETCH PRODUCTS', error);
@@ -177,3 +182,4 @@ export const createCategory = async (req: express.Request, res: express.Response
         return res.status(500).json({ error: 'An error occurred while creating the Product Type' });
     }
 };
+

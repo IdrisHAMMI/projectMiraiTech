@@ -14,6 +14,7 @@ import { AdminUsersComponent } from './components/admin/admin-users/admin-users.
 import { AdminProductsComponent } from './components/admin/admin-products/admin-products.component';
 import { ProductInterfaceComponent } from './components/client/product-interface/product-interface.component';
 import { CartComponent } from './components/client/cart/cart.component';
+import { SearchComponent } from './components/client/search/search.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'reset/:token', component: ResetPasswordComponent },
   { path: 'productItem/:id', component: ProductInterfaceComponent},
   { path: 'cart', component: CartComponent},
+  { path: 'search', component: SearchComponent},
   { path: '**', redirectTo: '/index' },
   // ADMIN PANEL ROUTES
   {

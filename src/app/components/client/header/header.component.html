@@ -1,35 +1,32 @@
-<mat-toolbar class="max-w-7x1 mx-auto border-x justify-between" style="height:  99px;">
-  <!-- Left section with logo -->
-  <div class="flex items-center">
+<mat-toolbar class="mx-auto border-x justify-between" style="height: 99px;">
+
+  <div class=" items-center">
     <a routerLink="/index">
-      <img src="../../../assets/staticImg/index_logo.png" alt="logo" routerLink="home" style="width:110px; margin-left:  20px;">
+      <img src="../../../assets/staticImg/index_logo.png" alt="logo" routerLink="/index" style="width:110px; margin-left: 20px;">
     </a>
   </div>
 
-  <!-- Search bar and buttons -->
+  
+  <div class="flex items-center space-x-4">
 
-    <!-- Login and cart buttons -->
-    <div class="flex items-center space-x-4">
-      <!-- LOGIN BUTTON -->
-      <ng-container *ngIf="!isLoggedIn" class="cursor-pointer hover:cursor-pointer">
-        <button routerLink="/authLogin" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-          Se Connecter
-        </button>
-      </ng-container>
+    <ng-container *ngIf="isLoggedIn" class="cursor-pointer hover:cursor-pointer">
+      <div class="relative cursor-pointer" (click)="toggleDropdown()">
+        <img src="../../../assets/staticImg/user.png" alt="user-logo" class="user-logo w-[50px] mx-auto" routerLink="/index">
+        <h4 class="px-3"><a>Mon Compte</a></h4>
 
-      <ng-container *ngIf="isLoggedIn" class="cursor-pointer hover:cursor-pointer">
-        <h4 class="px-3" *ngIf="isLoggedIn"><a routerLink="/userProfile">Votre Compte</a></h4>
-        <button (click)="logout()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-          Se Déconnecter   
-        </button>
-      </ng-container>
-
-      <!-- CART BUTTON -->
-      <button mat-icon-button routerLink="/cart">
-        <mat-icon>shopping_cart</mat-icon>
-      </button>
-    </div>
+        <div class="absolute top-full left-0 hidden bg-white shadow-md rounded mt-2 w-48" [ngClass]="{ 'block': isDropdownOpen, 'hidden': !isDropdownOpen }">
+          <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" routerLink="/userProfile">Voir mon Profil</a>
+          <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" routerLink="/admin/home">Panel D'Administration</a>
+          <button class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" (click)="logout()">Logout</button>
+        </div>
+      </div>
+      <button class=" text-black font-bold py-2 px-4 rounded-full" (click)="toggleDropdown()"></button>
+    </ng-container>
 
 
-  <!-- CART MENU -->
+    <!-- CART BUTTON -->
+    <button mat-icon-button routerLink="/cart">
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>

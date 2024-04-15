@@ -18,6 +18,4 @@ export default (router: express.Router) => {
     //DELETE CART ITEM
     router.delete('/api/cart/:id/delete/:productId', deleteCartRecord);
 
-    //STRIPE API PAYMENT ROUTE
-    router.post('/api/stripe/create-checkout-session')
 }

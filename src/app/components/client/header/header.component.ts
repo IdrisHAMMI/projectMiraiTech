@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/services/auth/auth.service';
 
 
@@ -10,19 +10,29 @@ import { AuthService } from 'src/services/auth/auth.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit { 
-  authService = inject(AuthService);
+  
   isLoggedIn: boolean = false;
+  isDropdownOpen: boolean = false;
+  productState: number = 0;
 
-  username: string;
+  constructor(private authService: AuthService,
+    private route: Router
+  ){}
 
+  
   ngOnInit(): void {
       this.authService.isLoggedIn$.subscribe(res => {
         this.isLoggedIn = this.authService.isLoggedIn();
       })
   }
 
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
   logout(){
     localStorage.removeItem("UID");
     this.authService.isLoggedIn$.next(false);
   }
+
 }

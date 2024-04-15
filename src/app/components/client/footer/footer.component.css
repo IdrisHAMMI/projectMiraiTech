@@ -1,5 +1,4 @@
 .icon_poly {
-
   clip-path:
       polygon(0% 20px,
       20px 0%,
@@ -14,3 +13,22 @@
   .item {
     color: white;
   }
+
+  footer {
+    position: fixed;
+    width: 100%;
+    background-color: #373737;
+    color: #ffffff;
+    padding: 20px;
+    bottom: 0;
+  }
+  @media (max-width: 1023px) {
+    footer {
+      padding-left: 40px;
+      padding-right: 40px;
+      position: relative;
+      bottom: 0;
+    }
+  }
+
+  
