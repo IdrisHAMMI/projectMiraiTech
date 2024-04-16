@@ -39,7 +39,7 @@ export const getCart = async (req: express.Request, res: express.Response, next:
         const ownerId = req.params.id; // USER ID IN CART MODEL
 
         // FIND THE CART DOCUMENT FOR THE DESIGNATED USER
-        const cart = await CartModel.findOne({ ownerId }).populate('items.productId');
+        const cart = await CartModel.findOne({ ownerId }).populate('items.productId')
 
         return res.json(cart);
     } catch (error) {

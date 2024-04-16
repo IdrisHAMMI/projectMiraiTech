@@ -30,7 +30,6 @@ const routes: Routes = [
   { path: 'productItem/:id', component: ProductInterfaceComponent},
   { path: 'cart', component: CartComponent},
   { path: 'search', component: SearchComponent},
-  { path: '**', redirectTo: '/index' },
   // ADMIN PANEL ROUTES
   {
     path: 'admin',

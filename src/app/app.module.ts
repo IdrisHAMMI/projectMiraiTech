@@ -11,7 +11,7 @@ import { HeaderComponent } from './components/client/header/header.component';
 import { FooterComponent } from './components/client/footer/footer.component';
 //INDEX IMPORT
 import { IndexComponent } from './components/client/index/index.component';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 //FIRESTORM IMPORTS
 //import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 //import { provideFirebaseApp, getApp } from '@angular/fire/app';
@@ -57,6 +57,8 @@ import { NgxPayPalModule } from 'ngx-paypal';
 import { PaymentSuccessComponent } from './components/client/payment-success/payment-success.component';
 import { SearchComponent } from './components/client/search/search.component';
 import { FilterPipe } from './pipe/filter.pipe';
+import { NgOptimizedImage } from '@angular/common';
+import { SlickCarouselModule} from 'ngx-slick-carousel';
 
 
 @NgModule({
@@ -112,6 +114,9 @@ import { FilterPipe } from './pipe/filter.pipe';
     MatPaginator,
     MatPaginatorModule,
     NgxPayPalModule,
+    NgOptimizedImage,
+    SlickCarouselModule
+    
   ],    
   providers: [
     

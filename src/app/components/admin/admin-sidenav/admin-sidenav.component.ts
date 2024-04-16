@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { navbarData } from './nav-data';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 interface SideNavToggle {
@@ -19,6 +20,8 @@ export class AdminSidenavComponent implements OnInit {
   screenWidth = 0;
   navData = navbarData;
 
+  constructor(private router: Router){}
+
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
   }
@@ -31,5 +34,10 @@ export class AdminSidenavComponent implements OnInit {
   closeSidenav(): void {
     this.collapsed = false;
     this.onToggleSideNav.emit({collapsed: this.collapsed, screenWidth: this.screenWidth});
+  }
+
+  logout(){
+    localStorage.removeItem("UID");
+    this.router.navigate(['/index']);
   }
 }

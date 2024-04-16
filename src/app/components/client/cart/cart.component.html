@@ -1,8 +1,7 @@
-
 <app-header></app-header>
 <div *ngIf="cartData?.items?.length; else noItems">
     <div class="bg-gray-100 pt-20">
-      <h1 class="mb-10 text-center text-2xl font-bold">Cart Items</h1>
+      <h1 class="mb-10 text-center text-2xl font-bold">Votre Panier</h1>
       <div class="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
         <div class="rounded-lg md:w-2/3">
         <!--ITERATE ARRAYS OF CART & PRODUCTS (products being its own collection) TO FETCH CART DATA FOR THE PRODUCTS-->
@@ -12,7 +11,7 @@
             <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
               <div class="mt-5 sm:mt-0">
                 <h2 class="text-lg font-bold text-gray-900">{{item.productId.productName}}</h2>
-                <p class="mt-1 text-xs text-gray-700">STOCK_ARRAY</p>
+                <p class="mt-1 text-xs text-gray-700">Marque: {{ item.productId.productBrand.brandName }}</p>
               </div>
               <div class="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
                 <div class="flex items-center border-gray-100">
@@ -48,7 +47,6 @@
 
 
 <ng-template #noItems>
-  <app-header></app-header>
   <div class="h-screen bg-gray-100 pt-20">
      <h1 class="mb-10 text-center text-2xl font-bold">Cart Items</h1>
      <div class="mx-auto max-w-5xl bg-white h-[100px] rounded justify-center px-6 md:flex md:space-x-6 xl:px-0">

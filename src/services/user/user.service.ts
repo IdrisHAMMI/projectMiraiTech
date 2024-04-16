@@ -15,7 +15,12 @@ export class UserService {
     return this.http.post<any>(`${apiUrl.userServiceApi}shipping-address`, addressData, { headers });
 }
 
-  getUsernameById(id: string) {
-    return this.http.get<any>(`${apiUrl.authServiceApi}${id}`);
+  getUserDetails(id: string): Observable<any> {
+    return this.http.get<any>(`${apiUrl.authServiceApi}user/${id}`)
   }
+
+  updateUserEmailProfile(id: string, email: string): Observable<any> {
+    return this.http.put<any>(`${apiUrl.authServiceApi}user/profile/update/${id}`, email)
+  }
+
 }

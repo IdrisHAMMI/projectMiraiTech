@@ -1,18 +1,24 @@
-<mat-toolbar class="mx-auto border-x justify-between" style="height: 99px;">
+<mat-toolbar class="bg-gray-400 mx-auto border-x justify-between" style="height: 99px;">
 
-  <div class=" items-center">
-    <a routerLink="/index">
-      <img src="../../../assets/staticImg/index_logo.png" alt="logo" routerLink="/index" style="width:110px; margin-left: 20px;">
+  <div class="flex items-center ">
+    <a href="/index">
+      <img src="../../../assets/staticImg/index_logo.png" alt="logo" style="width:110px; margin-left: 20px;">
     </a>
+    <a class="ml-[60px]" routerLink="/search">Rechercher un Produit</a>
   </div>
 
   
   <div class="flex items-center space-x-4">
-
+    <ng-container *ngIf="!isLoggedIn" class="cursor-pointer hover:cursor-pointer">
+      <button routerLink="/authLogin" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+        Se Connecter
+      </button>
+    </ng-container>
+    
     <ng-container *ngIf="isLoggedIn" class="cursor-pointer hover:cursor-pointer">
-      <div class="relative cursor-pointer" (click)="toggleDropdown()">
-        <img src="../../../assets/staticImg/user.png" alt="user-logo" class="user-logo w-[50px] mx-auto" routerLink="/index">
-        <h4 class="px-3"><a>Mon Compte</a></h4>
+      <div class="relative cursor-pointer z-[1000]" (click)="toggleDropdown()">
+        <img src="../../../assets/staticImg/user.png" alt="user-logo" class="user-logo w-[40px] mx-auto">
+        <h4 class="font-style px-3"><a>Mon Compte</a></h4>
 
         <div class="absolute top-full left-0 hidden bg-white shadow-md rounded mt-2 w-48" [ngClass]="{ 'block': isDropdownOpen, 'hidden': !isDropdownOpen }">
           <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" routerLink="/userProfile">Voir mon Profil</a>
@@ -20,13 +26,13 @@
           <button class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" (click)="logout()">Logout</button>
         </div>
       </div>
-      <button class=" text-black font-bold py-2 px-4 rounded-full" (click)="toggleDropdown()"></button>
+      <button class=" text-black font-bold rounded-full" (click)="toggleDropdown()"></button>
     </ng-container>
-
 
     <!-- CART BUTTON -->
     <button mat-icon-button routerLink="/cart">
       <mat-icon>shopping_cart</mat-icon>
+      <span class="cart-counter">{{ cartCount }}</span>
     </button>
   </div>
 </mat-toolbar>

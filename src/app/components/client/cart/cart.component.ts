@@ -4,6 +4,7 @@ import { ProductDisplayService } from 'src/services/product-display/product-disp
 import { environment } from './../../../../../environment/environment';
 import { PaymentSuccessComponent } from '../payment-success/payment-success.component';
 import { MatDialog } from '@angular/material/dialog';
+import { CartService } from 'src/services/cart/cart.service';
 
 
 @Component({
@@ -13,15 +14,16 @@ import { MatDialog } from '@angular/material/dialog';
 })
 
 export class CartComponent implements OnInit {
+  
   cartData: any;
   cartItems: any[] = [];
-
   totalAmount: number = 0;
-  constructor(private api: ProductDisplayService,
+  public payPalConfig ?: IPayPalConfig
+  
+  constructor(private api: CartService,
     private dialog: MatDialog
   ) {}
 
-  public payPalConfig ?: IPayPalConfig
 
   ngOnInit(): void {
     this.initConfig();
@@ -43,7 +45,7 @@ export class CartComponent implements OnInit {
     );
   }
   
-
+  
   calculateTotalAmount() {
     if (this.cartData && this.cartData.items) {
       this.totalAmount = this.cartData.items.reduce((total, item) => {

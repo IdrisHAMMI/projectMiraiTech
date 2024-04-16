@@ -4,7 +4,11 @@
   }
 
   .user-logo {
-    width: 40px;
+    width: 35px;
+  }
+
+  .font-style {
+    font-size: 15px;
   }
 }
 

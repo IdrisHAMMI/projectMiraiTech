@@ -11,11 +11,11 @@ import { Router } from '@angular/router';
 })
 export class IndexComponent implements OnInit{
   
-  products: IProductDocument[] = [];
+  products: any;
   
   constructor(private productService: ProductService,
     private productDisplayApi: ProductDisplayService,
-    private route: Router ) { }
+    ) { }
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe({
@@ -24,7 +24,6 @@ export class IndexComponent implements OnInit{
       },
       error: (err) => {
         console.error('Error fetching products:', err);
-        alert("error while fetching products data");
       }
     });
   }
@@ -32,4 +31,7 @@ export class IndexComponent implements OnInit{
   onProductClick(product: any) {
     this.productDisplayApi.selectedProduct = product;
   }
+
+  
+
 }

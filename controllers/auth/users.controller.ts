@@ -93,5 +93,25 @@ export const getAllUsers = async (req: express.Request, res: express.Response, n
   }
  }
  
- //UPDATES USER DATA (IS USED IN USER PROFILE)
- 
+  //UPDATES USER EMAIL DATA (for user profile)
+  export const updateEmailProfile = async (req: express.Request, res: express.Response, next : express.NextFunction) => {
+    try {
+
+      const { email } = req.body;
+
+      if (!email) {
+        console.log('Validation error: Missing email');
+        return res.status(400).json({ error: 'Missing email, or username' }).end();
+    }
+
+      const updateUser = await UserModel.findByIdAndUpdate(req.params.id, {
+        email
+      }, {new: true });
+
+      return res.status(201).json(updateUser);
+
+    } catch (error) {
+      console.error('Error updating product:', error);
+      return res.status(500).json({ error: 'An error occurred while updating the product' });
+    }
+  }

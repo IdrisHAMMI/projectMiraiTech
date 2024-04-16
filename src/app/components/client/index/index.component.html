@@ -1,65 +1,31 @@
 <app-header></app-header>
 
-<div id="default-carousel" class="relative w-full" data-carousel="static">
-  <!-- CAROUSEL WRAPPER -->
-  <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-       <!-- Item 1 -->
-      <div class="hidden duration-700 ease-in-out" data-carousel-item>
-          <img src="./../../../../assets/staticImg/carousel_img1.webp" class="absolute block w-[680px] -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 " alt="...">
-      </div>
-      <!-- Item 2 -->
-      <div class="hidden duration-700 ease-in-out" data-carousel-item>
-          <img src="./../../../../assets/staticImg/carousel_img2.webp" class="absolute block w-[680px] -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-      </div>
-      <!-- Item 3 -->
-      <div class="hidden duration-700 ease-in-out" data-carousel-item>
-          <img src="./../../../../assets/staticImg/carousel_img3.webp" class="absolute block w-[680px] -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-      </div>
-  </div>
-  
-  <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-          <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-          </svg>
-          <span class="sr-only">Previous</span>
-      </span>
-  </button>
-  <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-          <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-          </svg>
-          <span class="sr-only">Next</span>
-      </span>
-  </button>
-</div>
-
-
 <div class="py-10 px-4 sm:px-6 lg:px-8">
   <p class="text-center text-2xl font-bold mb-8">Nos Partenaires</p>
   <!-- BRANDS -->
   <div class="flex justify-center mb-8">
-  <div class="flex justify-center overflow-x-auto mb-8 "> <!-- Use flexbox for horizontal scrolling -->
-    <img src="../assets/staticImg/asus.jpg" class="rounded-full h-16 mx-2 overflow-hidden" alt="gigabyte">
+    <div class="flex justify-center mb-8">
+      <img src="../assets/staticImg/asus.jpg" class="rounded-full icon" alt="gigabyte">
+    </div>
+    <div class="flex ml-3 justify-center mb-8">
+      <img src="../assets/staticImg/amd.jpg" class="rounded-full icon" alt="gigabyte">
+    </div>
+    <div class="flex ml-3 justify-center mb-8">
+      <img src="../assets/staticImg/intel.jpg" class="rounded-full icon" alt="gigabyte">
+    </div>
+    <div class="flex ml-3 justify-center mb-8">
+      <img src="../assets/staticImg/aorus.jpg" class="rounded-full icon" alt="gigabyte">
+    </div>
+    <div class="flex ml-3 justify-center mb-8">
+      <img src="../assets/staticImg/msi.jpg" class="rounded-full icon" alt="gigabyte">
+    </div>
   </div>
-  <div class="flex justify-center overflow-x-auto mb-8"> <!-- Use flexbox for horizontal scrolling -->
-    <img src="../assets/staticImg/amd.jpg" class="rounded-full h-16 mx-2 overflow-hidden" alt="gigabyte">
-  </div>
-  <div class="flex justify-center overflow-x-auto mb-8"> <!-- Use flexbox for horizontal scrolling -->
-    <img src="../assets/staticImg/intel.jpg" class="rounded-full h-16 mx-2 overflow-hidden" alt="gigabyte">
-  </div>
-  <div class="flex justify-center overflow-x-auto mb-8"> <!-- Use flexbox for horizontal scrolling -->
-    <img src="../assets/staticImg/aorus.jpg" class="rounded-full h-16 mx-2 overflow-hidden" alt="gigabyte">
-  </div>
-  <div class="flex justify-center overflow-x-auto mb-8"> <!-- Use flexbox for horizontal scrolling -->
-    <img src="../assets/staticImg/msi.jpg" class="rounded-full h-16 mx-2 overflow-hidden" alt="gigabyte">
-  </div>
-</div>
 
-  <p class="text-center text-2xl font-bold mb-8">Les Produits que nous vendons</p>
+
+
+  <p class="text-center text-2xl font-bold mb-8">Les Produits que nous vendons, et bien plus!</p>
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-    <!-- Use grid layout with different column counts for responsiveness -->
+
     <div class="bg-white rounded-lg shadow-md p-4">
       <img src="../assets/staticImg/laptop.jpg" alt="laptop" class="mx-auto h-32 mb-4">
       <p class="text-center text-lg font-bold">Ordinateur Portable</p>
@@ -80,7 +46,7 @@
 
   <p class="text-center text-2xl font-bold mb-8 pt-3">Nos produits en vedette</p>
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-    <!-- Use grid layout with different column counts for responsiveness -->
+
     <div *ngFor="let product of products" class="border rounded-lg bg-gray-100 p-4">
       <a [routerLink]="['/productItem', product._id]">
         <p class="font-semibold">{{ product.productName }}</p>
@@ -93,6 +59,7 @@
   </div>
 </div>
 
+<!--FOOTER (This footer is NOT in a form of "app-footer" because of a styling positioning issue)-->
 <footer class="footer bg-[#373737] grid grid-cols-12 bottom-0 mt-auto">
   <div class="footer-logo col-span-12 md:col-span-4 flex items-center justify-center md:justify-start md:pl-8 py-4 md:py-0">
     <img src="../../../assets/staticImg/index_logo.png" alt="logo" routerLink="/index" class="bg-white icon_poly p-4 w-[100px]" >

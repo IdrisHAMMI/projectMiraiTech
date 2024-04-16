@@ -14,7 +14,9 @@ export class SearchComponent implements OnInit {
   products: IProductDocument[] = [];
   searchQuery: string;
   
-  constructor(private productService: ProductService,private route: ActivatedRoute, private router: Router, private fb: FormBuilder){}
+  constructor(private productService: ProductService,private route: ActivatedRoute, 
+    private router: Router, 
+    private fb: FormBuilder){}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
