@@ -4,10 +4,23 @@
     <a href="/index">
       <img src="../../../assets/staticImg/index_logo.png" alt="logo" style="width:110px; margin-left: 20px;">
     </a>
-    <a class="ml-[60px]" routerLink="/search">Rechercher un Produit</a>
   </div>
 
-  
+<!--SEARCH BAR START-->
+<form class="max-w-md mx-auto">   
+  <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+  <div class="relative">
+      <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+          </svg>
+      </div>
+      <input type="search" [(ngModel)]="searchQuery" name="searchQuery" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rechercher..." required />
+      <button type="submit" (click)="search()" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><i class="fa-solid fa-magnifying-glass"></i></button>
+  </div>
+</form>
+<!--SEARCH BAR END-->
+
   <div class="flex items-center space-x-4">
     <ng-container *ngIf="!isLoggedIn" class="cursor-pointer hover:cursor-pointer">
       <button routerLink="/authLogin" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
@@ -19,16 +32,16 @@
       <div class="relative cursor-pointer z-[1000]" (click)="toggleDropdown()">
         <img src="../../../assets/staticImg/user.png" alt="user-logo" class="user-logo w-[40px] mx-auto">
         <h4 class="font-style px-3"><a>Mon Compte</a></h4>
-
+    
         <div class="absolute top-full left-0 hidden bg-white shadow-md rounded mt-2 w-48" [ngClass]="{ 'block': isDropdownOpen, 'hidden': !isDropdownOpen }">
           <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" routerLink="/userProfile">Voir mon Profil</a>
-          <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" routerLink="/admin/home">Panel D'Administration</a>
+          <a *ngIf="isAdmin"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" routerLink="/admin/home">Panel D'Administration</a>
           <button class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" (click)="logout()">Logout</button>
         </div>
       </div>
       <button class=" text-black font-bold rounded-full" (click)="toggleDropdown()"></button>
     </ng-container>
-
+    
     <!-- CART BUTTON -->
     <button mat-icon-button routerLink="/cart">
       <mat-icon>shopping_cart</mat-icon>

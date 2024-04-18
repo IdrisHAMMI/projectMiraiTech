@@ -135,7 +135,10 @@ export const login = async (req: express.Request, res: express.Response, next: e
     );
 
     //HTTPONLY IS TRUE TO PREVENT (CROSS SITE SCRIPTING) XSS ATTACKS
-    return res.cookie("access_token", token, { httpOnly: true })
+    return res.cookie("access_token", token, {
+      httpOnly: true,
+      sameSite: 'strict', // or 'Lax' depending on your needs
+    })
     .status(200)
     .json({
       status:  200,
@@ -187,8 +190,8 @@ export const sendEmail = async (req, res) => {
         </head>
         <body>
           <h1>Password Reset Request</h1>
-          <p>Yo ${user.username}</p>
-          <p>Got your reset request.</p>
+          <p>Hello ${user.username} !</p>
+          <p>Here is your reset request:</p>
           <a href="${environment.LIVE_URL}/reset/${token}">
             <button style="background-color: #4CAF50; color: white; padding:  14px  20px; border: none; cursor: pointer; border-radius:  4px;">
               Reset Password

@@ -15,6 +15,7 @@ import { AdminProductsComponent } from './components/admin/admin-products/admin-
 import { ProductInterfaceComponent } from './components/client/product-interface/product-interface.component';
 import { CartComponent } from './components/client/cart/cart.component';
 import { SearchComponent } from './components/client/search/search.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -32,12 +33,12 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent},
   // ADMIN PANEL ROUTES
   {
-    path: 'admin',
+    path: 'admin' ,
     component: AdminPanelComponent,
     children: [
-      { path: 'home', component: AdminHomeComponent },
-      { path: 'users', component: AdminUsersComponent },
-      { path: 'products', component: AdminProductsComponent },
+      { path: 'home', component: AdminHomeComponent, canActivate: [AuthGuard] },
+      { path: 'users', component: AdminUsersComponent, canActivate: [AuthGuard] },
+      { path: 'products', component: AdminProductsComponent, canActivate: [AuthGuard] },
     ]
   },
 ];

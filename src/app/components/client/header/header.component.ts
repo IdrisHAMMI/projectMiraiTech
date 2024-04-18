@@ -13,6 +13,9 @@ export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
   isDropdownOpen: boolean = false;
   cartCount: number = 0;
+  searchQuery: string;
+  
+  isAdmin: boolean;
 
   constructor(private authService: AuthService,
     private cartApi: CartService,
@@ -27,15 +30,26 @@ export class HeaderComponent implements OnInit {
       this.cartApi.currentCartCount.subscribe(count => {
         this.cartCount = count;
       });
+      //IF THE userState HEADER BOOLEAN IS TRUE THEN INIT
+      this.isAdmin = localStorage.getItem('userState') === 'true';
+
   }
   //TOGGLES THE DROPDOWN ELEMENT IN HEADER
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
+  search() {
+    console.log('Search query:', this.searchQuery);
+    if (this.searchQuery && this.searchQuery.trim() !== '') {
+      // Redirect to search component with query parameter
+      this.router.navigate(['/search'], { queryParams: { q: this.searchQuery.trim() } });
+    }
+  }
   //LOGOUT USER FUNCTION (Logs the user out by removing the UID header from the browser's localstorage)
   logout(){
     localStorage.removeItem("UID");
+    localStorage.removeItem("userState");
     this.authService.isLoggedIn$.next(false);
     this.router.navigate(['/index']);
   }

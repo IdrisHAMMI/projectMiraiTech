@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { navbarData } from './nav-data';
-import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 
@@ -34,6 +33,10 @@ export class AdminSidenavComponent implements OnInit {
   closeSidenav(): void {
     this.collapsed = false;
     this.onToggleSideNav.emit({collapsed: this.collapsed, screenWidth: this.screenWidth});
+  }
+
+  goToIndex() {
+    this.router.navigate(['/index'])
   }
 
   logout(){

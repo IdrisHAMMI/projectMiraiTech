@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { apiUrl } from '../apiUrl';
 import { BehaviorSubject } from 'rxjs';
 
@@ -7,8 +7,8 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  http = inject(HttpClient);
-
+  constructor(private http: HttpClient) {}
+  
   isLoggedIn$ = new BehaviorSubject<boolean>(false);
 
   registerService(registerObj: any){
@@ -25,6 +25,13 @@ export class AuthService {
   resetPasswordService(resetObj: any){
     return this.http.post<any>(`${apiUrl.authServiceApi}reset-password`, resetObj);
   }
+
+  getUserState(id: string, isAdmin: boolean) {
+    let params = new HttpParams().set('isAdmin', isAdmin.toString());
+
+    return this.http.get<any>(`${apiUrl.authServiceApi}user/state/${id}`, { params });
+ }
+
   isLoggedIn(){
     return !!localStorage.getItem("UID");
   }

@@ -4,6 +4,7 @@ import { createProduct, fetchProducts, deleteProduct, updateProduct, createBrand
 import { registerAdmin } from './../controllers/auth/authentication.controller';
 import { upload } from './../controllers/upload-multer/upload'
 
+
 export default (router: express.Router) => {
   //CREATE USER (ADMIN)
   router.post('/api/admin/create/users', registerAdmin);

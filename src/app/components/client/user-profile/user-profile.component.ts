@@ -46,11 +46,6 @@ export class UserProfileComponent implements OnInit{
     )
   }
 
-  updateUserEmail(id: string) {
-    const UID = localStorage.getItem('UID');
-    
-  }
-
   logout(){
     localStorage.removeItem("UID");
     this.router.navigate(['/index']);

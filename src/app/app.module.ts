@@ -59,6 +59,7 @@ import { SearchComponent } from './components/client/search/search.component';
 import { FilterPipe } from './pipe/filter.pipe';
 import { NgOptimizedImage } from '@angular/common';
 import { SlickCarouselModule} from 'ngx-slick-carousel';
+import { AuthLoginComponent } from './components/client/auth-login/auth-login.component';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { SlickCarouselModule} from 'ngx-slick-carousel';
     HeaderComponent,
     IndexComponent,
     FooterComponent,
+    AuthLoginComponent,
     UserProfileComponent,
     UserProfileOrdersComponent,
     UserProfileAddressesComponent,

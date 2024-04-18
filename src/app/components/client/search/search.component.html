@@ -1,15 +1,4 @@
 <app-header></app-header>
-
-<div class="container mx-auto px-4 py-8 flex-1">
-  <div class="search-container flex justify-center mb-8">
-      <mat-form-field appearance="fill">
-          <mat-label>Search</mat-label>
-          <input #searchInput matInput placeholder="Search" class="w-full">
-          <button mat-button matSuffix (click)="onSearch(searchInput.value)">
-              <mat-icon>search</mat-icon>
-          </button>
-      </mat-form-field>
-  </div>
   
   <div class="result-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <h2 class="result-heading text-center mb-4 col-span-full">Résultat</h2>
@@ -27,6 +16,5 @@
           </a>
       </div>
   </div>
-</div>
-
+  
 <app-footer></app-footer>

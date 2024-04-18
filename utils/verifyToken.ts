@@ -6,10 +6,10 @@ import jwt  from "jsonwebtoken";
 export const verifyToken = (req, res, next)=> {
     const token = req.cookies.access_token;
     if(!token)
-        return res.status(500).send('tests')
+        return res.status(500).send('success')
     jwt.verify(token, environment.JWT_SECRET, (error, user) =>{
         if(error) {
-            return res.status(500).send('test')
+            return res.status(500).send('no bueno')
         } else {
             req.user = user;
         }

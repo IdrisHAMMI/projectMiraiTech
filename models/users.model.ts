@@ -18,7 +18,7 @@ export interface IUserModel {
         secondaryPhoneNumber: string;
     };
     isAdmin: boolean; 
-    roles: mongoose.Types.ObjectId[];
+    roles: mongoose.Types.ObjectId;
 }
 
 const UserSchema = new Schema<IUserModel>({
@@ -41,7 +41,7 @@ const UserSchema = new Schema<IUserModel>({
         default: false
     },
     roles: {
-        type: [{ type: Schema.Types.ObjectId, ref: "Role" }],
+        type: Schema.Types.ObjectId, ref: "Role",
         required: true,
     },
 }, {

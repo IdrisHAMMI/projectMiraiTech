@@ -20,6 +20,11 @@
   width: auto; 
 }
 
+.carousel-img-style {
+  width: 448px;
+}
+
+
 @media (max-width: 768px) {
   .carousel-style {
     width: 440px
