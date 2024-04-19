@@ -81,9 +81,9 @@
   </div>
 
   <p class="text-center text-2xl font-bold mb-8 pt-3">Nos produits en vedette</p>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 
-    <div *ngFor="let product of products" class="border rounded-lg bg-gray-100 p-4">
+    <div *ngFor="let product of products?.slice(0,4)" class="border rounded-lg bg-gray-100 p-4">
       <a [routerLink]="['/productItem', product._id]">
         <p class="font-semibold">{{ product.productName }}</p>
         <img [src]="'assets/upload/' + product.productImageURL" alt="{{ product.productName }}" class="mx-auto h-32 mb-2">

@@ -1,6 +1,8 @@
+import { ITransactionDocument, TransactionModel } from './../../models/transaction.model';
 import express from 'express' 
 import { CartModel } from '../../models/cart.model';
 
+//ADD PRODUCTS TO CART MODEL API
 export const addToCart = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
         const { ownerId, productId } = req.body;
@@ -34,6 +36,7 @@ export const addToCart = async (req: express.Request, res: express.Response, nex
     }
 };
 
+//FETCH CART DATA API
 export const getCart = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
         const ownerId = req.params.id; // USER ID IN CART MODEL
@@ -49,6 +52,7 @@ export const getCart = async (req: express.Request, res: express.Response, next:
     
 };
 
+//DELETE CART DATA API
 export const deleteCartRecord = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
         const ownerId = req.params.id; 
@@ -71,3 +75,51 @@ export const deleteCartRecord = async (req: express.Request, res: express.Respon
         return res.status(500).json({ error: 'An error occurred while deleting product from cart' });
     }
 }
+
+//DELETE CART DATA API
+export const deleteAllCartRecords = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    try {
+        const ownerId = req.params.id; 
+
+        // Find the cart document for the designated user and update it
+        const cart = await CartModel.findOneAndUpdate(
+            { ownerId },
+            { $set: { items: [] } }, // Set the items array to an empty array to remove all items
+            { new: true } // Return the updated document
+        );
+
+        if (!cart) {
+            return res.status(404).json({ error: 'Cart not found' });
+        }
+
+        return res.json(cart);
+    } catch (error) {
+        console.error('Error deleting all cart records:', error);
+        return res.status(500).json({ error: 'An error occurred while deleting all cart records' });
+    }
+}
+
+
+//API TO WRITE THE TRANSACTION INFORMATION
+export const saveTransaction = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    try {
+        // Extract ownerId, paypalTransactionId, and items from the request body
+        const { ownerId, paypalTransactionId, items, totalPrice } = req.body;
+    
+        // Create a new transaction instance
+        const transaction = new TransactionModel({
+          ownerId,
+          paypalTransactionId,
+          items,
+          totalPrice
+        });
+    
+        // Save the transaction to the database
+        const savedTransaction = await transaction.save();
+    
+        res.status(201).json(savedTransaction);
+      } catch (error) {
+        console.error('Error saving transaction:', error);
+        res.status(500).json({ error: 'An error occurred while saving the transaction' });
+      }
+};

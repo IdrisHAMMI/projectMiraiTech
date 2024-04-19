@@ -1,3 +1,4 @@
+import { ITransactionSchema } from './../../../models/transaction.model';
 import { Injectable } from '@angular/core';
 import { ICartModel } from './../../../models/cart.model';
 import { HttpClient, HttpHeaders }  from '@angular/common/http';
@@ -46,7 +47,11 @@ export class CartService {
   removeCartProduct(ownerId: string, productId: string): Observable<ICartModel[]> {
     this.updateCartCount(-1);
     return this.http.delete<ICartModel[]>(`${apiUrl.cartServiceApi}${ownerId}/delete/${productId}`)
+   } 
 
+   //REMOVES ALL DATA FROM THE CART
+   removeAllCartProduct(ownerId: string): Observable<ICartModel[]> {
+    return this.http.delete<ICartModel[]>(`${apiUrl.cartServiceApi}delete/all/${ownerId}`)
    } 
 
    //UPDATES CART COUNT
@@ -55,4 +60,8 @@ export class CartService {
     this.cartCountSource.next(currentCount + increment);
  } 
   
+  sendTransactionInfo(ownerId: string, transactionData: any): Observable<ITransactionSchema[]> {
+    return this.http.post<ITransactionSchema[]>(`${apiUrl.cartServiceApi}transaction/success/post/${ownerId}`, transactionData)
+  }
+
 }

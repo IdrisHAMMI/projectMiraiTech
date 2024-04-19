@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from 'src/services/cart/cart.service';
 import { ProductDisplayService } from 'src/services/product-display/product-display.service';
@@ -14,7 +15,8 @@ export class ProductInterfaceComponent implements OnInit {
   
   constructor(private route: ActivatedRoute, 
     private cartApi: CartService,
-    private productDisplayApi: ProductDisplayService) {}
+    private productDisplayApi: ProductDisplayService,
+    private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     let productId = this.route.snapshot.paramMap.get('id');
@@ -36,6 +38,9 @@ export class ProductInterfaceComponent implements OnInit {
     this.cartApi.addToCart(productId, ownerId).subscribe(
     (res) => {
       console.log('Product added to cart:', res);
+      this.snackBar.open('Produit ajouté dans votre Panier.', 'Fermer', {
+        duration: 3000,
+      });
     },
     (error) => {
       console.error('Error adding product to cart:', error);

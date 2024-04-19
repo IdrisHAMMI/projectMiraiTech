@@ -2,11 +2,14 @@
   <h1 class="mb-10 text-center text-2xl font-bold">Merci pour votre achat! Voici votre Recu: </h1>
   <div class="mx-auto max-w-5xl bg-white h-[180px] rounded justify-center px-6 md:flex md:space-x-6 xl:px-0">
       <div class="text-center my-auto text-[20px] rounded-lg md:w-2/3">
+        <h2>OrderID: {{data.paypalTransactionId}} </h2>
           <div *ngFor="let item of data.items"> <!-- Access items from data object -->
-              <p class="mx-auto"><b>name: {{item.name}} </b> Prix/Unité: {{item.unit_amount.value}}</p>
+              
+            <p class="mx-auto"><b>name: {{item.name}} </b> Prix/Unité: {{item.unit_amount.value}}</p>
           </div>
           <hr>
-          <h3><b>Votre Total: </b>{{data.amount}}</h3>
+          <h3><b>Votre Total: </b>{{data.totalPrice}}</h3>
       </div>
+
   </div>
 </div>

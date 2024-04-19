@@ -3,19 +3,19 @@ export const navbarData = [
     {
         routeLink: 'home',
         icon: 'fal fa-home',
-        label: 'Dashboard'
+        label: 'Tableau de Bord'
     },
 
     {
         routeLink: 'users',
         icon: 'fa-regular fa-user-group',
-        label: 'User'
+        label: 'Section Utilisateur'
     },
 
     {
         routeLink: 'products',
         icon: 'fa-regular fa-cart-shopping',
-        label: 'Products'
+        label: 'Section Produit'
     },
     {
         routeLink: '',

@@ -1,6 +1,9 @@
 import { UserModel, getUserByEmail, deleteUserById } from '../../models/users.model';
 import Role from '../../models/role.model'
 import express from 'express';
+import { TransactionModel } from '../../models/transaction.model';
+import mongoose from 'mongoose';
+
 
 
 
@@ -113,5 +116,23 @@ export const getAllUsers = async (req: express.Request, res: express.Response, n
     } catch (error) {
       console.error('Error updating product:', error);
       return res.status(500).json({ error: 'An error occurred while updating the product' });
+    }
+  }
+
+  export const getTransactionDataById = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    try {
+      const ownerId = req.params.id;
+      console.log('Owner ID:', ownerId);
+      const getTransactionById = await TransactionModel.findById(ownerId);
+  
+      if (!getTransactionById) {
+        console.log('No transactions with this ID');
+        return res.status(404).json({ error: 'No transactions have been made with this ID' }).end();
+      }
+  
+      return res.json(getTransactionById);
+    } catch (error) {
+      console.error('Error fetching transaction:', error);
+      return res.status(500).json({ error: 'An error occurred while fetching the transaction data' });
     }
   }

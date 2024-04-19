@@ -1,6 +1,7 @@
+import { ITransactionSchema } from './../../../../../models/transaction.model';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IPayPalConfig, ICreateOrderRequest, IClientAuthorizeCallbackData } from 'ngx-paypal';
-import { ProductDisplayService } from 'src/services/product-display/product-display.service';
+
 import { environment } from './../../../../../environment/environment';
 import { PaymentSuccessComponent } from '../payment-success/payment-success.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -83,6 +84,18 @@ export class CartComponent implements OnInit {
     })
   }
 
+  removeAllCartProducts(ownerId: string) {
+    this.api.removeAllCartProduct(ownerId)
+    .subscribe({
+      next:(res) => { 
+        this.fetchCartData(ownerId);
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    })
+  }
+
   
 //PAYPAL INIT CONFIG 
 private initConfig(): void {
@@ -134,14 +147,28 @@ private initConfig(): void {
       })
     },
     onClientAuthorization: (authorization: IClientAuthorizeCallbackData) => {
+      const ownerId = localStorage.getItem('UID'); //USER ID
       const items = authorization.purchase_units[0].items; // ACCESS ITEMS FROM AUTH DATA
-      const amount = authorization.purchase_units[0].amount.value; // ACCESS AMOUNT FROM AUTH DATA
-    
+      const amount = authorization.purchase_units[0].amount.breakdown.item_total.value; // ACCESS AMOUNT FROM AUTH DATA
+      const paypalTransactionId = authorization.id; // ACCESS THE TRANSACTION ID
+      const transactionData = {ownerId: ownerId, items: items, totalPrice: amount, paypalTransactionId: paypalTransactionId }; //TRANSACTION DATA
+
       const dialogRef = this.dialog.open(PaymentSuccessComponent, {
         width: '60%',
         height: '720px',
-        data: { items: items, amount: amount } 
+        data: { items: items, totalPrice: amount, paypalTransactionId: paypalTransactionId },
       });
+      
+      this.api.sendTransactionInfo(ownerId, transactionData).subscribe(
+        (res: ITransactionSchema[]) => {
+          this.removeAllCartProducts(ownerId);
+          console.log('Transaction info sent successfully:', res);
+        },
+        (error) => {
+          // Handle any errors
+          console.error('Error sending transaction info:', error);
+        }
+      );
     },
     
     onCancel: (data, actions) => {

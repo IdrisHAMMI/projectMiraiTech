@@ -1,10 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from 'src/services/user/user.service';
 
 @Component({
   selector: 'app-user-profile-orders',
   templateUrl: './user-profile-orders.component.html',
   styleUrl: './user-profile-orders.component.css'
 })
-export class UserProfileOrdersComponent {
+export class UserProfileOrdersComponent implements OnInit{
+userDetails: any;
+transactionData: any;
+  constructor(private api: UserService, 
+    private router: Router) { }
+  
+  ngOnInit(): void {
+    this.fetchUserDetails(this.userDetails);
+    this.fetchTransaction(this.transactionData);
+  }
 
+
+  fetchTransaction(id: string) {
+    const UID = localStorage.getItem('UID')
+    this.api.getTransactionById(UID).subscribe((result)=> {
+      this.userDetails = result
+    })
+  }
+
+fetchUserDetails(id: string) {
+  const UID = localStorage.getItem('UID');
+  this.api.getUserDetails(UID).subscribe((result)=>{
+    this.userDetails = result;
+  }
+  )
+}
+
+  logout(){
+    localStorage.removeItem("UID");
+    localStorage.removeItem("userState");
+    this.router.navigate(['/index']);
+  }
 }

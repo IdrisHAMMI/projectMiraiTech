@@ -23,4 +23,8 @@ export class UserService {
     return this.http.put<any>(`${apiUrl.authServiceApi}user/profile/update/${id}`, email)
   }
 
+  getTransactionById(id: string) {
+    return this.http.get<any>(`${apiUrl.authServiceApi}api/user/transaction/get/${id}`)
+
+  }
 }
