@@ -21,8 +21,10 @@ export class AddProductModalComponent implements OnInit {
   constructor(private formBuilder : FormBuilder,
      private api : AdminPanelService,
      private snackBar: MatSnackBar,
+     private ref: MatDialogRef<AddProductModalComponent>,
      @Inject(MAT_DIALOG_DATA) public data: any) {}
 
+     //INIT PRODUCT FORM & API
      ngOnInit(): void {
       this.productForm = this.formBuilder.group({
         productName: ['', Validators.required],
@@ -72,11 +74,15 @@ export class AddProductModalComponent implements OnInit {
             this.snackBar.open('Produit Ajouté!', 'Fermer', { duration: 2000 });
           },
           error: (err) => {
-              this.snackBar.open('An error occurred', 'Close', {
+              this.snackBar.open('Une Erreur est survenue', 'Close', {
                 duration: 3000,
                 panelClass: ['error-snackbar']
               });
             }
         });
+    }
+    
+    closepopup(){
+      this.ref.close();
     }
   }

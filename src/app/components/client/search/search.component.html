@@ -1,12 +1,12 @@
 <app-header></app-header>
   
-  <div class="result-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <h2 class="result-heading text-center mb-4 col-span-full">Résultat</h2>
+  <div class="result-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6">
+      <h2 class="result-heading text-center mb-4 col-span-full">Résultat de Produit</h2>
       <div *ngFor="let product of products | filter:searchQuery" class="product-item bg-white rounded-lg shadow-md">
           <a [routerLink]="['/productItem', product._id]">
               <p class="product-name text-center text-lg mb-2">{{ product.productName }}</p>
               <div class="image-container flex justify-center items-center">
-                  <img [src]="'assets/upload/' + product.productImageURL" class="product-image rounded-lg">
+                  <img [src]="'assets/upload/' + product.productImageURL" class="product-image rounded-lg p-5">
               </div>
               <div class="product-info p-4">
                   <p class="product-description mb-2">{{ product.productDescription }}</p>

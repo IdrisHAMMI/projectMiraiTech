@@ -1,4 +1,4 @@
-import { ITransactionSchema } from './../../../../../models/transaction.model';
+import { ITransactionSchema  } from './../../../../../models/transaction.model';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IPayPalConfig, ICreateOrderRequest, IClientAuthorizeCallbackData } from 'ngx-paypal';
 
@@ -147,8 +147,9 @@ private initConfig(): void {
       })
     },
     onClientAuthorization: (authorization: IClientAuthorizeCallbackData) => {
+      
       const ownerId = localStorage.getItem('UID'); //USER ID
-      const items = authorization.purchase_units[0].items; // ACCESS ITEMS FROM AUTH DATA
+      const items = authorization.purchase_units[0].items;// ACCESS ITEMS FROM AUTH DATA
       const amount = authorization.purchase_units[0].amount.breakdown.item_total.value; // ACCESS AMOUNT FROM AUTH DATA
       const paypalTransactionId = authorization.id; // ACCESS THE TRANSACTION ID
       const transactionData = {ownerId: ownerId, items: items, totalPrice: amount, paypalTransactionId: paypalTransactionId }; //TRANSACTION DATA

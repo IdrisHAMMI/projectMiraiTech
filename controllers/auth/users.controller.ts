@@ -2,7 +2,6 @@ import { UserModel, getUserByEmail, deleteUserById } from '../../models/users.mo
 import Role from '../../models/role.model'
 import express from 'express';
 import { TransactionModel } from '../../models/transaction.model';
-import mongoose from 'mongoose';
 
 
 
@@ -123,7 +122,9 @@ export const getAllUsers = async (req: express.Request, res: express.Response, n
     try {
       const ownerId = req.params.id;
       console.log('Owner ID:', ownerId);
-      const getTransactionById = await TransactionModel.findById(ownerId);
+      //note: i need to be careful with the way i find a proprety(findOne: Find any value thats identical to the one i am giving; findOneById: find a value """"IDENTICAL""""" to a primary objectId.)
+      //this is confusing istg
+      const getTransactionById = (await TransactionModel.findOne({ownerId}));
   
       if (!getTransactionById) {
         console.log('No transactions with this ID');

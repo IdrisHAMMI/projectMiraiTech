@@ -113,20 +113,20 @@ export const login = async (req: express.Request, res: express.Response, next: e
     const user = await UserModel.findOne({ email }).select('+password').populate("roles", "role");
 
     if (!user) {
-      return res.sendStatus(400);
+      return res.sendStatus(400).send({error: "User doesn't exist or typed wrong"});
     }
 
     console.log("Retrieved user:", user);
 
     if (!user.password) {
       console.error("User password is undefined or empty:", user);
-      return res.status(500).send("Server error");
+      return res.status(500).send({error: "User password is undefined or empty"});
     }
 
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
     if (!isPasswordCorrect) {
-      return res.status(400).send("Password is incorrect");
+      return res.status(400).send({error: "Password is incorrect"});
     }
 
     const token = jwt.sign(
@@ -137,7 +137,7 @@ export const login = async (req: express.Request, res: express.Response, next: e
     //HTTPONLY IS TRUE TO PREVENT (CROSS SITE SCRIPTING) XSS ATTACKS
     return res.cookie("access_token", token, {
       httpOnly: true,
-      sameSite: 'strict', // or 'Lax' depending on your needs
+      sameSite: 'strict',
     })
     .status(200)
     .json({

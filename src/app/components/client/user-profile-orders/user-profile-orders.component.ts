@@ -8,8 +8,10 @@ import { UserService } from 'src/services/user/user.service';
   styleUrl: './user-profile-orders.component.css'
 })
 export class UserProfileOrdersComponent implements OnInit{
+
 userDetails: any;
 transactionData: any;
+  
   constructor(private api: UserService, 
     private router: Router) { }
   
@@ -18,22 +20,24 @@ transactionData: any;
     this.fetchTransaction(this.transactionData);
   }
 
-
+  //GET TRANSACTION DATA
   fetchTransaction(id: string) {
     const UID = localStorage.getItem('UID')
     this.api.getTransactionById(UID).subscribe((result)=> {
-      this.userDetails = result
+      this.transactionData = result
     })
   }
 
-fetchUserDetails(id: string) {
-  const UID = localStorage.getItem('UID');
-  this.api.getUserDetails(UID).subscribe((result)=>{
-    this.userDetails = result;
+  //GET USER DATA
+  fetchUserDetails(id: string) {
+    const UID = localStorage.getItem('UID');
+    this.api.getUserDetails(UID).subscribe((result)=>{
+      this.userDetails = result;
+    }
+    )
   }
-  )
-}
 
+  //LOGOUT FUNCTION
   logout(){
     localStorage.removeItem("UID");
     localStorage.removeItem("userState");

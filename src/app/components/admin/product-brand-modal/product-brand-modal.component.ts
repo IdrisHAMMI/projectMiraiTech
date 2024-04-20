@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdminPanelService } from 'src/services/admin/adminpanel.service';
 MatSnackBar
@@ -14,7 +15,9 @@ export class ProductBrandModalComponent implements OnInit{
   
   constructor(private formBuilder : FormBuilder, 
     private api: AdminPanelService,
-    private snackBar: MatSnackBar){}
+    private snackBar: MatSnackBar,
+    private ref: MatDialogRef<ProductBrandModalComponent>,
+  ){}
 
   ngOnInit(): void {
     this.brandForm = this.formBuilder.group({
@@ -33,4 +36,9 @@ export class ProductBrandModalComponent implements OnInit{
       }
     })
   }
+
+  closepopup(){
+    this.ref.close();
+  }
+
 }

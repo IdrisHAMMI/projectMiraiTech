@@ -17,7 +17,6 @@ export class PaymentSuccessComponent {
  
   ngOnInit(): void {
     console.log('Items:', this.data.items);
-    console.log('Amount:', this.data.itemPrice);
     console.log('OrderID:', this.data.paypalTransactionId)
   }
 }

@@ -7,11 +7,11 @@ export default (router: express.Router) => {
   //GET ALL USER ROUTE
   router.get('auth/api/user/data/:id', verifyAdmin, getById );
   //ADDS SHIPPING ADDRESS TO USER COLLECTION
-  router.post('/userprofile/shipping-address', createShippingAddress);
+  router.post('/api/userprofile/shipping-address', createShippingAddress);
   //GET USER BY ID
   router.get('/auth/user/:id', getById);
   //UPDATE USER EMAIL FROM PROFILE
   router.put('/auth/user/profile/update/:id', updateEmailProfile);
   //GET TRANSACTION ORDER DATA
-  router.get('/api/user/transaction/get/:id', getTransactionDataById)
+  router.get('/api/userprofile/transaction/get/:id', getTransactionDataById)
 };

@@ -51,7 +51,11 @@ export class CartService {
 
    //REMOVES ALL DATA FROM THE CART
    removeAllCartProduct(ownerId: string): Observable<ICartModel[]> {
-    return this.http.delete<ICartModel[]>(`${apiUrl.cartServiceApi}delete/all/${ownerId}`)
+    return this.http.delete<ICartModel[]>(`${apiUrl.cartServiceApi}delete/all/${ownerId}`).pipe(
+      tap(() => {
+        this.updateCartCount(0);
+      })
+    )
    } 
 
    //UPDATES CART COUNT

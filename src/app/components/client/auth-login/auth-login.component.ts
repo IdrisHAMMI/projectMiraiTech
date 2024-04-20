@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -12,7 +13,9 @@ import { AuthService } from 'src/services/auth/auth.service';
 })
 export class AuthLoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, 
+    private snackBar: MatSnackBar,
+    private router: Router) {}
 
   loginForm !: FormGroup;
 
@@ -34,7 +37,10 @@ export class AuthLoginComponent implements OnInit {
         this.router.navigate(['index']);
       },
       error:(err) => {
-        console.log(err);
+        this.snackBar.open('Email ou Mot de passe non trouvé.', 'Fermer', {
+          duration: 3000,
+          panelClass: ['error-snackbar']
+        });
       }
     })
   }

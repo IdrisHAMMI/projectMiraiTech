@@ -1,4 +1,4 @@
-import { ITransactionDocument, TransactionModel } from './../../models/transaction.model';
+import { TransactionModel } from './../../models/transaction.model';
 import express from 'express' 
 import { CartModel } from '../../models/cart.model';
 
@@ -103,18 +103,15 @@ export const deleteAllCartRecords = async (req: express.Request, res: express.Re
 //API TO WRITE THE TRANSACTION INFORMATION
 export const saveTransaction = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
-        // Extract ownerId, paypalTransactionId, and items from the request body
-        const { ownerId, paypalTransactionId, items, totalPrice } = req.body;
-    
-        // Create a new transaction instance
+        const { ownerId, paypalTransactionId, name, value, totalPrice } = req.body;
+        
         const transaction = new TransactionModel({
           ownerId,
           paypalTransactionId,
-          items,
-          totalPrice
+          totalPrice,
+          items: [{ name, value }] 
         });
     
-        // Save the transaction to the database
         const savedTransaction = await transaction.save();
     
         res.status(201).json(savedTransaction);
@@ -122,4 +119,4 @@ export const saveTransaction = async (req: express.Request, res: express.Respons
         console.error('Error saving transaction:', error);
         res.status(500).json({ error: 'An error occurred while saving the transaction' });
       }
-};
+    };

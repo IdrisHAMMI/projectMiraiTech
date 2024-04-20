@@ -15,10 +15,10 @@ export class ShipdeetsModalComponent implements OnInit {
 
   userShippingForm: FormGroup;
   userService = inject(UserService);
-  private dialogRef:MatDialogRef<ShipdeetsModalComponent>;
   uid: string;
   
-  constructor(private ref:MatDialogRef<ShipdeetsModalComponent>, private fb: FormBuilder){}
+  constructor(private ref:MatDialogRef<ShipdeetsModalComponent>, 
+    private fb: FormBuilder){}
 
   ngOnInit(): void {
     this.uid = localStorage.getItem('UID');

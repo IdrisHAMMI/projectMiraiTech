@@ -24,7 +24,7 @@ export class UserService {
   }
 
   getTransactionById(id: string) {
-    return this.http.get<any>(`${apiUrl.authServiceApi}api/user/transaction/get/${id}`)
+    return this.http.get<any>(`${apiUrl.userServiceApi}transaction/get/${id}`)
 
   }
 }

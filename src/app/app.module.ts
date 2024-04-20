@@ -60,6 +60,9 @@ import { FilterPipe } from './pipe/filter.pipe';
 import { NgOptimizedImage } from '@angular/common';
 import { SlickCarouselModule} from 'ngx-slick-carousel';
 import { AuthLoginComponent } from './components/client/auth-login/auth-login.component';
+import { ForgotPasswordComponent } from './components/client/forgot-password/forgot-password.component';
+import { AuthSignupComponent } from './components/client/auth-signup/auth-signup.component';
+
 
 
 @NgModule({
@@ -69,11 +72,13 @@ import { AuthLoginComponent } from './components/client/auth-login/auth-login.co
     IndexComponent,
     FooterComponent,
     AuthLoginComponent,
+    AuthSignupComponent,
     UserProfileComponent,
     UserProfileOrdersComponent,
     UserProfileAddressesComponent,
     ProductInterfaceComponent,
     AdminPanelComponent,
+    ForgotPasswordComponent,
     AdminSidenavComponent,
     AdminBodyComponent,
     AdminHomeComponent,
