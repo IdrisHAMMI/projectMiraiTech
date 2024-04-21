@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { initFlowbite } from 'flowbite';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -13,6 +14,10 @@ interface SideNavToggle {
 })
 export class AppComponent {
   title = 'projectMiraiTech';
+
+  ngOnInit(): void {
+    initFlowbite();
+  }
 
   // FUNCTIONS ARE ONLY FOR USE ON THE ADMIN PANEL FOR THE NAVBAR
   isSideNavCollapsed = false;

@@ -1,0 +1,17 @@
+@media (max-width: 1536px) {
+    #carousel-example {
+        width: 640px;
+    }
+}
+
+@media (max-width: 1279px) {
+    #carousel-example {
+        width: 560px
+    }
+}
+
+@media (max-width: 1536px) {
+    #carousel-example {
+        width: 460px
+    }
+}

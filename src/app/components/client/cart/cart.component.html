@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div *ngIf="cartData?.items?.length; else noItems">
-    <div class="bg-gray-100 pt-20">
+    <div class="pt-20">
       <h1 class="mb-10 text-center text-2xl font-bold">Votre Panier</h1>
       <div class="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
         <div class="rounded-lg md:w-2/3">
@@ -21,14 +21,13 @@
                 </div>
                 <div class="flex items-center space-x-4">
                   <p class="text-sm">{{item.productId.productPrice | currency: 'EUR'}} </p>
-                  <span (click)="removeCartProduct(cartData.ownerId, item.productId._id)" class="cursor-pointer">delete</span>
+                  <span (click)="removeCartProduct(cartData.ownerId, item.productId._id)" class="cursor-pointer text-red-500 hover:text-red-600">Enlever</span>
                 </div>
               </div>
             </div>
           </div>
 
         </div>
-        <!-- Sub total -->
         <div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
           <hr class="my-4" />
           <div class="flex justify-between">
@@ -47,14 +46,14 @@
 
 
 <ng-template #noItems>
-  <div class="h-screen bg-gray-100 pt-20">
+  <div class="h-screen pt-20">
      <h1 class="mb-10 text-center text-2xl font-bold">Votre Panier</h1>
      <div class="mx-auto max-w-5xl bg-white h-[100px] rounded justify-center px-6 md:flex md:space-x-6 xl:px-0">
        <div class="text-center my-auto text-[20px] rounded-lg md:w-2/3">
          <p class="mx-auto">Vous n'avez aucun article dans votre panier.</p>
         </div>
      </div>
-     <p class="text-center cursor-pointer" style="margin-top: 16px;"><a routerLink="/index">Revenir vers l'Index</a></p>
+     <p class="text-center cursor-pointer text-blue-500 hover:text-blue-600" style="margin-top: 16px;"><a routerLink="/index">Revenir vers l'Index</a></p>
   </div>
  </ng-template>
  

@@ -27,15 +27,15 @@ export interface ITransactionSchema extends Document {
 }
 
 const transactionItemSchema = new Schema({
-    name: { type: String, required: true },
-    quantity: { type: Number, required: true },
+    name: { type: String },
+    quantity: { type: Number },
     tax: {
-        currency_code: { type: String, required: true },
-        value: { type: String, required: true }
+        currency_code: { type: String },
+        value: { type: String }
     },
     unit_amount: {
-        currency_code: { type: String, required: true },
-        value: { type: String, required: true }
+        currency_code: { type: String },
+        value: { type: String }
     }
 });
 

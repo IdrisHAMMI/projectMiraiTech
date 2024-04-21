@@ -1,3 +1,4 @@
+import { ViewportService } from './../../../../services/viewport/viewport.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/services/auth/auth.service';
@@ -17,10 +18,17 @@ export class HeaderComponent implements OnInit {
   
   isAdmin: boolean;
 
+  isSmallScreen = false;
+  
   constructor(private authService: AuthService,
+    private viewportService: ViewportService,
     private cartApi: CartService,
     private router: Router
-  ){}
+  ){
+    this.viewportService.isSmallScreen$.subscribe(isSmallScreen => {
+      this.isSmallScreen = isSmallScreen;
+    });
+ }
 
   
   ngOnInit(): void {
@@ -46,6 +54,11 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/search'], { queryParams: { q: this.searchQuery.trim() } });
     }
   }
+
+  toggleSearchBar() {
+
+  }
+
   //LOGOUT USER FUNCTION (Logs the user out by removing the UID header from the browser's localstorage)
   logout(){
     localStorage.removeItem("UID");

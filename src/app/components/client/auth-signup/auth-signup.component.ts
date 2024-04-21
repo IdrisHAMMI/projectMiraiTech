@@ -1,10 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { confirmPasswordValidator } from 'src/validators/authValidator';
-
 import { AuthService } from 'src/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { PatternValidatorsService } from './../../../../services/pattern-validator/pattern-validators.service';
+import { StrongPasswordRegx } from './regex-password';
 
 
 @Component({
@@ -14,21 +14,38 @@ import { PatternValidatorsService } from './../../../../services/pattern-validat
 })
 export class AuthSignupComponent implements OnInit {
   registerForm: FormGroup;
-  authService = inject(AuthService)
-  router = inject(Router);
-  constructor(private fb: FormBuilder) {}
+  
+  constructor(private fb: FormBuilder,
+      private authService: AuthService,
+      private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       username: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, Validators.email])],
-      password: ['', Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)],
-      confirmPassword: ['', Validators.required,  Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)],
+      password: ['',
+        Validators.compose([
+          Validators.required,
+          PatternValidatorsService.patternValidators(/\d/, {hasNumber:true}),
+          PatternValidatorsService.patternValidators(/[A-Z]/, {hasCapitalCase:true}),
+          PatternValidatorsService.patternValidators(/[a-z]/, {hasSmallCase:true}),
+          PatternValidatorsService.patternValidators(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, {hasSpecialCharacters:true}
+        ),
+        Validators.minLength(8),
+        ])
+       ],
+      confirmPassword: ['', Validators.required],
     },
     {
       validator: confirmPasswordValidator('password', 'confirmPassword')
     }
     );
+
+  }
+
+  get password() {
+    return this.registerForm.get('password');
   }
 
   register() {

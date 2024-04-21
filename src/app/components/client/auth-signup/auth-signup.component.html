@@ -6,13 +6,13 @@
       </a>
     </div>
 
-    <div class="container flex justify-center border-t-4 mt-5 max-w-xl">
+    <div class="container flex justify-center border-t-4 max-w-xl">
       <div class="w-full">
         <div class="text-center">
           <h1 class="text-3xl font-bold pt-2">Créer un Nouveau Compte</h1>
         </div>
         <div class="mt-4">
-          <form [formGroup]="registerForm" class="w-96 mx-auto">
+          <form [formGroup]="registerForm" class="form-style w-96 mx-auto p-4">
             
             <div class="mb-4">
               <label for="username" class="block font-bold">Nom D'Utilisateur</label>
@@ -25,21 +25,46 @@
               <input  type="text"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="email" placeholder="Email" />
               <span *ngIf="registerForm.hasError('required','email') == registerForm.controls['email'].dirty" class="text-rose-600">*Un Email est requis</span>
               <span *ngIf="registerForm.hasError('email','email')" class="text-rose-600">*Un Email est requis</span>
-
-              
-            </div>
-            <div class="mb-4">
-              <label for="password" class="block font-bold">Mot de Passe</label>
-              <input type="password"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="password" placeholder="Mot de Passe" />
-              <span *ngIf="registerForm.hasError('required','password') == registerForm.controls['password'].dirty" class="text-rose-600">*Un Mot de Passe est requis</span>
-              <span *ngIf="registerForm.hasError('pattern', 'password') && registerForm.controls['password'].dirty" class="text-rose-600">Le Mot de Passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et avoir une longueur minimale de 8 caractères.</span>
-              {{ registerForm.controls['password'].errors | json }}
             </div>
             
+              <label for="password" class="block font-bold">Mot de Passe</label>
+              <input type="password"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="password" placeholder="Mot de Passe" />
+              <div class="form-group" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                <label class="col invalid_msg" [ngClass]="password.hasError('required') || password.hasError('minlength')  ? 'text-red-600' : 'text-lime-600'">
+                    <i class="material-icons">
+                        {{ password.hasError('required') || password.hasError('minlength') ? 'cancel' : 'check_circle' }}
+                    </i>Votre Mot de Passe doit avoir au moins 8 Caractères!
+                </label>
+                <br>
+                <label class="col invalid_msg" [ngClass]="password.hasError('required') || password.hasError('hasNumber')  ? 'text-red-600' : 'text-lime-600'">
+                    <i class="material-icons">
+                        {{ password.hasError('required') || password.hasError('hasNumber') ? 'cancel' : 'check_circle' }}
+                    </i>Doit contenir au moins un Un Numero.
+                    
+                </label>
+                <br>
+                <label class="col invalid_msg" [ngClass]="password.hasError('required') || password.hasError('hasCapitalCase')  ? 'text-red-600' : 'text-lime-600'">
+                    <i class="material-icons">
+                        {{ password.hasError('required') || password.hasError('hasCapitalCase') ? 'cancel' : 'check_circle' }}
+                    </i>Doit contenir au moins une Majuscule.
+                </label>
+                <br>
+                <label class="col invalid_msg" [ngClass]="password.hasError('required') || password.hasError('hasSmallCase')  ? 'text-red-600' : 'text-lime-600'">
+                    <i class="material-icons">
+                        {{ password.hasError('required') || password.hasError('hasSmallCase') ? 'cancel' : 'check_circle' }}
+                    </i>Doit contenir au moins une Minuscule.
+                </label>
+                <br>
+                <label class="col invalid_msg" [ngClass]="password.hasError('required') || password.hasError('hasSpecialCharacters') ? 'text-red-600' : 'text-lime-600'">
+                    <i class="material-icons">
+                        {{ password.hasError('required') || password.hasError('hasSpecialCharacters') ? 'cancel' : 'check_circle' }}
+                    </i>Doit contenir au moins un Caractère special.
+                </label>
+            </div>
 
             <div class="mb-4">
-              <label for="confirmPassword" class="block font-bold">Confirmer le Mot de Passe</label>
-              <input type="confirmPassword"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="confirmPassword" placeholder="Confirmer votre Mot de Passe" />
+              <label for="confirmPassword" class="block font-bold mt-3">Confirmer le Mot de Passe</label>
+              <input type="password"  class="form-input w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" formControlName="confirmPassword" placeholder="Confirmer votre Mot de Passe" />
               <span *ngIf="registerForm.hasError('required','confirmPassword') == registerForm.controls['confirmPassword'].dirty" class="text-rose-600">*Vous devez remplir ce champs</span>
               <span *ngIf="registerForm.hasError('confirmPasswordValidator','confirmPassword')" class="text-rose-600">Ce n'est pas le même Mot de Passe</span>
 

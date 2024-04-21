@@ -62,7 +62,7 @@ import { SlickCarouselModule} from 'ngx-slick-carousel';
 import { AuthLoginComponent } from './components/client/auth-login/auth-login.component';
 import { ForgotPasswordComponent } from './components/client/forgot-password/forgot-password.component';
 import { AuthSignupComponent } from './components/client/auth-signup/auth-signup.component';
-
+import { CarouselComponent } from './components/client/carousel/carousel.component';
 
 
 @NgModule({
@@ -93,7 +93,8 @@ import { AuthSignupComponent } from './components/client/auth-signup/auth-signup
     CartComponent,
     PaymentSuccessComponent,
     SearchComponent,
-    FilterPipe
+    FilterPipe,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
