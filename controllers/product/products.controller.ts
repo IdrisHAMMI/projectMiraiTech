@@ -81,12 +81,7 @@ export const updateProduct = async (req: express.Request, res: express.Response,
 //FECTHES PRODUCT DATA
 export const fetchProducts = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
-        const product = await ProductModel.find().populate({
-            path: 'productCategory'
-        })
-        .populate({
-            path: 'productBrand'
-        });
+        const product = await ProductModel.find().populate('productCategory').populate('productBrand');
         res.json(product); 
     } catch (error) {
         console.error('CANT FETCH PRODUCTS', error);

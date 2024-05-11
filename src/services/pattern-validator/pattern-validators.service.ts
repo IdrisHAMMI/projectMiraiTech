@@ -9,7 +9,7 @@ export class PatternValidatorsService {
   static patternValidators(regex: RegExp, error:ValidationErrors): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
       if(!control.value){
-        //IF CONTROL IS EMPTY, RETURN NO ERROR
+      //IF CONTROL IS EMPTY, RETURN NO ERROR
         return null
       }
       //TEST THE VALUE OF THE CONTROL AGAINST THE REGEXP SUPPLIED
@@ -20,3 +20,4 @@ export class PatternValidatorsService {
     }
   }
 }
+

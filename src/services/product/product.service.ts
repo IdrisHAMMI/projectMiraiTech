@@ -13,9 +13,12 @@ export class ProductService {
   getProducts(): Observable<IProductDocument[]> {
     return this.http.get<IProductDocument[]>(`${apiUrl.productServiceApi}`);
   }
+
+  //GET PRODUCT BY ID
   getProductsById(): Observable<IProductDocument[]> {
     return this.http.get<IProductDocument[]>(`${apiUrl.productServiceApi}:_id`);
   }
+
   getProductByQuery(query: string): Observable<IProductDocument[]> {
     return this.http.get<IProductDocument[]>(`${apiUrl.productServiceApi}search/${query}`,);
   }

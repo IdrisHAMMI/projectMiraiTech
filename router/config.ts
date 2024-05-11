@@ -15,4 +15,4 @@ export default (): express.Router => {
     cart(router);
 
     return router;
-}
+};

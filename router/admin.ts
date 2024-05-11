@@ -45,3 +45,4 @@ export default (router: express.Router) => {
   router.delete('/api/admin/delete/product/:id', deleteProduct);
 
 }
+

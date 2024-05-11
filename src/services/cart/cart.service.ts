@@ -15,15 +15,10 @@ export class CartService {
   private cartCountSource = new BehaviorSubject<number>(0);
   currentCartCount = this.cartCountSource.asObservable();
 
-  constructor(private http: HttpClient) {
-    const savedCartCount = localStorage.getItem('cartCount');
-    if (savedCartCount) {
-       this.cartCountSource.next(JSON.parse(savedCartCount));
-    }
-   }
+  constructor(private http: HttpClient) {}
 
 
-  //ADDS PRODUCT DATA TO THE CART COLLECTION ()
+  //ADDS PRODUCT DATA TO THE CART COLLECTION
   addToCart(productId: string, ownerId: string): Observable<ICartModel[]> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const existingItem = this.cartItems.find(item => item.productId === productId);

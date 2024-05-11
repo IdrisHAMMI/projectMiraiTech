@@ -6,12 +6,11 @@ import compression from 'compression';
 import cors from 'cors';
 import mongoose from "mongoose";
 import router from "../router/config";
-import path from 'path';
 
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:4200',  // Replace with the actual origin of your Angular app
+  origin: 'http://localhost:4200',
   credentials: true,
 }));
 
@@ -36,3 +35,4 @@ mongoose.connect(MONGO_URL);
 mongoose.connection.on('error', (error: Error) => console.log(error));
  
 app.use('/', router())
+

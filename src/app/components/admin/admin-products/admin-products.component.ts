@@ -43,7 +43,6 @@ export class AdminProductsComponent implements AfterViewInit {
       dialogRef.afterClosed().subscribe(result => {
         this.fetchProducts();
       });
-
     }
   
   //PRODUCT EDIT MODAL

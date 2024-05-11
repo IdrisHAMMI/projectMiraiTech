@@ -1,6 +1,6 @@
 import express from 'express';
 import { verifyAdmin } from './../utils/verifyToken';
-import { getAllUsers, getById, getTransactionDataById, updateEmailProfile } from '../controllers/auth/users.controller';
+import { getById, getTransactionDataById, updateEmailProfile } from '../controllers/auth/users.controller';
 import { createShippingAddress } from '../controllers/user-profile/profile.controller';
 
 export default (router: express.Router) => {
@@ -15,3 +15,4 @@ export default (router: express.Router) => {
   //GET TRANSACTION ORDER DATA
   router.get('/api/userprofile/transaction/get/:id', getTransactionDataById)
 };
+

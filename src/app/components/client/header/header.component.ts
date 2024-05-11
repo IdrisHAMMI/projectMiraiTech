@@ -1,5 +1,5 @@
 import { ViewportService } from './../../../../services/viewport/viewport.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/services/auth/auth.service';
 import { CartService } from 'src/services/cart/cart.service';
@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
  }
 
   
-  ngOnInit(): void {
+  ngOnInit() {
       this.authService.isLoggedIn$.subscribe(res => {
         this.isLoggedIn = this.authService.isLoggedIn();
       })
@@ -40,13 +40,14 @@ export class HeaderComponent implements OnInit {
       });
       //IF THE userState HEADER BOOLEAN IS TRUE THEN INIT
       this.isAdmin = localStorage.getItem('userState') === 'true';
-
   }
+  
   //TOGGLES THE DROPDOWN ELEMENT IN HEADER
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
+  
   search() {
     console.log('Search query:', this.searchQuery);
     if (this.searchQuery && this.searchQuery.trim() !== '') {

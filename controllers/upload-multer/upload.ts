@@ -1,7 +1,7 @@
 import multer from 'multer';
 import path from 'path';
 
-//MULTER FILE UPLOAD LIBRARY
+//MULTER FILE UPLOAD MIDDLEWARE
 
 //DEFINES FILE STORAGE & FILE NAMEING STRUCTURE
 export const storage = multer.diskStorage({
@@ -22,4 +22,5 @@ export const storage = multer.diskStorage({
    };
 
 export const upload = multer({ storage, fileFilter })
+
 

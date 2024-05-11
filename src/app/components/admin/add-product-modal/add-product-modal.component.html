@@ -27,14 +27,14 @@
   <mat-form-field class="w-[100%]" appearance="fill">
     <mat-label>Marque du Produit</mat-label>
     <mat-select formControlName="productBrand">
-      <mat-option *ngFor="let brand of brandName" [value]="brand.brandName"> {{ brand.brandName}}</mat-option>
+      <mat-option *ngFor="let brand of brandName" [value]="brand.brandName"> {{ brand.brandName }} </mat-option>
     </mat-select>
    </mat-form-field>
 
    <mat-form-field class="w-[100%]" appearance="fill">
     <mat-label>Categorie du Produit</mat-label>
     <mat-select formControlName="productCategory">
-      <mat-option *ngFor="let category of categoryName" [value]="category.categoryName"> {{ category.categoryName}} </mat-option>
+      <mat-option *ngFor="let category of categoryName" [value]="category.categoryName"> {{ category.categoryName }} </mat-option>
     </mat-select>
    </mat-form-field>
     <br>

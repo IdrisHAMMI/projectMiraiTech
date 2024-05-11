@@ -2,7 +2,7 @@
 <div *ngIf="cartData?.items?.length; else noItems">
     <div class="pt-20">
       <h1 class="mb-10 text-center text-2xl font-bold">Votre Panier</h1>
-      <div class="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
+      <div class="mx-auto max-w-5xl justify-center pb-[130px] px-6 md:flex md:space-x-6 xl:px-0">
         <div class="rounded-lg md:w-2/3">
         <!--ITERATE ARRAYS OF CART & PRODUCTS (products being its own collection) TO FETCH CART DATA FOR THE PRODUCTS-->
           <div *ngFor="let item of cartData?.items" class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">

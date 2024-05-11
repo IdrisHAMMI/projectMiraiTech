@@ -2,11 +2,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
 import { AdminPanelService } from './../../../../services/admin/adminpanel.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { HttpClient } from '@angular/common/http';
-
-
-@Component({
+import { MatSnackBar } from '@angular/material/snack-bar';@Component({
   selector: 'app-add-product-modal',
   templateUrl: './add-product-modal.component.html',
   styleUrl: './add-product-modal.component.css'
@@ -86,3 +82,5 @@ export class AddProductModalComponent implements OnInit {
       this.ref.close();
     }
   }
+
+  

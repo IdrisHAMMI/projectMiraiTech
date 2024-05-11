@@ -10,28 +10,30 @@ import { environment } from './../../environment/environment';
    //USER REGISTRATION FUNCTION
    export const register = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
-        // Fetch role from the database
+        // FETCH ROLE FROM DATABASE
         const userRole = await Role.findOne({ role: 'User' });
         const role = userRole;
-        // Rename roles from req.body to avoid conflicts
+        
         const { email, password, username } = req.body;
 
-        // Check if email, password, or username is missing
+        // CHECK IF THE EMAIL, PASSWORD OR USERNAME IS MISSING
         if (!email || !password || !username) {
             console.log('Validation error: Missing email, password, or username');
             return res.status(400).json({ error: 'Missing email, password, or username' }).end();
         }
 
-        // Check if email already exists
+        // CHECK IF THE USER ALREADY EXISTS WITH THE EMAIL
         const existingUser = await getUserByEmail(email);
         if (existingUser) {
             console.log('Database error: Email is already in use');
             return res.status(400).json({ error: 'Email is already in use' }).end();
         }
 
+        // HASHED PASSWORD
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(req.body.password,salt);
 
+        // CREATES A NEW USER DOCUMENT
         const user = await createUser({
             email,
             username,
@@ -39,11 +41,15 @@ import { environment } from './../../environment/environment';
             password: hashedPassword
         });
 
+        // CHECKS IF THE NEW USER IS MISSING
         if (!user) {
             console.log('Database error: Failed to create user');
             return res.status(500).json({ error: 'Failed to create user' }).end();
         }
+        
+        //RETURN CREATED USER w/ STATUS 200
         return res.status(200).json(user).end();
+
     } catch (error) {
         console.log('Internal server error:', error);
         return res.status(500).json({ error: 'An internal server error occurred' }).end();
@@ -53,7 +59,7 @@ import { environment } from './../../environment/environment';
 //REGISTERS USER AS ADMIN(ONLY USE THIS FOR OFFICIAL ADMIN EMPLOYEES)
 export const registerAdmin = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
   try {
-      // Fetch role from the database
+      // FETCH ROLL FROM DATABASE
       let isAdmin = false;
       const userRole = await Role.findOne({ role: req.body.role });
       const role = userRole;
@@ -101,7 +107,7 @@ export const registerAdmin = async (req: express.Request, res: express.Response,
   }
 };
 
-
+//LOGIN API
 export const login = async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<express.Response> => {
   try {
     const { email, password } = req.body;

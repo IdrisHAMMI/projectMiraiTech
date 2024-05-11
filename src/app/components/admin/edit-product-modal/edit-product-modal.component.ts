@@ -19,7 +19,6 @@ export class EditProductModalComponent implements OnInit {
   constructor(private formBuilder : FormBuilder, 
     private api: AdminPanelService,
     private snackBar: MatSnackBar,
-    private dialogRef : MatDialogRef<EditProductModalComponent>,
     @Inject(MAT_DIALOG_DATA) public editData: any){}
 
   ngOnInit(): void {

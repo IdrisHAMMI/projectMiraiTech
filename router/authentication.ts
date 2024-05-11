@@ -17,3 +17,4 @@ export default (router: express.Router) => {
     //PASSWORD RECOVERY RESET ROUTE
     router.post('/auth/reset-password', resetPassword)
 };
+

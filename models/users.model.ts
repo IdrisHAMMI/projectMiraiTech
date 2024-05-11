@@ -1,6 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import dotenv from 'dotenv';
-dotenv.config();
+
 
 export interface IUserModel {
     username: string;
@@ -23,7 +22,7 @@ export interface IUserModel {
 
 const UserSchema = new Schema<IUserModel>({
     username: { type: String, required: true },
-    email: { type: String, required: true },
+    email: { type: String, unique: true, required: true },
     password: { type: String, required: true, select: false },
     shippingAddress: {
         firstName: { type: String },
@@ -55,15 +54,15 @@ export interface IUserModelEx extends IUserModel, Document {}
 
 export const UserModel = mongoose.model<IUserModel>('Users', UserSchema);
 
-export const getUsers = () => UserModel.find();
-
+//GETS THE USER VIA THEIR EMAIL
 export const getUserByEmail = (email: string) => UserModel.findOne({ email });
-
 
 //GETS THE USER VIA THEIR OBJECT ID
 export const getUserById = (id: string) => UserModel.findById(id);
+
 //CREATES USER
 export const createUser = (values: Record<string, any>) => new UserModel(values).save().then((user) => user.toObject());
 
 //DELETES A USER
 export const deleteUserById = (id: string) => UserModel.findOneAndDelete({ _id: id });
+

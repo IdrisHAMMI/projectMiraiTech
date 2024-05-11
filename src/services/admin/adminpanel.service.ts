@@ -17,7 +17,7 @@ export class AdminPanelService {
   //ADMIN USER SECTION//
 
   //FETCHES USER
-  fetchUsers(): Observable<IUserModelEx[]> { 
+  fetchUsers(): Observable<IUserModelEx[]> {
     return this.http.get<IUserModelEx[]>(`${apiUrl.adminPanelApi}data/users`);
   }
   //CREATES A USER
@@ -31,7 +31,7 @@ export class AdminPanelService {
   }
 
   //DELETES USER
-  deleteUsers(id: string) {                            
+  deleteUsers(id: string) {
     return this.http.delete<IUserModelEx[]>(`${apiUrl.adminPanelApi}delete/users/${id}`);
   }
 
@@ -51,7 +51,7 @@ export class AdminPanelService {
   getProducts(): Observable<any[]> {
      return this.http.get<string[]>(`${apiUrl.productServiceApi}`);
   }
-  
+
   //CREATES A BRAND
   addBrand(brandName: any): Observable<IBrandSchema> {
     return this.http.post<IBrandSchema>(`${apiUrl.productServiceApi}newBrand`, brandName);
@@ -72,8 +72,8 @@ export class AdminPanelService {
     return this.http.get<string[]>(`${apiUrl.productServiceApi}category`);
  }
 
-    //DELETES USER
-  deleteProduct(id: string) {                            
+  //DELETES USER
+  deleteProduct(id: string) {
     return this.http.delete<IProductDocument[]>(`${apiUrl.adminPanelApi}delete/product/${id}`);
   }
 }

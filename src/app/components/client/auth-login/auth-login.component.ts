@@ -1,7 +1,6 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/services/auth/auth.service';
 
@@ -30,10 +29,16 @@ export class AuthLoginComponent implements OnInit {
     this.authService.loginService(this.loginForm.value)
     .subscribe({
       next:(res)=>{
+        //isAdmin needs to be revised asap. TEMP SOLUTION UNTIL I FIND SOMETHING MORE SECURE
         const isAdmin = res.data.roles._id === '65c65ab9c513c27b855b720a';
-        localStorage.setItem("UID", res.data._id); //SETS USER ID 
-        localStorage.setItem("userState", isAdmin.toString());//SETS ADMIN BOOLEAN (if true show admin panel, if not show basic user settings)
+        
+        //SETS ADMIN BOOLEAN (if true show admin panel, if not show basic user settings)
+        localStorage.setItem("userState", isAdmin.toString()); 
+        
         this.authService.isLoggedIn$.next(true);
+
+        localStorage.setItem("UID", res.data._id); //SETS USER ID
+        
         this.router.navigate(['index']);
       },
       error:(err) => {
@@ -45,3 +50,4 @@ export class AuthLoginComponent implements OnInit {
     })
   }
 }
+

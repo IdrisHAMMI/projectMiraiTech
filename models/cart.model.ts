@@ -1,6 +1,5 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-
 export interface CartItem {
     productId: mongoose.Types.ObjectId;
     quantity: number;
@@ -33,3 +32,4 @@ export const CartSchema = new Schema<ICartModel>({
 export interface ICart extends ICartModel, Document {}
 
 export const CartModel = mongoose.model<ICart>('Cart', CartSchema);
+

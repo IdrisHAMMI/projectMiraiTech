@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from './../../../../services/product/product.service';
-import { IProductDocument } from './../../../../../models/product.model'; // Correct import
 import { ProductDisplayService } from 'src/services/product-display/product-display.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-index',
@@ -32,6 +30,5 @@ export class IndexComponent implements OnInit{
     this.productDisplayApi.selectedProduct = product;
   }
 
-  
-
 }
+

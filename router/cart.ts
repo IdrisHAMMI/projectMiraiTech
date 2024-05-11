@@ -17,5 +17,6 @@ export default (router: express.Router) => {
 
     //DELETES ALL CART ITEMS
     router.delete('/api/cart/delete/all/:id', deleteAllCartRecords);
-    
-}
+
+};
+

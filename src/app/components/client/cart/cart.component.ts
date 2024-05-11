@@ -182,8 +182,7 @@ private initConfig(): void {
     }
     
   };
-}
-
+ }
 }
 
 

@@ -14,6 +14,7 @@ export class AuthService {
   registerService(registerObj: any){
     return this.http.post<any>(`${apiUrl.authServiceApi}register`, registerObj);
   }
+  
   loginService(registerObj: any){
     return this.http.post<any>(`${apiUrl.authServiceApi}login`, registerObj);
   }
@@ -36,3 +37,4 @@ export class AuthService {
     return !!localStorage.getItem("UID");
   }
 }
+

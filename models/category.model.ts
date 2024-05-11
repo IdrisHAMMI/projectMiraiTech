@@ -22,3 +22,4 @@ const ProductTypeSchema = new mongoose.Schema(
 export interface ICategoryDocument extends ICategorySchema, Document {}
 
 export default mongoose.model('ProductCategory', ProductTypeSchema);
+

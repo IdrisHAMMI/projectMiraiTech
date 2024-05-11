@@ -55,26 +55,11 @@
         <p class="font-semibold">{{ product.productName }}</p>
         <img [src]="'assets/upload/' + product.productImageURL" alt="{{ product.productName }}" class="mx-auto h-32 mb-2">
         <p class="text-center">{{ product.productDescription }}</p>
-        <p class="text-center font-semibold">{{ product.productPrice | currency: 'USD' }}</p>
-        <button class="block mx-auto bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Add to Cart</button>
+        <p class="text-center font-semibold">{{ product.productPrice | currency: 'EUR' }}</p>
+        <button class="block mx-auto bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Ajouter a votre Panier</button>
       </a>
     </div>
   </div>
 </div>
 
-<!--FOOTER (This footer is NOT in a form of "app-footer" because of a styling positioning issue)-->
-<footer class="footer bg-[#373737] grid grid-cols-12 bottom-0 mt-auto">
-  <div class="footer-logo col-span-12 md:col-span-4 flex items-center justify-center md:justify-start md:pl-8 py-4 md:py-0">
-    <img src="../../../assets/staticImg/index_logo.png" alt="logo" routerLink="/index" class="bg-white icon_poly p-4 w-[100px]" >
-  </div>
-  <div class="footer-links col-span-12 md:col-span-4 text-center md:text-left py-4">
-    <p class="text-white">About Mirai Tech</p>
-    <p class="text-white">Accessibility Policy</p>
-    <p class="text-white">Copyrights & Trademarks</p>
-    <p class="text-white pt-4">© 2023 Mirai Tech Electronics, Inc</p>
-  </div>
-  <div class="footer-links col-span-12 md:col-span-4 text-center md:text-left py-4">
-    <p class="text-white">Privacy Policy</p>
-    <p class="text-white">Contact Us</p>
-  </div>
-</footer>
+<app-footer></app-footer>

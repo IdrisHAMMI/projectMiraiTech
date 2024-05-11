@@ -10,17 +10,17 @@ export const addToCart = async (req: express.Request, res: express.Response, nex
         let cart = await CartModel.findOne({ ownerId });
 
         if (cart) {
-            //IF A CART ENTRY ALREADY EXISTS, FIND THE PRODUCT IN THE CART AND UPDATE ITS QUANTITY
-            const productIndex = cart.items.findIndex(item => item.productId === productId);
-            if (productIndex !== -1) {
-                //IF THE PRODUCT ALREADY EXISTS IN THE CART THEN INCREMENT ITS QUANTITY
-                cart.items[productIndex].quantity++;
+            // CHECK IF THE PRODUCT ALREADY EXISTS IN THE CART
+            const existingItem = cart.items.find(item => item.productId.equals(productId));
+            if (existingItem) {
+                // IF THE PRODUCT EXISTS, INCREMENT ITS QUANTITY
+                existingItem.quantity++;
             } else {
-                // IF IT DOESNT EXIST THEN ADD IT WITH A VALUE QUANTITY OF 1
+                // IF THE PRODUCT DOESNT EXIST, THEN ADD A NEW ENTRY W/ NEW DATA
                 cart.items.push({ productId, quantity: 1 });
             }
         } else {
-            // IF THE CART ENTRY DOESNT EXIST, CREATE A NEW ONE WITH A VALUE QUANTITY OF 1
+            // IF THE CART DOESNT EXIST THEN CREATE A NEW ONE
             cart = new CartModel({
                 ownerId,
                 items: [{ productId, quantity: 1 }]
@@ -35,6 +35,8 @@ export const addToCart = async (req: express.Request, res: express.Response, nex
         return res.status(500).json({ error: 'An error occurred while adding the product to cart' });
     }
 };
+
+
 
 //FETCH CART DATA API
 export const getCart = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -99,6 +101,9 @@ export const deleteAllCartRecords = async (req: express.Request, res: express.Re
     }
 }
 
+export const updateQuantity = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+
+}
 
 //API TO WRITE THE TRANSACTION INFORMATION
 export const saveTransaction = async (req: express.Request, res: express.Response, next: express.NextFunction) => {

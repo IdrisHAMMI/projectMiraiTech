@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from 'src/services/cart/cart.service';
 import { ProductDisplayService } from 'src/services/product-display/product-display.service';
 
@@ -15,6 +15,7 @@ export class ProductInterfaceComponent implements OnInit {
   
   constructor(private route: ActivatedRoute, 
     private cartApi: CartService,
+    private router: Router,
     private productDisplayApi: ProductDisplayService,
     private snackBar: MatSnackBar) {}
 
@@ -31,6 +32,7 @@ export class ProductInterfaceComponent implements OnInit {
   addToCart(productId: string) {
     const ownerId = localStorage.getItem('UID');
     if (!ownerId) {
+      this.router.navigate(['authLogin']),
       console.error('Owner ID not found in local storage');
       return; //EXIT EARLY IF THE USER ID IS NOT FOUND
     }
@@ -48,3 +50,4 @@ export class ProductInterfaceComponent implements OnInit {
   );
  }
 }
+
