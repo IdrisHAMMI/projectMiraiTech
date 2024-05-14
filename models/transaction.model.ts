@@ -3,10 +3,6 @@ import mongoose, { Document, Schema } from 'mongoose';
 export interface ITransactionItem {
     name: string;
     quantity: number;
-    tax: {
-        currency_code: string;
-        value: string;
-    };
     unit_amount: {
         currency_code: string;
         value: string;
@@ -29,10 +25,6 @@ export interface ITransactionSchema extends Document {
 const transactionItemSchema = new Schema({
     name: { type: String },
     quantity: { type: Number },
-    tax: {
-        currency_code: { type: String },
-        value: { type: String }
-    },
     unit_amount: {
         currency_code: { type: String },
         value: { type: String }

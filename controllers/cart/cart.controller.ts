@@ -1,3 +1,4 @@
+import { ICategoryDocument } from './../../models/category.model';
 import { TransactionModel } from './../../models/transaction.model';
 import express from 'express' 
 import { CartModel } from '../../models/cart.model';
@@ -108,13 +109,13 @@ export const updateQuantity = async (req: express.Request, res: express.Response
 //API TO WRITE THE TRANSACTION INFORMATION
 export const saveTransaction = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
-        const { ownerId, paypalTransactionId, name, value, totalPrice } = req.body;
+        const { ownerId, paypalTransactionId, name, quantity, totalPrice } = req.body;
         
         const transaction = new TransactionModel({
           ownerId,
           paypalTransactionId,
           totalPrice,
-          items: [{ name, value }] 
+          items: [{ name, quantity} ] 
         });
     
         const savedTransaction = await transaction.save();

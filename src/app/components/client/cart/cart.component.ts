@@ -103,28 +103,38 @@ private initConfig(): void {
     clientId: environment.PAYPAL_CLIENT_ID,
     currency: 'EUR',
     createOrderOnClient: (data) => {
+      // Map items to PayPal format
+      const items = this.cartData.items.map((item) => ({
+        name: item.productId.productName,
+        productImageURL: item.productId.productImageURL,
+        quantity: item.quantity,
+        unit_amount: {
+          currency_code: 'EUR', 
+          value: item.productId.productPrice.toFixed(2)  //SINGLE PRICE VALUE
+        }
+      }));
+
+      // CALCULATE ITEM TOAL
+      const itemTotal = this.cartData.items.reduce((sum, item) => 
+        sum + (item.productId.productPrice * item.quantity), 0
+      ).toFixed(2);
+
       const purchaseUnits = [{
         reference_id: 'default',
         amount: {
           currency_code: 'EUR',
-          value: this.totalAmount.toFixed(2), // Total amount for the order
+          value: itemTotal,
           breakdown: {
             item_total: {
               currency_code: 'EUR',
-              value: this.totalAmount.toFixed(2)
+              value: itemTotal  // Correct item total
             }
           }
         },
-        items: this.cartData.items.map((item) => ({
-          name: item.productId.productName,
-          quantity: item.quantity,
-          unit_amount: {
-            currency_code: 'EUR',
-            value: (item.productId.productPrice * item.quantity).toFixed(2)
-          }
-        }))
+        items: items
       }];
     
+      // Create order request
       const order: ICreateOrderRequest = {
         intent: 'CAPTURE',
         purchase_units: purchaseUnits
@@ -132,6 +142,7 @@ private initConfig(): void {
     
       return order;
     },
+
     advanced: {
       commit: 'true',
       
@@ -149,15 +160,17 @@ private initConfig(): void {
     onClientAuthorization: (authorization: IClientAuthorizeCallbackData) => {
       
       const ownerId = localStorage.getItem('UID'); //USER ID
-      const items = authorization.purchase_units[0].items;// ACCESS ITEMS FROM AUTH DATA
+      const items = authorization.purchase_units[0].items;
+      const productName = authorization.purchase_units[0].items[0].name;// ACCESS ITEMS FROM AUTH DATA
+      const productQuantity = authorization.purchase_units[0].items[0].quantity;
       const amount = authorization.purchase_units[0].amount.breakdown.item_total.value; // ACCESS AMOUNT FROM AUTH DATA
       const paypalTransactionId = authorization.id; // ACCESS THE TRANSACTION ID
-      const transactionData = {ownerId: ownerId, items: items, totalPrice: amount, paypalTransactionId: paypalTransactionId }; //TRANSACTION DATA
-
+      const transactionData = {ownerId: ownerId, name: productName, quantity:productQuantity, totalPrice: amount, paypalTransactionId: paypalTransactionId }; //TRANSACTION DATA
+      
       const dialogRef = this.dialog.open(PaymentSuccessComponent, {
         width: '60%',
         height: '720px',
-        data: { items: items, totalPrice: amount, paypalTransactionId: paypalTransactionId },
+        data: { items: items, totalPrice: amount, paypalTransactionId: paypalTransactionId }, //TRANSACTION DATA FOR MODAL
       });
       
       this.api.sendTransactionInfo(ownerId, transactionData).subscribe(
@@ -179,7 +192,9 @@ private initConfig(): void {
       // Handle errors
     },
     onClick: (data) => {
+      console.log(data)
     }
+
     
   };
  }

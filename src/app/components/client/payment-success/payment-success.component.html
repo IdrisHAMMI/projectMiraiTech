@@ -5,7 +5,7 @@
         <h2>OrderID: {{data.paypalTransactionId}} </h2>
           <div *ngFor="let item of data.items"> <!-- Access items from data object -->
               
-            <p class="mx-auto"><b>name: {{item.name}} </b> Prix/Unité: {{item.unit_amount?.value}}</p>
+            <p class="mx-auto"><b>Nom du Produit: {{item.name}} </b> Prix/Unité: {{item.unit_amount?.value}}, Quantité: {{item.quantity}} </p>
           </div>
           <hr>
           <h3><b>Votre Total: </b>{{data.totalPrice}}</h3>
