@@ -58,7 +58,13 @@ export class CartService {
     const currentCount = this.cartCountSource.getValue();
     this.cartCountSource.next(currentCount + increment);
  } 
-  
+  //UPDATES CART QUANTITY
+   updateCartQty(quantity: number, ownerId: string, productId: string): Observable<ICartModel[]> {
+    const url = `${apiUrl.cartServiceApi}cartQty/update/${ownerId}/${productId}`;
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const body = JSON.stringify({ quantity }); // SET QUANTITY AS JSON OBJECT
+    return this.http.put<ICartModel[]>(url, body, { headers });
+  }
   sendTransactionInfo(ownerId: string, transactionData: any): Observable<ITransactionSchema[]> {
     return this.http.post<ITransactionSchema[]>(`${apiUrl.cartServiceApi}transaction/success/post/${ownerId}`, transactionData)
   }

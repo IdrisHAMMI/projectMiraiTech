@@ -1,5 +1,5 @@
 import express from 'express';
-import { addToCart, deleteCartRecord, deleteAllCartRecords, getCart, saveTransaction } from './../controllers/cart/cart.controller';
+import { addToCart, deleteCartRecord, deleteAllCartRecords, getCart, saveTransaction, updateQuantity } from './../controllers/cart/cart.controller';
 
 export default (router: express.Router) => {
 
@@ -18,5 +18,7 @@ export default (router: express.Router) => {
     //DELETES ALL CART ITEMS
     router.delete('/api/cart/delete/all/:id', deleteAllCartRecords);
 
+    //UPDATES PRODUCT QUANTITY
+    router.put('/api/cart/cartQty/update/:ownerId/:productId', updateQuantity)
 };
 

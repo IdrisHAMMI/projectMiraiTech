@@ -103,8 +103,43 @@ export const deleteAllCartRecords = async (req: express.Request, res: express.Re
 }
 
 export const updateQuantity = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    try {
 
-}
+      const { productId, ownerId } = req.params; 
+      const { quantity } = req.body;
+  
+      console.log(`Owner ID: ${ownerId}, Product ID: ${productId}, New Quantity: ${quantity}`);
+  
+      // FIND THE CART THAT CONTAINS THIS PRODUCT FOR THE SPECIFIC OWNER
+      const cart = await CartModel.findOne({ ownerId, 'items.productId': productId });
+      if (!cart) {
+        console.log('Cart not found for ownerId:', ownerId, 'and productId:', productId);
+        return res.status(404).json({ error: 'Cart item not found' });
+      }
+  
+      console.log('Cart found:', cart);
+  
+      // UPDATE THE QUANTITY OF THE SPECIFIC PRODUCT
+      const item = cart.items.find(item => item.productId.toString() === productId);
+      if (!item) {
+        console.log('Item not found in cart for productId:', productId);
+        return res.status(404).json({ error: 'Item not found in cart' });
+      }
+  
+      item.quantity = quantity;
+  
+      // SAVE THE CART
+      await cart.save();
+  
+      console.log('Updated Cart:', cart);
+  
+      return res.status(200).json(cart);
+  
+    } catch (err) {
+      console.error('Error updating product quantity:', err);
+      return res.status(500).json({ error: 'An error occurred while updating product quantity' });
+    }
+  };
 
 //API TO WRITE THE TRANSACTION INFORMATION
 export const saveTransaction = async (req: express.Request, res: express.Response, next: express.NextFunction) => {

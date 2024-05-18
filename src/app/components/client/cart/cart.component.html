@@ -1,4 +1,5 @@
 <app-header></app-header>
+
 <div *ngIf="cartData?.items?.length; else noItems">
     <div class="pt-20">
       <h1 class="mb-10 text-center text-2xl font-bold">Votre Panier</h1>
@@ -15,9 +16,12 @@
               </div>
               <div class="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
                 <div class="flex items-center border-gray-100">
-                  <span (click)="decrementQuantity(item)" class="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"> - </span>
+                  <!--QUANTITY-->
+                  <span (click)="decrementQuantity(item,item.productId._id)" class="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"> - </span>
                   <input class="h-8 w-8 border bg-white text-center text-xs outline-none" [(ngModel)]="item.quantity" min="1" />
-                  <span (click)="incrementQuantity(item)" class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"> + </span>
+                  <span (click)="incrementQuantity(item, item.productId._id)" class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"> + </span>
+                  <!--END-->
+
                 </div>
                 <div class="flex items-center space-x-4">
                   <p class="text-sm">{{item.productId.productPrice | currency: 'EUR'}} </p>
@@ -42,6 +46,7 @@
       </div>
     </div>
 </div>
+
 <app-footer></app-footer>
 
 
