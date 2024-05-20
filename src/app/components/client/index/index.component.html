@@ -56,8 +56,8 @@
         <img [src]="'assets/upload/' + product.productImageURL" alt="{{ product.productName }}" class="mx-auto h-32 mb-2">
         <p class="text-center">{{ product.productDescription }}</p>
         <p class="text-center font-semibold">{{ product.productPrice | currency: 'EUR' }}</p>
-        <button class="block mx-auto bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Ajouter a votre Panier</button>
       </a>
+      <button (click)="addToCart(product._id)" class="block mx-auto bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Ajouter a votre Panier</button>
     </div>
   </div>
 </div>

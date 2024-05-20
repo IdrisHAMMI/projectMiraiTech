@@ -1,54 +1,53 @@
 <app-header></app-header>
 
-<div *ngIf="cartData?.items?.length; else noItems">
-    <div class="pt-20">
-      <h1 class="mb-10 text-center text-2xl font-bold">Votre Panier</h1>
-      <div class="mx-auto max-w-5xl justify-center pb-[130px] px-6 md:flex md:space-x-6 xl:px-0">
-        <div class="rounded-lg md:w-2/3">
-        <!--ITERATE ARRAYS OF CART & PRODUCTS (products being its own collection) TO FETCH CART DATA FOR THE PRODUCTS-->
-          <div *ngFor="let item of cartData?.items" class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
-        <!--END-->
-           <img [src]="'assets/upload/' + item.productId.productImageURL" alt="product-image" class="w-full rounded-lg sm:w-40" />
-            <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
-              <div class="mt-5 sm:mt-0">
-                <h2 class="text-lg font-bold text-gray-900">{{item.productId.productName}}</h2>
-                <p class="mt-1 text-xs text-gray-700">Marque: {{ item.productId.productBrand.brandName }}</p>
-              </div>
-              <div class="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
-                <div class="flex items-center border-gray-100">
-                  <!--QUANTITY-->
-                  <span (click)="decrementQuantity(item,item.productId._id)" class="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"> - </span>
-                  <input class="h-8 w-8 border bg-white text-center text-xs outline-none" [(ngModel)]="item.quantity" min="1" />
-                  <span (click)="incrementQuantity(item, item.productId._id)" class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"> + </span>
-                  <!--END-->
-
+<div class="min-h-screen flex flex-col">
+  <div class="flex-grow">
+    <!-- CART CONTENT START -->
+    <div *ngIf="cartData?.items?.length; else noItems">
+      <div class="pt-20">
+        <h1 class="mb-10 text-center text-2xl font-bold">Votre Panier</h1>
+        <div class="mx-auto max-w-5xl justify-center pb-[130px] px-6 md:flex md:space-x-6 xl:px-0">
+          <div class="rounded-lg md:w-2/3">
+            <!-- Iterate arrays of cart & products (products being its own collection) to fetch cart data for the products -->
+            <div *ngFor="let item of cartData?.items" class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
+              <img [src]="'assets/upload/' + item.productId.productImageURL" alt="product-image" class="w-full rounded-lg sm:w-40" />
+              <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
+                <div class="mt-5 sm:mt-0">
+                  <h2 class="text-lg font-bold text-gray-900">{{item.productId.productName}}</h2>
+                  <p class="mt-1 text-xs text-gray-700">Marque: {{ item.productId.productBrand.brandName }}</p>
                 </div>
-                <div class="flex items-center space-x-4">
-                  <p class="text-sm">{{item.productId.productPrice | currency: 'EUR'}} </p>
-                  <span (click)="removeCartProduct(cartData.ownerId, item.productId._id)" class="cursor-pointer text-red-500 hover:text-red-600">Enlever</span>
+                <div class="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
+                  <div class="flex items-center border-gray-100">
+                    <!-- QUANTITY -->
+                    <span (click)="decrementQuantity(item,item.productId._id)" class="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"> - </span>
+                    <input class="h-8 w-8 border bg-white text-center text-xs outline-none" [(ngModel)]="item.quantity" min="1" />
+                    <span (click)="incrementQuantity(item, item.productId._id)" class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"> + </span>
+                    <!-- END -->
+                  </div>
+                  <div class="flex items-center space-x-4">
+                    <p class="text-sm">{{item.productId.productPrice | currency: 'EUR'}} </p>
+                    <span (click)="removeCartProduct(cartData.ownerId, item.productId._id)" class="cursor-pointer text-red-500 hover:text-red-600">Enlever</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-        </div>
-        <div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
-          <hr class="my-4" />
-          <div class="flex justify-between">
-            <p class="text-lg font-bold">Total</p>
-            <div class="">
-              <p class="mb-1 text-lg font-bold">{{totalAmount.toFixed(2) | currency: 'EUR' }}</p>
-              <p class="text-sm text-gray-700">including VAT</p>
+          <div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
+            <hr class="my-4" />
+            <div class="flex justify-between">
+              <p class="text-lg font-bold">Total</p>
+              <div class="">
+                <p class="mb-1 text-lg font-bold">{{totalAmount.toFixed(2) | currency: 'EUR' }}</p>
+                <p class="text-sm text-gray-700">including VAT</p>
+              </div>
             </div>
+            <ngx-paypal [config]="payPalConfig"></ngx-paypal>
           </div>
-          <ngx-paypal [config]="payPalConfig"></ngx-paypal>
         </div>
       </div>
     </div>
+  </div>
 </div>
-
-<app-footer></app-footer>
-
 
 <ng-template #noItems>
   <div class="h-screen pt-20">
@@ -62,3 +61,4 @@
   </div>
  </ng-template>
  
+ <app-footer></app-footer>

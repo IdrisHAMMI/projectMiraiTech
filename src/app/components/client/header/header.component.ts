@@ -13,7 +13,8 @@ export class HeaderComponent implements OnInit {
   
   isLoggedIn: boolean = false;
   isDropdownOpen: boolean = false;
-  cartCount: number = 0;
+  isSearchBarVisible: boolean = false;
+  cartCount: number = null;
   searchQuery: string;
   
   isAdmin: boolean;
@@ -30,34 +31,44 @@ export class HeaderComponent implements OnInit {
     });
  }
 
-  
-  ngOnInit() {
+  ngOnInit(): void {
       this.authService.isLoggedIn$.subscribe(res => {
         this.isLoggedIn = this.authService.isLoggedIn();
       })
-      this.cartApi.currentCartCount.subscribe(count => {
-        this.cartCount = count;
-      });
+      this.getCartCount();
       //IF THE userState HEADER BOOLEAN IS TRUE THEN INIT
       this.isAdmin = localStorage.getItem('userState') === 'true';
   }
-  
+
   //TOGGLES THE DROPDOWN ELEMENT IN HEADER
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
-  
+ // NEED TO ADD RESPONSIVE SEARCH BAR LATER
+ // toggleSearchBar(): void {
+ //   this.isSearchBarVisible = !this.isSearchBarVisible;
+ // }
+
+  getCartCount() {
+    const ownerId = localStorage.getItem('UID');
+    this.cartApi.getCartCount(ownerId).subscribe({
+      next: (res) => {
+        this.cartCount = res.count;
+        this.getCartCount();
+      },
+      error: (error) => {
+        console.error('Error fetching cart count:', error);
+      }
+    })
+  }
+
   search() {
     console.log('Search query:', this.searchQuery);
     if (this.searchQuery && this.searchQuery.trim() !== '') {
       // Redirect to search component with query parameter
       this.router.navigate(['/search'], { queryParams: { q: this.searchQuery.trim() } });
     }
-  }
-
-  toggleSearchBar() {
-
   }
 
   //LOGOUT USER FUNCTION (Logs the user out by removing the UID header from the browser's localstorage)

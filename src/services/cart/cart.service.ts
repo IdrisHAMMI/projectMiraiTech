@@ -12,8 +12,6 @@ import { BehaviorSubject, tap } from 'rxjs';
 export class CartService {
   
   private cartItems: any[] = [];
-  private cartCountSource = new BehaviorSubject<number>(0);
-  currentCartCount = this.cartCountSource.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -29,7 +27,6 @@ export class CartService {
         // ADD A NEW ITEM TO THE CART
         this.cartItems.push({ productId, ownerId, quantity: 1 });
      }
-     this.updateCartCount(1); // UPDATE THE CART COUNT IN addToCart
      return this.http.post<ICartModel[]>(`${apiUrl.cartServiceApi}add/${productId}`, { ownerId, productId }, { headers })
    }
 
@@ -40,24 +37,18 @@ export class CartService {
 
   //REMOVES PRODUCT DATA FROM THE CART
   removeCartProduct(ownerId: string, productId: string): Observable<ICartModel[]> {
-    this.updateCartCount(-1);
     return this.http.delete<ICartModel[]>(`${apiUrl.cartServiceApi}${ownerId}/delete/${productId}`)
    } 
 
    //REMOVES ALL DATA FROM THE CART
    removeAllCartProduct(ownerId: string): Observable<ICartModel[]> {
-    return this.http.delete<ICartModel[]>(`${apiUrl.cartServiceApi}delete/all/${ownerId}`).pipe(
-      tap(() => {
-        this.updateCartCount(0);
-      })
-    )
+    return this.http.delete<ICartModel[]>(`${apiUrl.cartServiceApi}delete/all/${ownerId}`)
    } 
 
-   //UPDATES CART COUNT
-   updateCartCount(increment: number) {
-    const currentCount = this.cartCountSource.getValue();
-    this.cartCountSource.next(currentCount + increment);
- } 
+   getCartCount(ownerId: string): Observable<{ count: number }> {
+    return this.http.get<{ count: number }>(`${apiUrl.cartServiceApi}count/get/${ownerId}`)
+   }
+
   //UPDATES CART QUANTITY
    updateCartQty(quantity: number, ownerId: string, productId: string): Observable<ICartModel[]> {
     const url = `${apiUrl.cartServiceApi}cartQty/update/${ownerId}/${productId}`;

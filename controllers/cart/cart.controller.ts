@@ -141,6 +141,26 @@ export const updateQuantity = async (req: express.Request, res: express.Response
     }
   };
 
+
+export const cartCount = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    try {
+        const { ownerId } = req.params;
+    
+        const cart = await CartModel.findOne({ ownerId });
+    
+        if (!cart) {
+          return res.status(404).json({ error: 'Cart not found' });
+        }
+    
+        const itemCount = cart.items.length;
+    
+        return res.status(200).json({ count: itemCount });
+      } catch (err) {
+        console.error("Error getting cart count:", err);
+        return res.status(500).json({ error: 'An error occurred while getting cart count' });
+      }
+    };
+
 //API TO WRITE THE TRANSACTION INFORMATION
 export const saveTransaction = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try {
