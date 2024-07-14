@@ -30,7 +30,7 @@ export class ProductInterfaceComponent implements OnInit {
   }
 
   addToCart(productId: string) {
-    const ownerId = localStorage.getItem('UID');
+    const ownerId = sessionStorage.getItem('UID');
     if (!ownerId) {
       this.router.navigate(['authLogin']),
       console.error('Owner ID not found in local storage');

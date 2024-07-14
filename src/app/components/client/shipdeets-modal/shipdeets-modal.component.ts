@@ -21,7 +21,7 @@ export class ShipdeetsModalComponent implements OnInit {
     private fb: FormBuilder){}
 
   ngOnInit(): void {
-    this.uid = localStorage.getItem('UID');
+    this.uid = sessionStorage.getItem('UID');
     if (!this.uid) {
       console.error('UID not found in local storage');
     }

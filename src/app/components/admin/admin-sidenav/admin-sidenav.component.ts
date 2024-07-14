@@ -40,7 +40,7 @@ export class AdminSidenavComponent implements OnInit {
   }
 
   logout(){
-    localStorage.removeItem("UID");
+    sessionStorage.removeItem("UID");
     this.router.navigate(['/index']);
   }
 }

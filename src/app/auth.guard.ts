@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
     //IF THE USER STATE (isAdmin) IS TRUE 
-    const isAdmin = localStorage.getItem('userState') === 'true';
+    const isAdmin = sessionStorage.getItem('userState') === 'true';
     if (isAdmin) {
       return true;
     } else {

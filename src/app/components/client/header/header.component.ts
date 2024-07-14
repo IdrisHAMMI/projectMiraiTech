@@ -1,5 +1,5 @@
 import { ViewportService } from './../../../../services/viewport/viewport.service';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/services/auth/auth.service';
 import { CartService } from 'src/services/cart/cart.service';
@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
   isDropdownOpen: boolean = false;
   isSearchBarVisible: boolean = false;
-  cartCount: number = null;
+  cartCount: number = 0;
   searchQuery: string;
   
   isAdmin: boolean;
@@ -34,12 +34,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
       this.authService.isLoggedIn$.subscribe(res => {
         this.isLoggedIn = this.authService.isLoggedIn();
-      })
+      });
       this.getCartCount();
       //IF THE userState HEADER BOOLEAN IS TRUE THEN INIT
-      this.isAdmin = localStorage.getItem('userState') === 'true';
+      this.isAdmin = sessionStorage.getItem('userState') === 'true';
   }
-
   //TOGGLES THE DROPDOWN ELEMENT IN HEADER
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
@@ -51,11 +50,10 @@ export class HeaderComponent implements OnInit {
  // }
 
   getCartCount() {
-    const ownerId = localStorage.getItem('UID');
+    const ownerId = sessionStorage.getItem('UID');
     this.cartApi.getCartCount(ownerId).subscribe({
       next: (res) => {
         this.cartCount = res.count;
-        this.getCartCount();
       },
       error: (error) => {
         console.error('Error fetching cart count:', error);
@@ -64,17 +62,18 @@ export class HeaderComponent implements OnInit {
   }
 
   search() {
-    console.log('Search query:', this.searchQuery);
+    console.log('Search query:', this.searchQuery); // DEBUG QUERY STRING LOG
+    
     if (this.searchQuery && this.searchQuery.trim() !== '') {
-      // Redirect to search component with query parameter
+      // REDIRECT TO SEARCH COMPONENT WITH QUERY PARAMETER
       this.router.navigate(['/search'], { queryParams: { q: this.searchQuery.trim() } });
     }
   }
 
   //LOGOUT USER FUNCTION (Logs the user out by removing the UID header from the browser's localstorage)
   logout(){
-    localStorage.removeItem("UID");
-    localStorage.removeItem("userState");
+    sessionStorage.removeItem("UID");
+    sessionStorage.removeItem("userState");
     this.authService.isLoggedIn$.next(false);
     this.router.navigate(['/index']);
   }

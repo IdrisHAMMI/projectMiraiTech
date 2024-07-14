@@ -17,7 +17,6 @@ import { CartService } from 'src/services/cart/cart.service';
 export class CartComponent implements OnInit {
   
   cartData: any;
-  cartItems: any[] = [];
   totalAmount: number = 0;
   public payPalConfig ?: IPayPalConfig
   
@@ -28,7 +27,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.initConfig();
-    const id = localStorage.getItem('UID');
+    const id = sessionStorage.getItem('UID');
     if (id) {
       this.fetchCartData(id);
     }
@@ -75,12 +74,12 @@ export class CartComponent implements OnInit {
   }
 
   updateCartQty(item, productId: string) {
-    const ownerId = localStorage.getItem('UID');
+    const ownerId = sessionStorage.getItem('UID');
     this.api.updateCartQty(item.quantity, ownerId, productId)
       .subscribe({
         next: (res) => {
           console.log('Cart item updated successfully:', res);
-          // Optionally, refresh the cart items or handle the response as needed
+          
         },
         error: (error) => {
           console.error('Error updating cart item:', error);
@@ -119,7 +118,6 @@ private initConfig(): void {
     clientId: environment.PAYPAL_CLIENT_ID,
     currency: 'EUR',
     createOrderOnClient: (data) => {
-      // Map items to PayPal format
       const items = this.cartData.items.map((item) => ({
         name: item.productId.productName,
         productImageURL: item.productId.productImageURL,
@@ -130,7 +128,7 @@ private initConfig(): void {
         }
       }));
 
-      // CALCULATE ITEM TOAL
+      // CALCULATE ITEM TOTAL
       const itemTotal = this.cartData.items.reduce((sum, item) => 
         sum + (item.productId.productPrice * item.quantity), 0
       ).toFixed(2);
@@ -143,14 +141,13 @@ private initConfig(): void {
           breakdown: {
             item_total: {
               currency_code: 'EUR',
-              value: itemTotal  // Correct item total
+              value: itemTotal
             }
           }
         },
         items: items
       }];
     
-      // Create order request
       const order: ICreateOrderRequest = {
         intent: 'CAPTURE',
         purchase_units: purchaseUnits
@@ -168,20 +165,25 @@ private initConfig(): void {
       layout: 'vertical'
     },
     onApprove: (data, actions) => {
-      console.log('onApprove - transaction was approved byut not authorized', data, actions);
+      console.log('onApprove - transaction was approved but not authorized', data, actions);
       actions.order.get().then(details => {
         console.log('onApprove - you can get full order details inside onApprove: ', details)
       })
     },
+
     onClientAuthorization: (authorization: IClientAuthorizeCallbackData) => {
-      
-      const ownerId = localStorage.getItem('UID'); //USER ID
-      const items = authorization.purchase_units[0].items;
-      const productName = authorization.purchase_units[0].items[0].name;// ACCESS ITEMS FROM AUTH DATA
-      const productQuantity = authorization.purchase_units[0].items[0].quantity;
+      const ownerId = sessionStorage.getItem('UID'); //USER ID
+      const items = authorization.purchase_units[0].items;// ACCESS ITEMS FROM AUTH DATA
+      const productName = authorization.purchase_units[0].items[0].name; //ACCESS PRODUCT NAME
+      const productQuantity = authorization.purchase_units[0].items[0].quantity; //ACCESS PRODUCT QUANTITY
       const amount = authorization.purchase_units[0].amount.breakdown.item_total.value; // ACCESS AMOUNT FROM AUTH DATA
       const paypalTransactionId = authorization.id; // ACCESS THE TRANSACTION ID
-      const transactionData = {ownerId: ownerId, name: productName, quantity:productQuantity, totalPrice: amount, paypalTransactionId: paypalTransactionId }; //TRANSACTION DATA
+      const transactionData = {ownerId: ownerId, 
+        name: productName, 
+        quantity:productQuantity, 
+        totalPrice: amount, 
+        paypalTransactionId: paypalTransactionId 
+      }; //TRANSACTION DATA
       
       const dialogRef = this.dialog.open(PaymentSuccessComponent, {
         width: '60%',
@@ -195,7 +197,6 @@ private initConfig(): void {
           console.log('Transaction info sent successfully:', res);
         },
         (error) => {
-          // Handle any errors
           console.error('Error sending transaction info:', error);
         }
       );
@@ -210,7 +211,6 @@ private initConfig(): void {
     onClick: (data) => {
       console.log(data)
     }
-
     
   };
  }

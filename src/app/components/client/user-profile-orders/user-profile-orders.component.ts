@@ -22,7 +22,7 @@ transactionData: any;
 
   //GET TRANSACTION DATA
   fetchTransaction(id: string) {
-    const UID = localStorage.getItem('UID')
+    const UID = sessionStorage.getItem('UID')
     this.api.getTransactionById(UID).subscribe((result)=> {
       this.transactionData = result
     })
@@ -30,7 +30,7 @@ transactionData: any;
 
   //GET USER DATA
   fetchUserDetails(id: string) {
-    const UID = localStorage.getItem('UID');
+    const UID = sessionStorage.getItem('UID');
     this.api.getUserDetails(UID).subscribe((result)=>{
       this.userDetails = result;
     }
@@ -39,8 +39,8 @@ transactionData: any;
 
   //LOGOUT FUNCTION
   logout(){
-    localStorage.removeItem("UID");
-    localStorage.removeItem("userState");
+    sessionStorage.removeItem("UID");
+    sessionStorage.removeItem("userState");
     this.router.navigate(['/index']);
   }
 }

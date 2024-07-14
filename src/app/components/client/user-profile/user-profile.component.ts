@@ -28,7 +28,7 @@ export class UserProfileComponent implements OnInit{
   }
 
   editEmail() {
-    const UID = localStorage.getItem('UID');
+    const UID = sessionStorage.getItem('UID');
     this.api.updateUserEmailProfile(UID, this.userForm.value)
     .subscribe({
       next:(res) => {
@@ -39,7 +39,7 @@ export class UserProfileComponent implements OnInit{
   }
 
   fetchUserDetails(id: string) {
-    const UID = localStorage.getItem('UID');
+    const UID = sessionStorage.getItem('UID');
     this.api.getUserDetails(UID).subscribe((result)=>{
       this.userDetails = result;
     }
@@ -47,8 +47,8 @@ export class UserProfileComponent implements OnInit{
   }
 
   logout(){
-    localStorage.removeItem("UID");
-    localStorage.removeItem("userState");
+    sessionStorage.removeItem("UID");
+    sessionStorage.removeItem("userState");
     this.router.navigate(['/index']);
   }
 

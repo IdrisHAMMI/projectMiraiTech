@@ -23,7 +23,7 @@ export class UserProfileAddressesComponent implements OnInit{
   }
 
   fetchUserDetails(id: string) {
-    const UID = localStorage.getItem('UID');
+    const UID = sessionStorage.getItem('UID');
     this.api.getUserDetails(UID).subscribe((result)=>{
       this.userAddress = result;
     }
@@ -31,7 +31,7 @@ export class UserProfileAddressesComponent implements OnInit{
   }
   
   logout(){
-    localStorage.removeItem("UID");
+    sessionStorage.removeItem("UID");
     this.router.navigate(['/index']);
   }
 

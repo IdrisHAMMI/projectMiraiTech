@@ -11,7 +11,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   createShippingAddress(addressData: any): Observable<any> {
-    const headers = new HttpHeaders().set('UID', localStorage.getItem('UID'));
+    const headers = new HttpHeaders().set('UID', sessionStorage.getItem('UID'));
     return this.http.post<any>(`${apiUrl.userServiceApi}shipping-address`, addressData, { headers });
 }
 

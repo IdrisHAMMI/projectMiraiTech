@@ -33,11 +33,11 @@ export class AuthLoginComponent implements OnInit {
         const isAdmin = res.data.roles._id === '65c65ab9c513c27b855b720a';
         
         //SETS ADMIN BOOLEAN (if true show admin panel, if not show basic user settings)
-        localStorage.setItem("userState", isAdmin.toString()); 
+        sessionStorage.setItem("userState", isAdmin.toString()); 
         
         this.authService.isLoggedIn$.next(true);
 
-        localStorage.setItem("UID", res.data._id); //SETS USER ID
+        sessionStorage.setItem("UID", res.data._id); //SETS USER ID
         
         this.router.navigate(['index']);
       },

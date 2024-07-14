@@ -45,8 +45,7 @@ export const getCart = async (req: express.Request, res: express.Response, next:
         const ownerId = req.params.id; // USER ID IN CART MODEL
 
         // FIND THE CART DOCUMENT FOR THE DESIGNATED USER
-        const cart = await CartModel.findOne({ ownerId }).populate('items.productId')
-
+        const cart = await CartModel.findOne({ ownerId }).populate('items.productId').populate('items.productId.productBrand')
         return res.json(cart);
     } catch (error) {
         console.error('Error fetching cart:', error);
@@ -61,11 +60,11 @@ export const deleteCartRecord = async (req: express.Request, res: express.Respon
         const ownerId = req.params.id; 
         const productId = req.params.productId;
 
-        // Find the cart document for the designated user and update it
+        // FIND THE CART DOCUMENT FOR THE DESIGNATED USER AND UPDATES IT
         const cart = await CartModel.findOneAndUpdate(
             { ownerId },
-            { $pull: { items: { productId } } }, // Remove the specified product from the items array
-            { new: true } // Return the updated document
+            { $pull: { items: { productId } } }, // REMOVES THE SPECIFIED PRODUCT
+            { new: true } // RETURNS THE UPDATED DOCUMENT
         );
 
         if (!cart) {
@@ -84,11 +83,11 @@ export const deleteAllCartRecords = async (req: express.Request, res: express.Re
     try {
         const ownerId = req.params.id; 
 
-        // Find the cart document for the designated user and update it
+        // FIND THE CART DOCUMENT FOR THE DESIGNATED USER AND UPDATES IT
         const cart = await CartModel.findOneAndUpdate(
             { ownerId },
-            { $set: { items: [] } }, // Set the items array to an empty array to remove all items
-            { new: true } // Return the updated document
+            { $set: { items: [] } }, // SET THE ITEMS ARRAY TO AN EMPTY ARRAY
+            { new: true } // RETURN UPDATED DOCUMENT
         );
 
         if (!cart) {
@@ -181,3 +180,8 @@ export const saveTransaction = async (req: express.Request, res: express.Respons
         res.status(500).json({ error: 'An error occurred while saving the transaction' });
       }
     };
+
+
+
+
+    

@@ -8,13 +8,13 @@
         <h1 class="mb-10 text-center text-2xl font-bold">Votre Panier</h1>
         <div class="mx-auto max-w-5xl justify-center pb-[130px] px-6 md:flex md:space-x-6 xl:px-0">
           <div class="rounded-lg md:w-2/3">
-            <!-- Iterate arrays of cart & products (products being its own collection) to fetch cart data for the products -->
+            <!-- ITERATE ARRAY OF PRODUCTS DATA INSIDE CART DOCUMENT -->
             <div *ngFor="let item of cartData?.items" class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
               <img [src]="'assets/upload/' + item.productId.productImageURL" alt="product-image" class="w-full rounded-lg sm:w-40" />
               <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
                 <div class="mt-5 sm:mt-0">
                   <h2 class="text-lg font-bold text-gray-900">{{item.productId.productName}}</h2>
-                  <p class="mt-1 text-xs text-gray-700">Marque: {{ item.productId.productBrand.brandName }}</p>
+                  <p class="mt-1 text-xs text-green-500">En stock</p>
                 </div>
                 <div class="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
                   <div class="flex items-center border-gray-100">
@@ -26,7 +26,7 @@
                   </div>
                   <div class="flex items-center space-x-4">
                     <p class="text-sm">{{item.productId.productPrice | currency: 'EUR'}} </p>
-                    <span (click)="removeCartProduct(cartData.ownerId, item.productId._id)" class="cursor-pointer text-red-500 hover:text-red-600">Enlever</span>
+                    <span (click)="removeCartProduct(cartData.ownerId, item.productId._id)" class="cursor-pointer text-red-500 hover:text-ed-600">Enlever</span>
                   </div>
                 </div>
               </div>

@@ -4,7 +4,6 @@ import { ICartModel } from './../../../models/cart.model';
 import { HttpClient, HttpHeaders }  from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { apiUrl } from '../apiUrl';
-import { BehaviorSubject, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -56,8 +55,8 @@ export class CartService {
     const body = JSON.stringify({ quantity }); // SET QUANTITY AS JSON OBJECT
     return this.http.put<ICartModel[]>(url, body, { headers });
   }
+
   sendTransactionInfo(ownerId: string, transactionData: any): Observable<ITransactionSchema[]> {
     return this.http.post<ITransactionSchema[]>(`${apiUrl.cartServiceApi}transaction/success/post/${ownerId}`, transactionData)
   }
-
 }

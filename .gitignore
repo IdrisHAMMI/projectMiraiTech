@@ -47,7 +47,7 @@ Thumbs.db
 .runtimeconfig.json
 
 # Config
-/environment
+# /environment ( ENV WILL BE IN COMMIT FOR PROJECT PORTFOLIO )
 
 # Dyanmic Image Folder
-/src/assets/upload
+# /src/assets/upload ( UPLOADED ASSETS WILL BE IN COMMIT FOR PROJECT PORTFOLIO )

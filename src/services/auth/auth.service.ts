@@ -34,7 +34,7 @@ export class AuthService {
  }
 
   isLoggedIn(){
-    return !!localStorage.getItem("UID");
+    return !!sessionStorage.getItem("UID");
   }
 }
 
